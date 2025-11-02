@@ -1,0 +1,203 @@
+/* Custom CSS Variables - Assuming these are defined in style.css and dashboard.css */
+:root {
+    --color-primary: #10B981;       /* Emerald 600 */
+    --color-primary-light: #34D399; /* Emerald 400 */
+    --color-bg-dark: #0F172A;       /* Slate 900 */
+    --color-card-dark: #1E293B;     /* Slate 800 */
+    --color-border: #334155;        /* Slate 700 */
+    --color-text-light: #F8FAFC;    /* White */
+    --color-text-muted: #94A3B8;    /* Slate 400 */
+    --color-slate-600: #475569;     /* Slate 600 */
+    --color-slate-500: #64748B;     /* Slate 500 */
+    
+    /* Notification Accents */
+    --color-dot-unread: #EF4444;    /* Red 500 */
+    --color-unread-bg: rgba(59, 130, 246, 0.1); /* Blue 500 / 10% opacity */
+    --color-unread-border: #3B82F6; /* Blue 500 */
+    --color-action-btn: #60A5FA;    /* Blue 400 */
+    
+    /* Message Accents (Reusing dashboard colors for consistency) */
+    --color-upload-text: #34D399;   /* Emerald 400 (Self-action) */
+    --color-share-text: #60A5FA;    /* Blue 400 */
+    --color-view-text: #FACC15;     /* Yellow 400 */
+    --color-delete-text: #F87171;   /* Red 400 (Revoke) */
+    --color-file-text: #34D399;     /* Emerald 400 */
+}
+
+
+/* -------------------------------------- */
+/* 1. Page Header & Action Bar */
+/* -------------------------------------- */
+
+.notifications-subtitle {
+    /* text-slate-400 mb-6 */
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.notifications-action-bar {
+    /* flex justify-end mb-6 */
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.5rem;
+}
+
+/* Mark All as Read Button - Reusing button styles but defining secondary here */
+.btn-secondary {
+    /* px-4 py-2 bg-slate-700 text-slate-300 font-semibold rounded-lg hover:bg-slate-600 text-sm */
+    padding: 0.5rem 1rem;
+    background-color: var(--color-border); /* Slate 700 */
+    color: var(--color-text-muted);
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s;
+    font-size: 0.875rem;
+    border: none;
+    cursor: pointer;
+}
+.btn-secondary:hover {
+    background-color: var(--color-slate-600); /* Slate 600 */
+    color: var(--color-text-light);
+}
+
+
+/* -------------------------------------- */
+/* 2. Notification List & Card */
+/* -------------------------------------- */
+
+.notification-list-container {
+    /* space-y-4 */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.notification-card {
+    /* p-4 border border-slate-700 rounded-xl flex items-start space-x-4 */
+    background-color: var(--color-card-dark);
+    padding: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: background-color 0.2s, border-color 0.2s;
+    cursor: pointer;
+}
+
+.notification-card:hover {
+    background-color: #16202e; /* Slightly darker hover state */
+}
+
+.notification-content-wrapper {
+    /* flex-1 */
+    flex-grow: 1;
+}
+
+/* Status Dot */
+.notification-status-dot {
+    /* w-2 h-2 rounded-full flex-shrink-0 mt-2 */
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 0.5rem; /* Align with text baseline */
+}
+
+
+/* --- Unread State --- */
+.notification-card.unread {
+    background-color: var(--color-unread-bg);
+    border: 1px solid var(--color-unread-border); 
+}
+.notification-card.unread:hover {
+    background-color: rgba(59, 130, 246, 0.15); 
+}
+.dot-unread {
+    background-color: var(--color-dot-unread);
+}
+
+
+/* --- Read State --- */
+.notification-card.read {
+    /* Slightly subdued read state */
+    background-color: var(--color-card-dark); 
+    border: 1px solid var(--color-border); 
+    opacity: 0.8; 
+}
+.dot-read {
+    background-color: transparent;
+}
+.read-message {
+    color: var(--color-text-muted) !important;
+}
+.read-timestamp {
+    color: var(--color-slate-600) !important;
+}
+
+
+/* -------------------------------------- */
+/* 3. Text and Accent Colors */
+/* -------------------------------------- */
+
+.notification-message {
+    /* text-white font-medium */
+    color: var(--color-text-light);
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.notification-timestamp {
+    /* text-slate-500 text-xs block mt-1 */
+    color: var(--color-slate-500);
+    font-size: 0.75rem;
+    display: block;
+    margin-top: 0.25rem;
+}
+
+/* Message Accents */
+.accent-view { color: var(--color-view-text); }
+.accent-share { color: var(--color-share-text); }
+.accent-delete { color: var(--color-delete-text); }
+.accent-upload { color: var(--color-upload-text); }
+.accent-file { color: var(--color-file-text); }
+.accent-file-read { color: var(--color-text-muted); }
+
+
+/* -------------------------------------- */
+/* 4. Mark as Read Button */
+/* -------------------------------------- */
+
+.mark-read-btn {
+    /* text-xs text-blue-400 hover:text-blue-300 flex-shrink-0 */
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    font-size: 0.75rem;
+    color: var(--color-action-btn);
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 0.25rem;
+}
+
+.mark-read-btn:hover {
+    background-color: rgba(59, 130, 246, 0.2); 
+    color: #93c5fd; /* Blue 300 */
+}
+
+/* Status Text for Read Cards */
+.notification-status-text {
+    /* text-slate-500 text-xs flex-shrink-0 */
+    color: var(--color-slate-500);
+    font-size: 0.75rem;
+    flex-shrink: 0;
+    margin-top: 0.5rem;
+}
+
+/* Hide the Mark as Read button for already read cards */
+.notification-card.read .mark-read-btn {
+    display: none;
+}

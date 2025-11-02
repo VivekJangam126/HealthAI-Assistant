@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSMS | Share & Permissions</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="/CSS/dashboard.css"> 
+    <link rel="stylesheet" href="/CSS/share.css"> 
+</head>
+<body class="dashboard-body">
+
+    <div class="dashboard-layout">
+
+        <aside id="sidebar" class="sidebar sidebar-hidden">
+            <div class="sidebar-header">
+                <a href="dashboard.html" class="logo-text">DSMS</a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="sidebar-nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l-2-2m2 2v10a1 1 0 01-1 1h-3m-6 0h6m-6 0h.01"></path></svg>
+                    Home
+                </a>
+                <a href="documents.html" class="sidebar-nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    My Documents
+                </a>
+                <a href="share.html" class="sidebar-nav-link is-active">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.01 9 10.669 9 9.337 9 5.862 12 2 12 2s3.01 3.862 3.01 7.337c0 1.332.114 2.67.316 4.004m-7 0a8 8 0 1114 0m-7 0v7"></path></svg>
+                    Share Controls
+                </a>
+                <a href="logs.html" class="sidebar-nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-10v10m-4-8v8m2 4h4a2 2 0 002-2v-4a2 2 0 00-2-2h-4a2 2 0 00-2 2v4a2 2 0 002 2z"></path></svg>
+                    Activity Logs
+                </a>
+                <a href="notifications.html" class="sidebar-nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v2a3 3 0 11-6 0v-2m6 0H9"></path></svg>
+                    Notifications 
+                    <span class="notification-badge" id="notification-count">3</span>
+                </a>
+                <a href="profile.html" class="sidebar-nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14c4.418 0 8 3.582 8 8H4c0-4.418 3.582-8 8-8z"></path></svg>
+                    Profile
+                </a>
+                <a href="settings.html" class="sidebar-nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.82 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.82 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.82-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.82-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    Settings
+                </a>
+
+                <div class="sidebar-logout-section">
+                    <a href="auth.html" class="sidebar-nav-link logout-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                        Logout
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            
+            <header class="top-bar-mobile">
+                <button id="mobile-menu-btn" class="menu-toggle-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+                <div class="top-bar-title">Share Controls</div>
+                <div class="profile-avatar">JD</div>
+            </header>
+
+            <div class="dashboard-section-padding">
+                <h1 class="page-heading">Controlled Document Sharing</h1>
+                <p class="share-page-subtitle">Turn one-way sharing into revocable, secure sharing with expiration and permissions.</p>
+
+                <div class="share-grid">
+                    
+                    <div class="share-form-card content-card share-form-col">
+                        <h2 class="form-heading">Create New Share Link</h2>
+                        
+                        <form id="new-share-form">
+                            
+                            <div class="form-group">
+                                <label for="document-select" class="form-label">Document to Share</label>
+                                <select id="document-select" required class="form-input">
+                                    <option value="" disabled selected>Select a document from your files...</option>
+                                    <option value="doc1">Resume_encrypted.pdf</option>
+                                    <option value="doc2">Bank_Statement_Q3.docx</option>
+                                    <option value="doc3">Project_Brief_V2.txt</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="recipient-email" class="form-label">Recipient Email (Must be a registered user)</label>
+                                <input type="email" id="recipient-email" required class="form-input" placeholder="harish@example.com">
+                            </div>
+
+                            <div class="form-group-grid">
+                                
+                                <div class="form-group-half">
+                                    <label for="expiry-time" class="form-label">Access Expiry</label>
+                                    <select id="expiry-time" required class="form-input">
+                                        <option value="never">Never (Permanent)</option>
+                                        <option value="1d">1 Day</option>
+                                        <option value="7d">7 Days</option>
+                                        <option value="1m">1 Month</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group-half">
+                                    <label for="permission-type" class="form-label">Permission Type</label>
+                                    <select id="permission-type" required class="form-input">
+                                        <option value="view">View-only</option>
+                                        <option value="download">View & Download</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="share-btn btn-primary btn-shadow">
+                                <svg class="share-icon-btn" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.01 9 10.669 9 9.337 9 5.862 12 2 12 2s3.01 3.862 3.01 7.337c0 1.332.114 2.67.316 4.004m-7 0a8 8 0 1114 0m-7 0v7"></path></svg>
+                                Create Secure Share
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="share-info-card content-card share-info-col">
+                        <h3 class="info-heading info-heading-blue">Security Tip</h3>
+                        <p class="info-text">After sharing, DSMS will automatically record every **View** and **Download** action in the **Logs** page, providing you complete transparency.</p>
+                        
+                        <h3 class="info-heading info-heading-blue info-heading-mt">How Sharing Works</h3>
+                        <ul class="info-list">
+                            <li>File remains **encrypted** on server.</li>
+                            <li>Recipient only gets a temporary **decryption token**.</li>
+                            <li>You can **revoke access** instantly anytime.</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="content-card">
+                    <h2 class="card-heading">Shared By Me <span id="active-share-count"></span></h2>
+                    <div class="table-responsive">
+                        <table class="data-table" id="shared-by-me-table">
+                            <thead>
+                                <tr class="table-header-row table-header-uppercase">
+                                    <th class="table-cell-padding">File</th>
+                                    <th class="table-cell-padding">Recipient</th>
+                                    <th class="table-cell-padding">Permission</th>
+                                    <th class="table-cell-padding">Expires</th>
+                                    <th class="table-cell-padding">Time Left</th>
+                                    <th class="table-cell-padding">Status</th>
+                                    <th class="table-cell-padding text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-body" id="sharedByMeBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="content-card mt-6">
+                    <h2 class="card-heading">Shared With Me</h2>
+                    <div class="table-responsive">
+                        <table class="data-table" id="shared-with-me-table">
+                            <thead>
+                                <tr class="table-header-row table-header-uppercase">
+                                    <th class="table-cell-padding">File</th>
+                                    <th class="table-cell-padding">Shared By</th>
+                                    <th class="table-cell-padding">Permission</th>
+                                    <th class="table-cell-padding">Expires</th>
+                                    <th class="table-cell-padding">Time Left</th>
+                                    <th class="table-cell-padding">Status</th>
+                                    <th class="table-cell-padding text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-body" id="sharedWithMeBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebar = document.getElementById('sidebar');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    // Using classes defined in dashboard.css for consistency
+                    sidebar.classList.toggle('sidebar-hidden');
+                    sidebar.classList.toggle('sidebar-mobile-visible'); 
+                });
+            }
+        });
+    </script>
+    <script src="/JS/share.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,429 @@
+/* Custom CSS Variables - Assuming these are defined in style.css and dashboard.css */
+:root {
+    --color-primary: #10B981;       /* Emerald 600 */
+    --color-primary-light: #34D399; /* Emerald 400 */
+    --color-bg-dark: #0F172A;       /* Slate 900 */
+    --color-card-dark: #1E293B;     /* Slate 800 */
+    --color-border: #334155;        /* Slate 700 */
+    --color-text-light: #F8FAFC;    /* White */
+    --color-text-muted: #94A3B8;    /* Slate 400 */
+    
+    /* Action Specific Colors */
+    --color-upload: #10B981;        /* Emerald 600 */
+    --color-share: #2563EB;         /* Blue 600 */
+    --color-view: #F59E0B;          /* Yellow 600 */
+    --color-delete: #DC2626;        /* Red 600 */
+    --color-upload-accent: #34D399; /* Emerald 400 */
+    --color-share-accent: #60A5FA;  /* Blue 400 */
+    --color-view-accent: #FCD34D;   /* Yellow 300 */
+    --color-delete-accent: #F87171; /* Red 400 */
+}
+
+/* -------------------------------------- */
+/* 1. Page Subtitle */
+/* -------------------------------------- */
+
+.logs-subtitle {
+    /* text-slate-400 mb-6 */
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+}
+
+/* -------------------------------------- */
+/* 2. Filters and Export Bar (FIXED ALIGNMENT) */
+/* -------------------------------------- */
+
+.logs-filter-bar {
+    /* flex flex-wrap justify-between items-center bg-slate-800 p-4 rounded-xl border border-slate-700 mb-8 */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-card-dark);
+    padding: 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-border);
+    margin-bottom: 2rem;
+}
+
+.filter-group-container {
+    /* flex flex-wrap gap-4 items-center */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.filter-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-label {
+    /* text-sm font-medium text-slate-300 mr-2 */
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+}
+
+.filter-label-desktop-only {
+    display: none;
+}
+@media (min-width: 640px) { /* sm:inline */
+    .filter-label-desktop-only {
+        display: inline;
+    }
+}
+
+.form-input-filter {
+    /* Reusing basic dark-theme input styles */
+    padding: 0.5rem 0.75rem;
+    background-color: var(--color-card-dark); /* Slate 800 */
+    border: 1px solid var(--color-border); /* Slate 700 */
+    border-radius: 0.5rem;
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+    transition: border-color 0.2s;
+}
+
+.form-input-filter:focus {
+    outline: none;
+    border-color: var(--color-primary); 
+}
+
+.export-btn {
+    /* mt-4 sm:mt-0 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-500 transition duration-300 */
+    margin-top: 1rem; /* For mobile spacing */
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-text-light);
+    background-color: var(--color-share); /* Blue 600 */
+}
+.export-btn:hover {
+    background-color: #3b82f6; /* Blue 500 */
+}
+@media (min-width: 640px) { /* sm:mt-0 */
+    .export-btn {
+        margin-top: 0;
+    }
+}
+
+.export-icon {
+    /* w-4 h-4 mr-2 inline-block */
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+    display: inline-block;
+}
+
+/* Unified logs controls and table styles - simplified modern look */
+.logs-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.logs-controls input, .logs-controls select {
+    background: var(--color-card-dark);
+    color: var(--color-text-light);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+.logs-controls .export-btn {
+    background: var(--color-share);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+.logs-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-bg-dark);
+    color: var(--color-text-light);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.logs-table th, .logs-table td {
+    padding: 10px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.logs-table th {
+    text-align: left;
+    color: var(--color-text-muted);
+    font-weight: 600;
+}
+
+.subtitle {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    margin-top: 0.25rem;
+}
+
+/* Logs specific card alignment and premium look */
+.logs-card {
+    margin-top: 0.25rem; /* bring header closer */
+    padding: 1rem;
+}
+
+/* Ensure logs content aligns with dashboard padding and sidebar
+   Use same left/right spacing as .dashboard-section-padding */
+.dashboard-section-padding .logs-card {
+    /* Center logs card within the dashboard section and constrain internal
+       elements so the control bar and table don't touch screen edges. */
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Table card look */
+.logs-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--color-card-dark);
+    color: var(--color-text-light);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(2,6,23,0.6);
+}
+
+/* Limit the width of the controls and table so they don't touch the device edge */
+.logs-card .logs-controls {
+    max-width: 1100px;
+    margin: 0 auto; /* center controls */
+}
+
+.logs-card .table-responsive {
+    max-width: 1100px;
+    margin: 0 auto; /* center the table container */
+}
+
+.logs-table thead th {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+    padding: 12px 14px;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.logs-table tbody td {
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    vertical-align: middle;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Row hover */
+.logs-table tbody tr {
+    transition: background-color 0.18s ease;
+}
+.logs-table tbody tr:hover {
+    background-color: rgba(255,255,255,0.02);
+}
+
+/* Compact row spacing */
+.logs-table tbody tr td.td-ts { width: 180px; }
+.logs-table tbody tr td.td-file { width: 320px; }
+.logs-table tbody tr td.td-action { width: 130px; }
+.logs-table tbody tr td.td-user { width: 200px; }
+.logs-table tbody tr td.td-details { width: auto; }
+
+/* Action badge styles */
+.action-badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.78rem;
+    color: var(--color-text-light);
+    opacity: 0.95;
+    letter-spacing: 0.02em;
+}
+.action-upload { background: rgba(16,185,129,0.12); color: var(--color-upload); border: 1px solid rgba(16,185,129,0.12); }
+.action-share { background: rgba(37,99,235,0.08); color: var(--color-blue); border: 1px solid rgba(37,99,235,0.08); }
+.action-view { background: rgba(147,51,234,0.08); color: var(--color-purple); border: 1px solid rgba(147,51,234,0.08); }
+.action-download { background: rgba(249,115,22,0.08); color: #f97316; border: 1px solid rgba(249,115,22,0.08); }
+.action-delete { background: rgba(220,38,38,0.08); color: var(--color-red); border: 1px solid rgba(220,38,38,0.08); }
+.action-default { background: rgba(148,163,184,0.04); color: var(--color-text-muted); border: 1px solid rgba(148,163,184,0.04); }
+
+/* Controls appearance: compact unified bar */
+.logs-controls {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border: 1px solid var(--color-border);
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.logs-controls input[type="text"], .logs-controls select, .logs-controls input[type="date"] {
+    min-height: 40px;
+}
+
+/* Export button hover */
+.export-btn { transition: background-color 0.18s ease, transform 0.12s ease; }
+.export-btn:hover { filter: brightness(1.06); transform: translateY(-1px); }
+
+/* Responsive: controls wrap into two rows on small screens */
+@media (max-width: 640px) {
+    .logs-controls { display: flex; flex-direction: column; gap: 8px; }
+    .logs-controls > div { width: 100%; display:flex; gap:8px; }
+    .logs-controls .export-btn { align-self: flex-end; }
+    .logs-table tbody td { font-size: 0.9rem; }
+}
+
+/* -------------------------------------- */
+/* 3. Activity Timeline (FIXED ALIGNMENT) */
+/* -------------------------------------- */
+
+.timeline-container {
+    /* relative */
+    position: relative;
+    padding-left: 0; /* Removing extra padding, relying on .timeline-item padding */
+}
+
+/* Vertical Timeline Line */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 1.5rem; /* Centered with the icon's left edge */
+    width: 2px;
+    height: 100%;
+    background-color: var(--color-border); /* The line */
+    z-index: 0;
+}
+
+/* Individual Timeline Item */
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+    /* Added left padding to create separation from the line */
+    padding-left: 4.5rem; 
+}
+
+/* Timeline Icon (The circle on the line) */
+.timeline-icon {
+    /* position: absolute; left: 0; top: 0; */
+    position: absolute;
+    /* Adjusted left position to place icon exactly on the vertical line (1.5rem line + 0.1rem offset) */
+    left: 0.1rem; 
+    top: 0.8rem; /* Pushes the icon down slightly to align it with the content's title */
+    width: 2.8rem; 
+    height: 2.8rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    box-shadow: 0 0 0 4px var(--color-bg-dark); /* Slate 900 background for separation */
+    transition: transform 0.3s ease;
+}
+
+.timeline-item:hover .timeline-icon {
+    transform: scale(1.1);
+}
+
+.timeline-icon-svg {
+    /* w-5 h-5 text-white */
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--color-text-light);
+}
+
+/* Log Content Card */
+.timeline-content {
+    /* Adjusted margin to push content to the right of the icon */
+    position: relative;
+    /* Removed the previous transform to use proper padding/margin alignment */
+}
+/* Reusing content-card class from dashboard.css */
+.content-card {
+    background-color: var(--color-card-dark);
+    border: 1px solid var(--color-border);
+    padding: 1rem; /* Reduced padding from 1.5rem for a tighter timeline look */
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Log Content Arrow (The triangle pointing to the line) */
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    /* Positioned the arrow to touch the timeline line */
+    left: -0.75rem; 
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    /* Arrow color matches card background */
+    border-right: 8px solid var(--color-card-dark); 
+    z-index: 2;
+}
+
+/* For better visual structure, the arrow border should match the content card border */
+.timeline-content::after {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    left: -0.9rem; /* Slightly left of the main arrow */
+    width: 0;
+    height: 0;
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    /* Arrow color matches card border */
+    border-right: 9px solid var(--color-border);
+    z-index: 1;
+}
+
+
+/* Content Text Styling */
+.log-timestamp {
+    /* text-slate-400 text-xs font-semibold block mb-1 */
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.log-title {
+    /* text-white text-base font-semibold */
+    color: var(--color-text-light);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.log-details {
+    /* text-slate-400 text-sm */
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+}
+
+/* Action Accent Colors */
+.icon-upload { background-color: var(--color-upload); }
+.icon-share { background-color: var(--color-share); }
+.icon-view { background-color: var(--color-view); }
+.icon-delete { background-color: var(--color-delete); }
+
+.text-upload-accent { color: var(--color-upload-accent); }
+.text-share-accent { color: var(--color-share-accent); }
+.text-view-accent { color: var(--color-view-accent); }
+.text-delete-accent { color: var(--color-delete-accent); }

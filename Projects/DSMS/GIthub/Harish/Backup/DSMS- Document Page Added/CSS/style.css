@@ -1,0 +1,526 @@
+/* Custom CSS Variables (DSMS Palette) */
+:root {
+    --color-primary: #10B981; /* Emerald 600 */
+    --color-primary-light: #34D399; /* Emerald 400 */
+    --color-primary-dark: #059669; /* Emerald 700 */
+    --color-bg-dark: #0F172A; /* Slate 900 */
+    --color-card-dark: #1E293B; /* Slate 800 */
+    --color-border: #334155; /* Slate 700 */
+    --color-text-light: #F8FAFC; /* Slate 50 (White) */
+    --color-text-muted: #94A3B8; /* Slate 400 */
+    --color-slate-600: #475569; /* Slate 600 for arrows */
+}
+
+/* -------------------------------------- */
+/* 1. Base & Layout */
+/* -------------------------------------- */
+
+/* Base Body Styling */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-light);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main Container: Ensures content takes full height */
+.main-container {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main content area to grow */
+main {
+    flex-grow: 1;
+}
+
+/* General Link Styling */
+a {
+    text-decoration: none;
+     color: white;
+    transition: color 0.3s ease;
+}
+
+/* Utility Class for Content Centering and Max Width */
+.section-content {
+    max-width: 1280px; /* Equivalent to max-w-7xl */
+    margin-left: auto;
+    margin-right: auto;
+}
+.section-content-padded {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+
+/* General Section Styling */
+section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--color-text-light);
+}
+
+/* -------------------------------------- */
+/* 2. Navigation Bar */
+/* -------------------------------------- */
+
+.main-header {
+    padding: 1rem 0; /* Vertical padding */
+    border-bottom: 1px solid var(--color-border);
+}
+@media (min-width: 768px) {
+    .main-header {
+        padding: 1.5rem 0;
+    }
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-link {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-text-light);
+    letter-spacing: 0.05em; /* tracking-wider */
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.logo-link:hover {
+    transform: scale(1.05);
+}
+
+.logo-phase {
+    font-size: 0.875rem; /* text-sm */
+    color: var(--color-primary-light);
+    font-weight: 500;
+    margin-left: 0.25rem;
+    position: relative;
+}
+
+.logo-phase::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary-light);
+    transition: width 0.3s ease;
+}
+
+.logo-phase:hover::after {
+    width: 100%;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Desktop Links */
+.nav-links {
+    display: none; /* Hidden on mobile */
+    gap: 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: white;
+}
+.nav-links .nav-item:hover {
+    color:rgb(73, 226, 150);
+    text-decoration: underline;
+}
+@media (min-width: 768px) {
+    .nav-links {
+        display: flex;
+    }
+}
+
+/* -------------------------------------- */
+/* 3. Buttons (CTA) */
+/* -------------------------------------- */
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1rem; /* Standard padding */
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 600;
+    border-radius: 0.5rem; /* rounded-lg */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.btn:hover::before {
+    width: 300%;
+    height: 300%;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    /* Custom button shadow */
+    box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.4); 
+}
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+}
+
+/* Large button for Hero section */
+.btn-large {
+    padding: 0.875rem 2rem; /* px-8 py-3 */
+    border-radius: 0.75rem; /* rounded-xl */
+    font-weight: 700;
+}
+.btn-large:hover {
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--color-slate-600);
+    color: var(--color-text-muted);
+}
+.btn-secondary:hover {
+    background-color: var(--color-card-dark);
+    color: var(--color-text-light);
+    transform: scale(1.05);
+}
+
+
+/* -------------------------------------- */
+/* 4. Hero Section */
+/* -------------------------------------- */
+
+.hero-section {
+    text-align: center;
+    padding: 5rem 0 8rem; /* py-20 md:py-32 */
+}
+
+.hero-title {
+    font-size: 2.25rem; /* text-4xl */
+    font-weight: 800; /* font-extrabold */
+    line-height: 1.25; /* leading-tight */
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+    animation: fadeInDown 1s ease-out;
+}
+@media (min-width: 640px) {
+    .hero-title { font-size: 3rem; } 
+}
+@media (min-width: 768px) {
+    .hero-title { font-size: 3.75rem; } 
+}
+
+.hero-title .highlight {
+    color: var(--color-primary-light);
+}
+
+.hero-subtitle {
+    font-size: 1.125rem; /* text-xl */
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+    max-width: 48rem; /* Custom max width for subtitle */
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeInUp 1s ease-out 0.3s backwards;
+}
+@media (min-width: 768px) {
+    .hero-subtitle { font-size: 1.5rem; } 
+}
+
+.hero-cta-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem; 
+    animation: fadeIn 1s ease-out 0.6s backwards;
+}
+
+
+/* -------------------------------------- */
+/* 5. Features Section */
+/* -------------------------------------- */
+
+.features-section {
+    background-color: rgba(30, 41, 59, 0.5); /* Semi-transparent dark background */
+    padding-top: 4rem; 
+    padding-bottom: 6rem; 
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+@media (min-width: 768px) {
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 1024px) {
+    .feature-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.feature-card {
+    background-color: var(--color-card-dark);
+    padding: 1.5rem;
+    border-radius: 0.75rem; 
+    border: 1px solid var(--color-border);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.1);
+}
+
+.feature-icon {
+    width: 2rem;
+    height: 2rem;
+    color: var(--color-primary-light);
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.2) rotate(360deg);
+    transition: transform 0.6s ease;
+}
+
+.feature-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+    margin-bottom: 0.5rem;
+}
+
+.feature-description {
+    color: var(--color-text-muted);
+}
+
+/* -------------------------------------- */
+/* 6. How It Works Section */
+/* -------------------------------------- */
+
+.how-it-works-section {
+    text-align: center;
+}
+
+.flow-steps-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    justify-content: center;
+}
+@media (min-width: 768px) {
+    /* 3 steps + 2 arrows = 5 columns on desktop */
+    .flow-steps-grid {
+        grid-template-columns: 1fr 0.1fr 1fr 0.1fr 1fr;
+        align-items: flex-start; 
+    }
+}
+
+.flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.flow-step:hover {
+    transform: translateY(-5px);
+}
+
+.flow-step-number {
+    width: 4rem;
+    height: 4rem;
+    background-color: var(--color-primary);
+    border-radius: 50%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-light);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.flow-step:hover .flow-step-number {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+}
+
+.flow-step-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-light);
+}
+
+.flow-step-description {
+    color: var(--color-text-muted);
+    text-align: center;
+}
+
+.flow-arrow-container {
+    display: none; /* Hide arrow on mobile */
+    align-items: center;
+    justify-content: center;
+}
+@media (min-width: 768px) {
+    .flow-arrow-container {
+        display: flex;
+        /* Padding to vertically center the arrow */
+        padding-top: 2rem; 
+    }
+}
+
+.flow-arrow {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--color-slate-600);
+    animation: bounceX 2s infinite;
+}
+
+
+@keyframes bounceX {
+    0%, 100% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* -------------------------------------- */
+/* 7. Final CTA Section */
+/* -------------------------------------- */
+
+.final-cta-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    background-color: rgba(16, 185, 129, 0.1); 
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.final-cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.1), transparent);
+    animation: shine 8s infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.cta-content {
+    text-align: center;
+    max-width: 56rem; 
+}
+
+.cta-title {
+    font-size: 1.875rem; 
+    font-weight: 700;
+    color: var(--color-primary-light);
+    margin-bottom: 1rem;
+}
+
+.cta-description {
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+}
+
+
+/* -------------------------------------- */
+/* 8. Footer */
+/* -------------------------------------- */
+
+.main-footer {
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.footer-copy {
+    margin-bottom: 0.5rem;
+}
+
+/* Add after your custom variables */
+.vanta-background {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: var(--color-bg-dark);
+}

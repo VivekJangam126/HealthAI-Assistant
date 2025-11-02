@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSMS | Your Documents, Your Control</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/CSS/style.css">
+</head>
+<body>
+
+    <div class="main-container">
+
+        <header class="main-header">
+            <nav class="navbar section-content-padded">
+                <a href="index.html" class="logo-link">
+                    DSMS <span class="logo-phase">Phase 1</span>
+                </a>
+                <div class="nav-actions">
+                    <div class="nav-links">
+                        <a href="#features" class="nav-item">Features</a>
+                        <a href="#how-it-works" class="nav-item">How It Works</a>
+                    </div>
+                    <a href="auth.html" class="btn btn-primary">
+                        Sign In / Register
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+
+            <section class="hero-section">
+                <div class="section-content section-content-padded">
+                    <h1 class="hero-title">
+                        Building the Foundation of <span class="highlight">Digital Ownership</span>
+                    </h1>
+                    <h2 class="hero-subtitle">
+                        Your documents, your control. Privacy-first management system.
+                    </h2>
+                    <div class="hero-cta-group">
+                        <a href="auth.html" class="btn btn-primary btn-large">
+                            Get Started (It's Free)
+                        </a>
+                        <a href="auth.html" class="btn btn-secondary btn-large">
+                            Sign In
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="features" class="features-section">
+                <div class="section-content section-content-padded">
+                    <h2 class="section-title">Our Core Philosophy: 4 Pillars</h2>
+                    <div class="feature-grid">
+
+                        <div class="feature-card">
+                            <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                            <h3 class="feature-title">Store Securely</h3>
+                            <p class="feature-description">Client-side AES encryption ensures your privacy before file upload. Only you hold the keys.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-5m3 5v-1.5m3 1.5V9m-9 3h10a2 2 0 002-2V8a2 2 0 00-2-2H9a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <h3 class="feature-title">Manage Freely</h3>
+                            <p class="feature-description">View, organize, and track your personal documents with an intuitive dashboard interface.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.01 9 10.669 9 9.337 9 5.862 12 2 12 2s3.01 3.862 3.01 7.337c0 1.332.114 2.67.316 4.004m-7 0a8 8 0 1114 0m-7 0v7"></path></svg>
+                            <h3 class="feature-title">Share Safely</h3>
+                            <p class="feature-description">Revocable permissions aur expiry time set karke files ko control ke saath share kijiye.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            <h3 class="feature-title">Track Transparently</h3>
+                            <p class="feature-description">Har action ka real-time activity log dekhiye. Full visibility, complete transparency.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="how-it-works" class="how-it-works-section">
+                <div class="section-content section-content-padded">
+                    <h2 class="section-title">How It Works: The 3-Step Flow</h2>
+                    <div class="flow-steps-grid">
+                        
+                        <div class="flow-step">
+                            <div class="flow-step-number">1</div>
+                            <h3 class="flow-step-title">Sign In or Register</h3>
+                            <p class="flow-step-description">Firebase Auth ka use karke apna secure DSMS account banao ya login karo.</p>
+                        </div>
+
+                        <div class="flow-arrow-container">
+                            <svg class="flow-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </div>
+
+                        <div class="flow-step">
+                            <div class="flow-step-number">2</div>
+                            <h3 class="flow-step-title">Upload Securely</h3>
+                            <p class="flow-step-description">Apne documents ko client-side encrypt karke Firebase Storage par upload karo.</p>
+                        </div>
+
+                        <div class="flow-arrow-container">
+                            <svg class="flow-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </div>
+                        
+                        <div class="flow-step">
+                            <div class="flow-step-number">3</div>
+                            <h3 class="flow-step-title">Share & Track</h3>
+                            <p class="flow-step-description">Permission set karke share karo aur `logs.html` par har activity ko live monitor karo.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+
+            <section class="final-cta-section">
+                <div class="section-content cta-content section-content-padded">
+                    <h2 class="cta-title">Ready to take back control?</h2>
+                    <p class="cta-description">DSMS Phase 1 gives you security and transparency over your most valuable digital assets.</p>
+                    <a href="auth.html" class="btn btn-primary btn-large">
+                        Start Your Secure Journey Now
+                    </a>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="main-footer">
+            <div class="section-content footer-content section-content-padded">
+                <p class="footer-copy">&copy; 2024 DSMS Phase 1 | Building the Foundation of Digital Ownership</p>
+                <p class="footer-tech">Tech Stack: HTML5, CSS3, JavaScript, Firebase & Client-side Crypto.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Required Three.js library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<!-- Vanta.js library - choose one or more effects -->
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.dots.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+<script src="/JS/vanta-init.js"></script>
+
+<div class="vanta-background"></div>
+</body>
+</html>

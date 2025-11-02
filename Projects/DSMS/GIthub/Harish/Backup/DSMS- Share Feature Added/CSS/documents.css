@@ -1,0 +1,227 @@
+/* Custom CSS Variables - Assuming these are defined in style.css */
+:root {
+    --color-primary: #10B981;       /* Emerald 600 */
+    --color-primary-light: #34D399; /* Emerald 400 */
+    --color-primary-dark: #059669;  /* Emerald 700 */
+    --color-card-dark: #1E293B;     /* Slate 800 */
+    --color-border: #334155;        /* Slate 700 */
+    --color-text-light: #F8FAFC;    /* White */
+    --color-text-muted: #94A3B8;    /* Slate 400 */
+    --color-blue: #2563EB;          /* Blue 600 */
+    --color-blue-light: #60A5FA;    /* Blue 400 */
+    --color-purple-light: #C084FC;  /* Purple 400 */
+    --color-red-light: #F87171;     /* Red 400 */
+    --color-yellow-light: #FACC15;  /* Yellow 400 */
+}
+
+/* -------------------------------------- */
+/* 1. Upload Section */
+/* -------------------------------------- */
+
+.upload-area {
+    /* bg-slate-800 p-6 rounded-xl border-2 border-dashed border-slate-700 hover:border-emerald-500 transition duration-300 mb-8 */
+    background-color: var(--color-card-dark);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border: 2px dashed var(--color-border);
+    margin-bottom: 2rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Upload Area Hover/Drag Feedback (Overriding the inline style) */
+.upload-area:hover {
+    border-color: var(--color-primary); /* hover:border-emerald-500 */
+    box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.2);
+}
+
+.file-input-hidden {
+    display: none;
+}
+
+.upload-content {
+    /* p-4 */
+    padding: 1rem;
+}
+
+.upload-icon {
+    /* w-10 h-10 mx-auto text-emerald-400 mb-2 */
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--color-primary-light);
+    margin-bottom: 0.5rem;
+}
+
+.upload-text {
+    /* text-white font-semibold */
+    color: var(--color-text-light);
+    font-weight: 600;
+}
+
+.upload-subtext {
+    /* text-sm text-slate-400 mt-1 */
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+}
+
+.btn-upload {
+    /* mt-4 px-4 py-2 bg-emerald-600 text-white text-sm font-semibold rounded-lg hover:bg-emerald-500 */
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    transition: background-color 0.3s;
+    border: none;
+}
+.btn-upload:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.upload-status-message {
+    /* text-sm text-yellow-400 mt-4 */
+    font-size: 0.875rem;
+    color: var(--color-yellow-light);
+    margin-top: 1rem;
+}
+
+/* -------------------------------------- */
+/* 2. Documents Table */
+/* -------------------------------------- */
+
+/* Reusing .content-card, .data-table, etc. from dashboard.css */
+
+.document-count-display {
+    /* text-sm text-slate-400 font-normal */
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    font-weight: 400;
+}
+
+.table-header-uppercase {
+    text-transform: uppercase;
+    font-size: 0.75rem; /* text-xs */
+}
+
+.table-body {
+    /* text-white text-sm */
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+}
+
+/* Custom Table Cell Display for Responsiveness */
+.table-cell-desktop-small {
+    display: none;
+}
+@media (min-width: 640px) { /* sm:table-cell */
+    .table-cell-desktop-small {
+        display: table-cell;
+    }
+}
+
+.table-cell-desktop-medium {
+    display: none;
+}
+@media (min-width: 1024px) { /* lg:table-cell */
+    .table-cell-desktop-medium {
+        display: table-cell;
+    }
+}
+
+
+/* Document Name/Icon Styling */
+.document-name-cell {
+    /* flex items-center */
+    display: flex;
+    align-items: center;
+}
+
+.file-icon {
+    /* w-4 h-4 mr-2 */
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+}
+
+.file-icon.icon-blue {
+    color: var(--color-blue-light);
+}
+.file-icon.icon-purple {
+    color: var(--color-purple-light);
+}
+
+/* Status Badge */
+.status-badge {
+    /* text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full */
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    text-transform: uppercase;
+    border-radius: 9999px;
+    line-height: 1;
+}
+
+.status-encrypted {
+    /* bg-emerald-600 text-white */
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+}
+
+.table-timestamp {
+    /* text-slate-400 */
+    color: var(--color-text-muted);
+}
+
+
+/* -------------------------------------- */
+/* 3. Actions */
+/* -------------------------------------- */
+
+.action-btn {
+    /* Reusing definition from old documents.css */
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.875rem; 
+    font-weight: 500;
+    transition: color 0.2s ease;
+    padding: 0.25rem 0.375rem;
+    border-radius: 4px;
+    margin: 0 0.1rem; /* Added margin for separation */
+}
+
+.action-btn:hover {
+    text-decoration: underline;
+}
+
+/* Action Button Colors (Using specific classes for better control) */
+.action-view {
+    color: var(--color-yellow-light);
+}
+.action-view:hover {
+    color: #f7e07e; /* Slightly lighter yellow */
+}
+
+.action-share {
+    color: var(--color-blue-light);
+}
+.action-share:hover {
+    color: var(--color-blue);
+}
+
+.action-delete {
+    color: var(--color-red-light);
+}
+.action-delete:hover {
+    color: var(--color-red);
+}
+
+/* Margin adjustment for actions */
+.table-cell-padding .action-btn + .action-btn {
+    margin-left: 0.5rem;
+}

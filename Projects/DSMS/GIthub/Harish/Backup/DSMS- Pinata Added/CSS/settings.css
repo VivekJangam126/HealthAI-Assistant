@@ -1,0 +1,229 @@
+/* Custom CSS Variables - Assuming these are defined in style.css and dashboard.css */
+:root {
+    --color-primary: #10B981;       /* Emerald 600 */
+    --color-primary-light: #34D399; /* Emerald 400 */
+    --color-card-dark: #1E293B;     /* Slate 800 */
+    --color-border: #334155;        /* Slate 700 */
+    --color-text-light: #F8FAFC;    /* White */
+    --color-text-muted: #94A3B8;    /* Slate 400 */
+    --color-slate-600: #475569;     /* Slate 600 */
+    
+    /* Action Colors */
+    --color-blue-primary: #2563EB;      /* Blue 600 */
+    --color-blue-light: #60A5FA;        /* Blue 400 */
+    --color-yellow-primary: #F59E0B;    /* Yellow 600 */
+    --color-yellow-light: #FCD34D;      /* Yellow 300 */
+    --color-red-primary: #DC2626;       /* Red 600 */
+    --color-red-dark: #991B1B;          /* Red 800 */
+    --color-red-accent: #F87171;        /* Red 400 */
+    --color-red-accent-light: #FECACA;  /* Red 200 */
+}
+
+
+/* -------------------------------------- */
+/* 1. Page Header & Grid Layout */
+/* -------------------------------------- */
+
+.settings-subtitle {
+    /* text-slate-400 mb-6 */
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.settings-grid {
+    /* grid grid-cols-1 lg:grid-cols-2 gap-8 */
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+@media (min-width: 1024px) {
+    .settings-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.settings-card {
+    /* bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg */
+    background-color: var(--color-card-dark);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Ensures buttons/toggles align perfectly */
+    box-sizing: border-box; 
+}
+
+.section-title {
+    /* font-size: 1.5rem; font-weight: 700; color: White; border-bottom: 1px solid Slate 700 */
+    font-size: 1.25rem; /* text-xl */
+    font-weight: 700;
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+}
+.section-title.text-red-accent {
+    color: var(--color-red-accent);
+}
+
+/* -------------------------------------- */
+/* 2. Individual Setting Items (FIXED ALIGNMENT) */
+/* -------------------------------------- */
+
+.setting-item {
+    /* display: flex; justify-content: space-between; align-items: center; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-border);
+    /* Space between text and control (button/toggle) */
+    gap: 1rem; 
+}
+
+.setting-item.last-item {
+    border-bottom: none;
+}
+
+.setting-text-group {
+    /* Takes up maximum space, allowing button/toggle to be fixed width */
+    flex-grow: 1;
+    margin-right: 0.5rem; 
+}
+
+.setting-label {
+    /* font-size: 1rem; font-weight: 600; color: White */
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-light); 
+    margin-bottom: 0.1rem;
+}
+.setting-label.text-red-accent {
+    color: var(--color-red-accent);
+}
+
+.setting-description {
+    /* font-size: 0.875rem; color: Slate 400 */
+    font-size: 0.875rem;
+    color: var(--color-text-muted); 
+    /* Max width is managed by flexbox, no need for explicit max-width on description */
+}
+.setting-description.text-red-accent {
+    color: var(--color-red-accent);
+}
+.setting-description.text-red-accent-light {
+    color: var(--color-red-light);
+}
+.setting-description.text-slate-500 {
+    color: var(--color-slate-500);
+}
+
+
+/* -------------------------------------- */
+/* 3. Action Button Styling */
+/* -------------------------------------- */
+
+.setting-btn-action {
+    /* padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 600; */
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+    color: var(--color-text-light);
+    border: none;
+    cursor: pointer;
+    box-sizing: border-box; /* Ensure button padding is inside its dimensions */
+}
+
+/* Button Color Overrides */
+.btn-blue {
+    background-color: var(--color-blue-primary);
+}
+.btn-blue:hover {
+    background-color: var(--color-blue-light);
+}
+
+.btn-red-primary {
+    background-color: var(--color-red-primary);
+}
+.btn-red-primary:hover {
+    background-color: var(--color-red-accent);
+}
+
+.btn-yellow {
+    background-color: var(--color-yellow-primary);
+}
+.btn-yellow:hover {
+    background-color: var(--color-yellow-light);
+}
+
+.btn-red-dark {
+    background-color: var(--color-red-dark);
+}
+.btn-red-dark:hover {
+    background-color: var(--color-red-primary);
+}
+
+
+/* -------------------------------------- */
+/* 4. Custom Toggle Switch Styling */
+/* -------------------------------------- */
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 25px;
+    flex-shrink: 0;
+    margin-left: 1rem; /* Ensure space between text and toggle */
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-slate-600); /* Slate 600 (Off state) */
+    transition: .4s;
+    border-radius: 25px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 19px;
+    width: 19px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider-emerald {
+    background-color: var(--color-primary); /* Emerald 600 (On state) */
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+/* Disabled Toggle Styling */
+input:disabled + .slider {
+    background-color: var(--color-card-dark); 
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+input:disabled + .slider:before {
+    background-color: var(--color-slate-600); 
+}

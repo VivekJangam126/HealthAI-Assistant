@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSMS | Dashboard</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="/CSS/dashboard.css">
+    <script src="/JS/dashboard.js" defer></script>
+    
+</head>
+<body class="dashboard-body">
+
+    <div class="dashboard-layout">
+
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <a href="dashboard.html" class="logo-text">DSMS</a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="sidebar-nav-link is-active">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l-2-2m2 2v10a1 1 0 01-1 1h-3m-6 0h6m-6 0h.01"></path></svg>
+                    Home
+                </a>
+                <a href="documents.html" class="sidebar-nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    My Documents
+                </a>
+                <a href="share.html" class="sidebar-nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.01 9 10.669 9 9.337 9 5.862 12 2 12 2s3.01 3.862 3.01 7.337c0 1.332.114 2.67.316 4.004m-7 0a8 8 0 1114 0m-7 0v7"></path></svg>
+                    Share Controls
+                </a>
+                <a href="logs.html" class="sidebar-nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-10v10m-4-8v8m2 4h4a2 2 0 002-2v-4a2 2 0 00-2-2h-4a2 2 0 00-2 2v4a2 2 0 002 2z"></path></svg>
+                    Activity Logs
+                </a>
+                <a href="notifications.html" class="sidebar-nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v2a3 3 0 11-6 0v-2m6 0H9"></path></svg>
+                    Notifications 
+                    <span class="notification-badge" id="notification-count">3</span>
+                </a>
+                <a href="profile.html" class="sidebar-nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14c4.418 0 8 3.582 8 8H4c0-4.418 3.582-8 8-8z"></path></svg>
+                    Profile
+                </a>
+                <a href="settings.html" class="sidebar-nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.82 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.82 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.82-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.82-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    Settings
+                </a>
+
+                <div class="sidebar-logout-section">
+                    <a href="auth.html" class="sidebar-nav-link logout-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                        Logout
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            
+            <header class="top-bar-mobile">
+                <button id="mobile-menu-btn" class="menu-toggle-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+                <div class="top-bar-title">DSMS Dashboard</div>
+                <div class="profile-avatar">JD</div>
+            </header>
+
+            <div class="dashboard-section-padding">
+                <h1 class="page-heading">Welcome Back, User!</h1>
+
+                <div class="stat-card-grid">
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon-wrapper icon-emerald">
+                            <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        </div>
+                        <div>
+                            <p class="stat-label">Total Documents</p>
+                            <p class="stat-value" id="total-documents">42</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon-wrapper icon-blue">
+                            <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.01 9 10.669 9 9.337 9 5.862 12 2 12 2s3.01 3.862 3.01 7.337c0 1.332.114 2.67.316 4.004m-7 0a8 8 0 1114 0m-7 0v7"></path></svg>
+                        </div>
+                        <div>
+                            <p class="stat-label">Active Shares</p>
+                            <p class="stat-value" id="active-shares">5</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon-wrapper icon-purple">
+                            <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10a2 2 0 002 2h12a2 2 0 002-2V7M7 7h10M7 7a2 2 0 01-2 2v6a2 2 0 002 2h10a2 2 0 002-2V9a2 2 0 01-2-2H7z"></path></svg>
+                        </div>
+                        <div>
+                            <p class="stat-label">Storage Used</p>
+                            <p class="stat-value" id="storage-used">1.2 GB <span class="stat-sub-value">/ 5 GB</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h2 class="card-heading">
+                        Recent Activity
+                        <a href="logs.html" class="view-all-link">View All</a>
+                    </h2>
+                    
+                    <div class="table-responsive">
+                        <table class="data-table" id="recent-activity-table">
+                            <thead>
+                                <tr class="table-header-row">
+                                    <th class="table-cell-padding">Action</th>
+                                    <th class="table-cell-padding">File Name</th>
+                                    <th class="table-cell-padding table-cell-desktop-only">Description</th>
+                                    <th class="table-cell-padding">Timestamp</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-row-item action-upload">
+                                    <td class="table-cell-padding action-cell">
+                                        <svg class="action-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                        Upload
+                                    </td>
+                                    <td class="table-cell-padding">Tax_Docs_2024.pdf</td>
+                                    <td class="table-cell-padding table-cell-desktop-only text-slate-400">New file uploaded.</td>
+                                    <td class="table-cell-padding table-timestamp">5 mins ago</td>
+                                </tr>
+                                <tr class="table-row-item action-share">
+                                    <td class="table-cell-padding action-cell">
+                                        <svg class="action-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.01 9 10.669 9 9.337 9 5.862 12 2 12 2s3.01 3.862 3.01 7.337c0 1.332.114 2.67.316 4.004m-7 0a8 8 0 1114 0m-7 0v7"></path></svg>
+                                        Share
+                                    </td>
+                                    <td class="table-cell-padding">Project_Plan.docx</td>
+                                    <td class="table-cell-padding table-cell-desktop-only text-slate-400">Shared with Harish.</td>
+                                    <td class="table-cell-padding table-timestamp">2 hours ago</td>
+                                </tr>
+                                <tr class="table-row-item action-view">
+                                    <td class="table-cell-padding action-cell">
+                                        <svg class="action-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                        View
+                                    </td>
+                                    <td class="table-cell-padding">Resume.pdf</td>
+                                    <td class="table-cell-padding table-cell-desktop-only text-slate-400">Srushti viewed the file.</td>
+                                    <td class="table-cell-padding table-timestamp">Yesterday</td>
+                                </tr>
+                                <tr class="table-row-item action-delete">
+                                    <td class="table-cell-padding action-cell">
+                                        <svg class="action-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                        Delete
+                                    </td>
+                                    <td class="table-cell-padding">Old_Notes.txt</td>
+                                    <td class="table-cell-padding table-cell-desktop-only text-slate-400">Document permanently removed.</td>
+                                    <td class="table-cell-padding table-timestamp">3 days ago</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebar = document.getElementById('sidebar');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                // Toggle classes for full-screen sidebar overlay on mobile
+                sidebar.classList.toggle('sidebar-hidden');
+                sidebar.classList.toggle('sidebar-mobile-visible'); 
+            });
+            
+            // Add a class to hide sidebar by default on mobile for pure CSS control
+            if (window.innerWidth < 768) {
+                 sidebar.classList.add('sidebar-hidden');
+            }
+        });
+    </script>
+    <script src="/JS/unreadCount.js" defer></script>
+</body>
+</html>

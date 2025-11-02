@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSMS | Requests</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="/CSS/dashboard.css">
+    <link rel="stylesheet" href="/CSS/share.css">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-layout">
+        <aside id="sidebar" class="sidebar sidebar-hidden">
+            <div class="sidebar-header">
+                <a href="dashboard.html" class="logo-text">DSMS</a>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="sidebar-nav-link">Home</a>
+                <a href="documents.html" class="sidebar-nav-link">My Documents</a>
+                <a href="share.html" class="sidebar-nav-link">Share Controls</a>
+                <a href="requests.html" class="sidebar-nav-link is-active">Requests</a>
+                <a href="logs.html" class="sidebar-nav-link">Activity Logs</a>
+                <a href="notifications.html" class="sidebar-nav-link">Notifications <span class="notification-badge" id="notification-count">0</span></a>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="top-bar-mobile">
+                <button id="mobile-menu-btn" class="menu-toggle-btn">☰</button>
+                <div class="top-bar-title">Document Requests</div>
+                <div class="profile-avatar">JD</div>
+            </header>
+            <div class="dashboard-section-padding">
+                <h1 class="page-heading">Document Requests</h1>
+                <div class="content-card">
+                    <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;">
+                        <h2 class="card-heading">Received Requests</h2>
+                        <h2 class="card-heading">Sent Requests</h2>
+                    </div>
+                    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:12px;">
+                        <div style="flex:1;min-width:320px;">
+                            <table class="data-table" id="received-table">
+                                <thead>
+                                    <tr><th>Requester</th><th>Type</th><th>Reason</th><th>Expiry</th><th>Status</th><th>Actions</th></tr>
+                                </thead>
+                                <tbody id="received-body"></tbody>
+                            </table>
+                        </div>
+                        <div style="flex:1;min-width:320px;">
+                            <table class="data-table" id="sent-table">
+                                <thead>
+                                    <tr><th>Recipient</th><th>Type</th><th>Reason</th><th>Expiry</th><th>Status</th></tr>
+                                </thead>
+                                <tbody id="sent-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/JS/requests.js" defer></script>
+    <script src="/JS/unreadCount.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+[
+  {
+    "title": "SmartMatrix Technologies",
+    "role": "Web Development Intern",
+    "period": "January 2026 – Present",
+    "description": "Joined as a web development intern at SmartMatrix, working on real-world client projects, bug fixing, and production-ready UI improvements using React and modern frontend practices."
+  },
+  {
+    "title": "EatClub – Food Ordering Platform",
+    "role": "Frontend Developer (Ongoing Project)",
+    "period": "February 2026 – Present",
+    "description": "Building an intuitive food ordering interface with responsive layouts, reusable components, and API integration to handle menus, orders, and live status updates."
+  },
+  {
+    "title": "DSMS – Decentralized Storage Management System",
+    "role": "Project Lead (Web Developer)",
+    "period": "2025 – 2026",
+    "description": "Designed and developed a decentralized storage management platform concept focusing on secure file handling, role-based access, and a dashboard-friendly UI for students and admins."
+  },
+  {
+    "title": "MCQ Web App",
+    "role": "React Developer",
+    "period": "May 2025 – Present",
+    "description": "Building a responsive multiple-choice quiz web app for diploma students, including Firebase authentication, quiz management, and result tracking."
+  },
+  {
+    "title": "Campus Connect",
+    "role": "Event Collaboration Platform",
+    "period": "May 2025 – Present",
+    "description": "Developing a platform for colleges to post, manage, and collaborate on events, hackathons, and workshops, streamlining student–industry interaction."
+  },
+  {
+    "title": "Guided Internship Learning",
+    "role": "Training Under IT Engineer",
+    "period": "April 2025 – Present",
+    "description": "Learning ethical hacking, GitHub management, Linux usage, and backend principles under direct mentorship. Supporting server setups and workflow design."
+  },
+  {
+    "title": "Self-Guided Projects",
+    "role": "Frontend Developer",
+    "period": "March 2025 – Present",
+    "description": "Building personal projects including a portfolio website with interactive sections and a dynamic project display using JSON, Tailwind CSS, and JavaScript."
+  },
+  {
+    "title": "CyberSakshar",
+    "role": "Security Education Platform Creator",
+    "period": "January 2025 – Present",
+    "description": "Developed a platform to promote cybersecurity awareness with interactive modules, ethical hacking basics, and a student-focused UI/UX."
+  },
+  {
+    "title": "Linux Terminal Simulator",
+    "role": "Web-based CLI Developer",
+    "period": "April 2025 – May 2025",
+    "description": "Built a web app that simulates Linux commands in the browser using HTML, CSS, JavaScript, and Flask with command parsing and permission simulation."
+  },
+  {
+    "title": "AyuMitra",
+    "role": "Healthcare App Developer",
+    "period": "March 2025 – April 2025",
+    "description": "Created a personalized healthcare app that tracks symptoms, suggests diet and exercise plans, and supports smart consultations."
+  },
+  {
+    "title": "DhiVak – Smart Attendance",
+    "role": "AI Integration Developer",
+    "period": "December 2024 – February 2025",
+    "description": "Implemented an AI-powered attendance system combining face/voice recognition with GPS tracking and visual feedback for students."
+  },
+  {
+    "title": "OSI & TCP Model Simulator",
+    "role": "Educational Web Developer",
+    "period": "February 2025 – March 2025",
+    "description": "Developed interactive visualizations for OSI and TCP/IP layers, showing packet flow and protocol behavior with animations."
+  }
+]

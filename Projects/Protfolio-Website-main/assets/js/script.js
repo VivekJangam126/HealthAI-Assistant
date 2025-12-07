@@ -249,3 +249,44 @@ srtop.reveal('.experience .timeline .container', { interval: 400 });
 /* SCROLL CONTACT */
 srtop.reveal('.contact .container', { delay: 400 });
 srtop.reveal('.contact .container .form-group', { delay: 400 });
+
+
+
+
+// ===== Intro video + hero animation sync =====
+window.addEventListener("load", function () {
+  const overlay = document.getElementById("intro-overlay");
+  const video = document.getElementById("intro-video");
+
+  // If overlay or video missing, just run hero animation directly
+  if (!overlay || !video) {
+    document.body.classList.add("hero-anim-ready");
+    return;
+  }
+
+  // lock scroll while intro is visible
+  document.body.classList.add("intro-active");
+
+  const finishIntro = () => {
+    if (overlay.classList.contains("hidden")) return;
+
+    overlay.classList.add("hidden");
+    document.body.classList.remove("intro-active");
+    document.body.classList.add("hero-anim-ready");
+  };
+
+  // play video (handle autoplay issues)
+  const playPromise = video.play();
+  if (playPromise !== undefined) {
+    playPromise.catch(() => {
+      // autoplay blocked -> skip intro
+      finishIntro();
+    });
+  }
+
+  // when video ends, reveal hero
+  video.addEventListener("ended", finishIntro);
+
+  // safety fallback: if video hangs, skip after 9s
+  setTimeout(finishIntro, 9000);
+});

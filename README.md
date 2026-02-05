@@ -1,11 +1,11 @@
 # HealthAI Assistant 🏥
 
-[![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/NikhilRaikwar/HealthAI-Assistant)
+[![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/VivekJangam126/HealthAI-Assistant)
 [![Hacktoberfest 2025](https://img.shields.io/badge/Hacktoberfest-2025-blueviolet)](https://hacktoberfest.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/NikhilRaikwar/HealthAI-Assistant/pulls)
-[![Stars](https://img.shields.io/github/stars/NikhilRaikwar/HealthAI-Assistant?style=social)](https://github.com/NikhilRaikwar/HealthAI-Assistant/stargazers)
-[![Forks](https://img.shields.io/github/forks/NikhilRaikwar/HealthAI-Assistant?style=social)](https://github.com/NikhilRaikwar/HealthAI-Assistant/network/members)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/VivekJangam126/HealthAI-Assistant/pulls)
+[![Stars](https://img.shields.io/github/stars/VivekJangam126/HealthAI-Assistant?style=social)](https://github.com/VivekJangam126/HealthAI-Assistant/stargazers)
+[![Forks](https://img.shields.io/github/forks/VivekJangam126/HealthAI-Assistant?style=social)](https://github.com/VivekJangam126/HealthAI-Assistant/network/members)
 
 An AI-powered healthcare assistant that provides medical information, symptom analysis, and health recommendations using Google's Gemini AI. Supporting multiple languages for global accessibility! 🌍
 
@@ -19,8 +19,8 @@ An AI-powered healthcare assistant that provides medical information, symptom an
 
 **Your Hacktoberfest contribution will be marked INVALID if you don't star the repository!**
 
-<a href="https://github.com/NikhilRaikwar/HealthAI-Assistant">
-  <img src="https://img.shields.io/github/stars/NikhilRaikwar/HealthAI-Assistant?style=for-the-badge&logo=github&color=yellow" alt="Star this repo"/>
+<a href="https://github.com/VivekJangam126/HealthAI-Assistant">
+  <img src="https://img.shields.io/github/stars/VivekJangam126/HealthAI-Assistant?style=for-the-badge&logo=github&color=yellow" alt="Star this repo"/>
 </a>
 
 **👆 Click above to star the repo - It takes 2 seconds!**
@@ -73,8 +73,8 @@ We're excited to participate in Hacktoberfest 2025! This is the perfect opportun
 
 ### 🚀 **Quick Start for Hacktoberfest Contributors**
 
-1. **⭐ Star the repo** - [Click here](https://github.com/NikhilRaikwar/HealthAI-Assistant) (MANDATORY!)
-2. **Find an issue** - Check our [Good First Issues](https://github.com/NikhilRaikwar/HealthAI-Assistant/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) or [Hacktoberfest](https://github.com/NikhilRaikwar/HealthAI-Assistant/issues?q=is%3Aopen+is%3Aissue+label%3AHacktoberfest) labeled issues
+1. **⭐ Star the repo** - [Click here](https://github.com/VivekJangam126/HealthAI-Assistant) (MANDATORY!)
+2. **Find an issue** - Check our [Good First Issues](https://github.com/VivekJangam126/HealthAI-Assistant/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) or [Hacktoberfest](https://github.com/VivekJangam126/HealthAI-Assistant/issues?q=is%3Aopen+is%3Aissue+label%3AHacktoberfest) labeled issues
 3. **Comment on the issue** - Express your interest: "I'd like to work on this"
 4. **Wait for assignment** - Maintainers will assign the issue to you
 5. **Fork the repo** - Click the 'Fork' button at the top right
@@ -155,7 +155,7 @@ Visit the live application: **[HealthAI Assistant](https://health-ai-assistant.v
 
 1. **Clone the repository**:
 ```bash
-git clone https://github.com/NikhilRaikwar/HealthAI-Assistant.git
+git clone https://github.com/VivekJangam126/HealthAI-Assistant.git
 cd HealthAI-Assistant
 ```
 
@@ -421,9 +421,9 @@ npm run format
 
 ## 📧 Contact
 
-**Maintainer**: Nikhil Raikwar  
-**GitHub**: [@NikhilRaikwar](https://github.com/NikhilRaikwar)  
-**Project Link**: [https://github.com/NikhilRaikwar/HealthAI-Assistant](https://github.com/NikhilRaikwar/HealthAI-Assistant)
+For questions or suggestions, please open an issue on GitHub.
+
+**Project Link**: [https://github.com/VivekJangam126/HealthAI-Assistant](https://github.com/VivekJangam126/HealthAI-Assistant)
 
 ---
 
@@ -492,8 +492,8 @@ We love our contributors! All contributors are shown below with their GitHub pro
 
 ### 🎉 Thank You to All Our Amazing Contributors! 🎉
 
-<a href="https://github.com/NikhilRaikwar/HealthAI-Assistant/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=NikhilRaikwar/HealthAI-Assistant&max=100&columns=10" alt="Contributors"/>
+<a href="https://github.com/VivekJangam126/HealthAI-Assistant/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=VivekJangam126/HealthAI-Assistant&max=100&columns=10" alt="Contributors"/>
 </a>
 
 **Want to see your face here? [Start contributing now!](./CONTRIBUTING.md)** 🚀
@@ -506,12 +506,12 @@ We love our contributors! All contributors are shown below with their GitHub pro
 
 <div align="center">
 
-![GitHub stars](https://img.shields.io/github/stars/NikhilRaikwar/HealthAI-Assistant?style=social)
-![GitHub forks](https://img.shields.io/github/forks/NikhilRaikwar/HealthAI-Assistant?style=social)
-![GitHub issues](https://img.shields.io/github/issues/NikhilRaikwar/HealthAI-Assistant)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/NikhilRaikwar/HealthAI-Assistant)
-![GitHub contributors](https://img.shields.io/github/contributors/NikhilRaikwar/HealthAI-Assistant)
-![GitHub last commit](https://img.shields.io/github/last-commit/NikhilRaikwar/HealthAI-Assistant)
+![GitHub stars](https://img.shields.io/github/stars/VivekJangam126/HealthAI-Assistant?style=social)
+![GitHub forks](https://img.shields.io/github/forks/VivekJangam126/HealthAI-Assistant?style=social)
+![GitHub issues](https://img.shields.io/github/issues/VivekJangam126/HealthAI-Assistant)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/VivekJangam126/HealthAI-Assistant)
+![GitHub contributors](https://img.shields.io/github/contributors/VivekJangam126/HealthAI-Assistant)
+![GitHub last commit](https://img.shields.io/github/last-commit/VivekJangam126/HealthAI-Assistant)
 
 </div>
 
@@ -531,7 +531,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-### ⭐ **If you like this project, please [star the repo](https://github.com/NikhilRaikwar/HealthAI-Assistant)!** ⭐
+### ⭐ **If you like this project, please [star the repo](https://github.com/VivekJangam126/HealthAI-Assistant)!** ⭐
 
 **Let's build something amazing together! 🚀**
 
@@ -541,7 +541,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Quality contributions are always welcome!**
 
-<a href="https://github.com/NikhilRaikwar/HealthAI-Assistant">
+<a href="https://github.com/VivekJangam126/HealthAI-Assistant">
   <img src="https://img.shields.io/badge/⭐-Star%20This%20Repo-yellow?style=for-the-badge&logo=github" alt="Star this repo"/>
 </a>
 

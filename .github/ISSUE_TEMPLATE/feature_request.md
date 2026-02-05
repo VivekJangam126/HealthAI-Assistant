@@ -15,7 +15,7 @@ assignees: ''
 ## 👥 Recognition
 If you implement this feature, don't forget to add yourself to [CONTRIBUTORS.md](../../CONTRIBUTORS.md) in your pull request! 🎉
 
-⭐ **If you haven't already, please [star the repo](https://github.com/NikhilRaikwar/HealthAI-Assistant)!** ⭐
+⭐ **If you haven't already, please [star the repo](https://github.com/VivekJangam126/HealthAI-Assistant)!** ⭐
 
 
 ## 💡 Feature Description

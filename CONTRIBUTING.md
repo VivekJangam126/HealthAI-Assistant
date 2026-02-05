@@ -13,7 +13,7 @@ Before opening any issue or PR:
 2. This shows your support and is **REQUIRED** for Hacktoberfest contributions
 3. **Contributions without starring will be rejected**
 
-[⭐ **Star the Repo Now**](https://github.com/NikhilRaikwar/HealthAI-Assistant) - It takes 2 seconds! 😊
+[⭐ **Star the Repo Now**](https://github.com/VivekJangam126/HealthAI-Assistant) - It takes 2 seconds! 😊
 
 ---
 
@@ -24,7 +24,7 @@ Before opening any issue or PR:
 - **This is MANDATORY** - no exceptions!
 
 ### ✅ **Step 2: Find or Create an Issue** 📝
-- Browse [existing issues](https://github.com/NikhilRaikwar/HealthAI-Assistant/issues)
+- Browse [existing issues](https://github.com/VivekJangam126/HealthAI-Assistant/issues)
 - Look for issues labeled:
   - `good first issue` - Perfect for beginners
   - `hacktoberfest` - Hacktoberfest-ready issues
@@ -315,8 +315,8 @@ All contributors are showcased at the end of the [README](./README.md) with thei
 
 **Your face will be here:**
 <p align="center">
-   <a href="https://github.com/NikhilRaikwar/HealthAI-Assistant/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=NikhilRaikwar/HealthAI-Assistant&max=100&columns=10" alt="Contributors"/>
+   <a href="https://github.com/VivekJangam126/HealthAI-Assistant/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=VivekJangam126/HealthAI-Assistant&max=100&columns=10" alt="Contributors"/>
 </a>
 </p>
 
@@ -326,8 +326,7 @@ All contributors are showcased at the end of the [README](./README.md) with thei
 
 ### **Have Questions?**
 - 💬 Comment on the issue you're working on
-- 📧 Contact maintainer: [@NikhilRaikwar](https://github.com/NikhilRaikwar)
-- 🐛 Found a bug? [Open an issue](https://github.com/NikhilRaikwar/HealthAI-Assistant/issues/new)
+- 🐛 Found a bug? [Open an issue](https://github.com/VivekJangam126/HealthAI-Assistant/issues/new)
 
 ### **Useful Resources:**
 - [React Documentation](https://react.dev)
@@ -395,7 +394,7 @@ We are committed to providing a welcoming and inclusive experience for everyone.
 - 🎨 UI enhancements
 - 🌍 Translation additions
 
-Check our [issues page](https://github.com/NikhilRaikwar/HealthAI-Assistant/issues) for current opportunities!
+Check our [issues page](https://github.com/VivekJangam126/HealthAI-Assistant/issues) for current opportunities!
 
 ---
 

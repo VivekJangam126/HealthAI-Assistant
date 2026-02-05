@@ -15,7 +15,7 @@ Please provide a brief description of your changes. What does this PR do? 😊
 
 **Note**: Please add yourself to the CONTRIBUTORS.md file following the format provided. This helps us recognize and celebrate all contributors! 🎉
 
-⭐ **If you haven't already, please [star the repo](https://github.com/NikhilRaikwar/HealthAI-Assistant)!** ⭐
+⭐ **If you haven't already, please [star the repo](https://github.com/VivekJangam126/HealthAI-Assistant)!** ⭐
 
 
 ## 🔗 Related Issues

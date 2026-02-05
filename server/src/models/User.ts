@@ -61,9 +61,9 @@ const UserSchema = new Schema<IUser>(
 );
 
 // Hash password before saving
-UserSchema.pre('save', async function (next) {
+UserSchema.pre('save', async function () {
   if (!this.isModified('password')) {
-    next();
+    return;
   }
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
@@ -78,9 +78,9 @@ UserSchema.methods.comparePassword = async function (
 
 // Generate JWT token
 UserSchema.methods.generateAuthToken = function (): string {
-  return jwt.sign({ id: this._id }, config.jwtSecret, {
+  return jwt.sign({ id: this._id.toString() }, config.jwtSecret, {
     expiresIn: config.jwtExpire,
-  });
+  } as jwt.SignOptions);
 };
 
 export default mongoose.model<IUser>('User', UserSchema);

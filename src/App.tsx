@@ -12,6 +12,7 @@ import { NavigationProvider } from './context/NavigationContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { Navbar } from './components/navigation/Navbar';
 import AppContent from './components/AppContent';
+import HistorySidebar from './components/history/HistorySidebar';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           }}
         />
         <AppContent />
+        <HistorySidebar />
       </NavigationProvider>
     </ThemeProvider>
   );

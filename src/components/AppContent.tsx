@@ -18,7 +18,7 @@ export default function AppContent() {
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 transition-colors duration-200">
       <Navbar />
 
-      <main className="flex-grow pt-20 pb-24">
+      <main className="flex-grow pt-20 pb-24 lg:ml-64">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center">
             <div className="w-full animate-fadeIn">
@@ -40,7 +40,7 @@ export default function AppContent() {
         </div>
       </main>
 
-      <footer className="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 shadow-sm">
+      <footer className="fixed bottom-0 left-0 right-0 lg:left-64 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 shadow-sm">
         <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center space-x-2">
             <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500">

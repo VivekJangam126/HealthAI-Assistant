@@ -7,6 +7,7 @@ import { errorHandler } from './middleware/errorHandler';
 
 // Import routes
 import authRoutes from './routes/authRoutes';
+import historyRoutes from './routes/historyRoutes';
 
 // Initialize express app
 const app: Application = express();
@@ -38,6 +39,7 @@ app.use(cookieParser());
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/history', historyRoutes);
 
 // Health check route
 app.get('/api/health', (req: Request, res: Response) => {

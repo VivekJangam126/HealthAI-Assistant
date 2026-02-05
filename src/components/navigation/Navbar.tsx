@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Menu, LogIn, UserPlus } from 'lucide-react';
+import { Menu, PanelLeft } from 'lucide-react';
 import { NavLogo } from './NavLogo';
 import { MobileMenu } from './MobileMenu';
 import { navigationItems } from '../../config/navigation';
 import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler';
 import { useNavigationContext } from '../../context/NavigationContext';
 import { useAuthStore } from '../../store/authStore';
-import ProfileDropdown from '../auth/ProfileDropdown';
-import LoginModal from '../auth/LoginModal';
-import SignupModal from '../auth/SignupModal';
+import { useHistoryStore } from '../../store/historyStore';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -22,10 +20,9 @@ import { cn } from '@/lib/utils';
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isSignupOpen, setIsSignupOpen] = useState(false);
   const { activeTab, setActiveTab } = useNavigationContext();
-  const { isAuthenticated, loadUser } = useAuthStore();
+  const { loadUser } = useAuthStore();
+  const { toggleSidebar } = useHistoryStore();
 
   useEffect(() => {
     loadUser();
@@ -33,9 +30,17 @@ export function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-sm">
+      <header className="fixed top-0 left-0 right-0 z-40 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-sm lg:left-64">
         <div className="max-w-7xl mx-auto">
           <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+            {/* Mobile sidebar toggle */}
+            <button
+              onClick={toggleSidebar}
+              className="lg:hidden p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            >
+              <PanelLeft className="w-5 h-5" />
+            </button>
+
             <NavLogo />
 
             <nav className="hidden lg:flex lg:items-center lg:space-x-2">
@@ -104,27 +109,6 @@ export function Navbar() {
 
             <div className="flex items-center gap-2">
               <AnimatedThemeToggler className="p-2 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-100 dark:hover:bg-gray-800 transition-colors duration-200" />
-              
-              {isAuthenticated ? (
-                <ProfileDropdown />
-              ) : (
-                <div className="hidden lg:flex items-center gap-2">
-                  <button
-                    onClick={() => setIsLoginOpen(true)}
-                    className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
-                  >
-                    <LogIn className="w-4 h-4" />
-                    Login
-                  </button>
-                  <button
-                    onClick={() => setIsSignupOpen(true)}
-                    className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
-                  >
-                    <UserPlus className="w-4 h-4" />
-                    Sign Up
-                  </button>
-                </div>
-              )}
 
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
@@ -141,24 +125,6 @@ export function Navbar() {
       <MobileMenu 
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
-      />
-
-      <LoginModal
-        isOpen={isLoginOpen}
-        onClose={() => setIsLoginOpen(false)}
-        onSwitchToSignup={() => {
-          setIsLoginOpen(false);
-          setIsSignupOpen(true);
-        }}
-      />
-
-      <SignupModal
-        isOpen={isSignupOpen}
-        onClose={() => setIsSignupOpen(false)}
-        onSwitchToLogin={() => {
-          setIsSignupOpen(false);
-          setIsLoginOpen(true);
-        }}
       />
     </>
   );

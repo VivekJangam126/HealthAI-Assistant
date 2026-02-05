@@ -1,5 +1,4 @@
-import React from 'react';
-import { Github, Globe, Mail } from 'lucide-react';
+import { Github, Globe } from 'lucide-react';
 import { PageContainer } from './ui/PageContainer';
 
 export default function About() {

@@ -147,36 +147,397 @@ Visit the live application: **[HealthAI Assistant](https://health-ai-assistant.v
 
 ### Prerequisites
 
-- Node.js (version 16 or higher)
-- npm or yarn
-- Gemini AI API key
+Before you begin, ensure you have the following installed on your system:
 
-### Installation
+- **Node.js** (version 16 or higher) - [Download here](https://nodejs.org/)
+- **npm** (comes with Node.js) or **yarn**
+- **MongoDB** (for local development) - [Download here](https://www.mongodb.com/try/download/community)
+- **Git** - [Download here](https://git-scm.com/downloads)
+- **Gemini AI API Key** - [Get it here](https://makersuite.google.com/app/apikey)
 
-1. **Clone the repository**:
+---
+
+## 📦 Complete Installation Guide
+
+### Step 1: Install MongoDB
+
+#### For Windows:
+1. Download MongoDB Community Server from [MongoDB Download Center](https://www.mongodb.com/try/download/community)
+2. Run the installer and follow the installation wizard
+3. Choose "Complete" installation
+4. Install MongoDB as a Service (recommended)
+5. MongoDB will start automatically on `mongodb://localhost:27017`
+
+#### For macOS:
 ```bash
+# Using Homebrew
+brew tap mongodb/brew
+brew install mongodb-community
+brew services start mongodb-community
+```
+
+#### For Linux (Ubuntu/Debian):
+```bash
+# Import MongoDB public GPG key
+wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
+
+# Create list file
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+
+# Update package database
+sudo apt-get update
+
+# Install MongoDB
+sudo apt-get install -y mongodb-org
+
+# Start MongoDB
+sudo systemctl start mongod
+sudo systemctl enable mongod
+```
+
+#### Verify MongoDB Installation:
+```bash
+# Check if MongoDB is running
+mongosh
+# or
+mongo
+
+# You should see MongoDB shell prompt
+# Type 'exit' to quit
+```
+
+---
+
+### Step 2: Clone the Repository
+
+```bash
+# Clone the repository
 git clone https://github.com/VivekJangam126/HealthAI-Assistant.git
+
+# Navigate to project directory
 cd HealthAI-Assistant
 ```
 
-2. **Install dependencies**:
+---
+
+### Step 3: Get Your Gemini API Key
+
+1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Sign in with your Google account
+3. Click on "Get API Key" or "Create API Key"
+4. Copy the generated API key (it looks like: `AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX`)
+5. Keep it safe - you'll need it in the next step
+
+---
+
+### Step 4: Configure Frontend Environment Variables
+
+1. **Navigate to the root directory** (HealthAI-Assistant folder)
+
+2. **Create a `.env` file** in the root directory:
 ```bash
+# For Windows (Command Prompt)
+type nul > .env
+
+# For Windows (PowerShell)
+New-Item .env
+
+# For macOS/Linux
+touch .env
+```
+
+3. **Open the `.env` file** in your text editor and add:
+```env
+# Gemini AI API Key (REQUIRED)
+VITE_GEMINI_API_KEY=your_actual_gemini_api_key_here
+
+# Backend API URL (for local development)
+VITE_API_URL=http://localhost:5000/api
+```
+
+4. **Replace `your_actual_gemini_api_key_here`** with your actual Gemini API key from Step 3
+
+**Example:**
+```env
+VITE_GEMINI_API_KEY=AIzaSyBcP0qQLG2jyT-bHsMPrNet67zdFGIZDow
+VITE_API_URL=http://localhost:5000/api
+```
+
+---
+
+### Step 5: Configure Backend Environment Variables
+
+1. **Navigate to the server directory**:
+```bash
+cd server
+```
+
+2. **Create a `.env` file** in the server directory:
+```bash
+# For Windows (Command Prompt)
+type nul > .env
+
+# For Windows (PowerShell)
+New-Item .env
+
+# For macOS/Linux
+touch .env
+```
+
+3. **Open the `server/.env` file** and add:
+```env
+# Server Configuration
+PORT=5000
+NODE_ENV=development
+
+# MongoDB Configuration (Local)
+MONGODB_URI=mongodb://localhost:27017/healthai
+
+# JWT Configuration
+JWT_SECRET=healthai_jwt_secret_key_2024_production_secure_xyz789abc123
+JWT_EXPIRE=7d
+
+# Frontend URL (for CORS)
+CLIENT_URL=http://localhost:3000,http://localhost:5173,http://127.0.0.1:3000
+```
+
+**Note:** You can change the `JWT_SECRET` to any secure random string for better security.
+
+4. **Go back to the root directory**:
+```bash
+cd ..
+```
+
+---
+
+### Step 6: Install Dependencies
+
+#### Install Frontend Dependencies:
+```bash
+# Make sure you're in the root directory (HealthAI-Assistant)
 npm install
 ```
 
-3. **Set up environment variables**:
-   - Create a `.env` file in the root directory
-   - Add your Gemini AI API key:
-```env
-VITE_GEMINI_API_KEY=your_gemini_api_key_here
+This will install all required packages including:
+- React, Vite, TypeScript
+- Tailwind CSS
+- Gemini AI SDK
+- Axios for API calls
+- And more...
+
+#### Install Backend Dependencies:
+```bash
+# Navigate to server directory
+cd server
+
+# Install server dependencies
+npm install
+
+# Go back to root
+cd ..
 ```
 
-4. **Start the development server**:
+This will install:
+- Express.js
+- MongoDB/Mongoose
+- JWT for authentication
+- bcryptjs for password hashing
+- And more...
+
+---
+
+### Step 7: Start the Application
+
+You need to run both frontend and backend servers simultaneously.
+
+#### Option 1: Using Two Terminal Windows (Recommended)
+
+**Terminal 1 - Start Backend Server:**
 ```bash
+# Navigate to server directory
+cd server
+
+# Start the backend server
 npm run dev
 ```
 
-The application will be available at `http://localhost:5173`
+You should see:
+```
+Server running on port 5000
+MongoDB connected successfully
+```
+
+**Terminal 2 - Start Frontend Server:**
+```bash
+# Make sure you're in the root directory
+# Open a new terminal window/tab
+
+# Start the frontend development server
+npm run dev
+```
+
+You should see:
+```
+VITE v5.x.x  ready in xxx ms
+
+➜  Local:   http://localhost:3000/
+➜  Network: use --host to expose
+```
+
+#### Option 2: Using One Terminal (Windows)
+
+```bash
+# Start backend in background and frontend
+cd server && start npm run dev && cd .. && npm run dev
+```
+
+#### Option 3: Using One Terminal (macOS/Linux)
+
+```bash
+# Start backend in background and frontend
+cd server && npm run dev & cd .. && npm run dev
+```
+
+---
+
+### Step 8: Access the Application
+
+1. **Open your browser** and navigate to:
+   - Frontend: `http://localhost:3000` or `http://localhost:5173`
+   - Backend API: `http://localhost:5000/api`
+
+2. **Test the application**:
+   - Try the Symptom Analyzer
+   - Use the Healthcare Chat
+   - Check Drug Interactions
+   - Upload a medical report
+
+---
+
+## 🔧 Troubleshooting
+
+### MongoDB Connection Issues
+
+**Error: `MongooseServerSelectionError: connect ECONNREFUSED`**
+
+**Solution:**
+```bash
+# Check if MongoDB is running
+# Windows:
+net start MongoDB
+
+# macOS:
+brew services start mongodb-community
+
+# Linux:
+sudo systemctl start mongod
+sudo systemctl status mongod
+```
+
+### Port Already in Use
+
+**Error: `Port 3000 is already in use`**
+
+**Solution:**
+```bash
+# Kill the process using the port
+# Windows:
+netstat -ano | findstr :3000
+taskkill /PID <PID> /F
+
+# macOS/Linux:
+lsof -ti:3000 | xargs kill -9
+```
+
+### API Key Issues
+
+**Error: `API key not valid`**
+
+**Solution:**
+1. Verify your Gemini API key is correct
+2. Check if there are any spaces before/after the key in `.env`
+3. Restart the development server after changing `.env`
+4. Make sure the key starts with `AIza`
+
+### Module Not Found Errors
+
+**Solution:**
+```bash
+# Delete node_modules and reinstall
+rm -rf node_modules package-lock.json
+npm install
+
+# For server
+cd server
+rm -rf node_modules package-lock.json
+npm install
+```
+
+---
+
+## 📝 Quick Reference
+
+### Environment Variables Summary
+
+**Frontend (`.env` in root):**
+```env
+VITE_GEMINI_API_KEY=your_gemini_api_key
+VITE_API_URL=http://localhost:5000/api
+```
+
+**Backend (`server/.env`):**
+```env
+PORT=5000
+NODE_ENV=development
+MONGODB_URI=mongodb://localhost:27017/healthai
+JWT_SECRET=your_secure_secret_key
+JWT_EXPIRE=7d
+CLIENT_URL=http://localhost:3000,http://localhost:5173
+```
+
+### Common Commands
+
+```bash
+# Start frontend
+npm run dev
+
+# Start backend
+cd server && npm run dev
+
+# Build for production
+npm run build
+
+# Run linter
+npm run lint
+
+# Install new package
+npm install package-name
+```
+
+---
+
+## ✅ Verification Checklist
+
+Before you start developing, make sure:
+
+- [ ] MongoDB is installed and running
+- [ ] Node.js and npm are installed
+- [ ] Repository is cloned
+- [ ] Gemini API key is obtained
+- [ ] Frontend `.env` file is created with API key
+- [ ] Backend `server/.env` file is created
+- [ ] Frontend dependencies are installed (`npm install`)
+- [ ] Backend dependencies are installed (`cd server && npm install`)
+- [ ] Backend server is running (port 5000)
+- [ ] Frontend server is running (port 3000 or 5173)
+- [ ] Application opens in browser
+- [ ] No console errors
+
+---
+
+## 🎉 You're All Set!
+
+The application should now be running successfully. You can start exploring the features or begin contributing to the project!
 
 ---
 

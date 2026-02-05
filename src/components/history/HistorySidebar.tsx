@@ -138,10 +138,10 @@ export default function HistorySidebar() {
         />
       )}
 
-      {/* Sidebar - Always visible on desktop, toggleable on mobile */}
+      {/* Sidebar - Toggleable on all screen sizes, starts below navbar */}
       <div 
-        className={`fixed left-0 top-0 h-full w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 z-50 flex flex-col transition-transform duration-300 ${
-          isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        className={`fixed left-0 top-16 h-[calc(100vh-4rem)] w-80 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 z-50 flex flex-col transition-transform duration-300 ${
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         {/* Header */}
@@ -154,7 +154,8 @@ export default function HistorySidebar() {
           </div>
           <button
             onClick={toggleSidebar}
-            className="lg:hidden p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+            className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+            title="Close sidebar"
           >
             <PanelLeftClose className="w-4 h-4 text-gray-500 dark:text-gray-400" />
           </button>
@@ -163,6 +164,17 @@ export default function HistorySidebar() {
         {/* Search and Filters - Only show when authenticated */}
         {isAuthenticated && (
           <div className="p-3 space-y-2 border-b border-gray-200 dark:border-gray-700">
+            {/* New Chat Button */}
+            <button
+              onClick={() => setActiveTab('chat')}
+              className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium shadow-sm"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+              New Chat
+            </button>
+            
             {/* Search */}
             <div className="relative">
               <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />

@@ -6,6 +6,10 @@ import ReactMarkdown from 'react-markdown';
 import { useDropzone } from 'react-dropzone';
 import { PageContainer } from './ui/PageContainer';
 import { ChatMessage } from '../types';
+import { useConversationSave } from '../hooks/useConversationSave';
+import { useAuthStore } from '../store/authStore';
+import { useHistoryStore } from '../store/historyStore';
+import toast from 'react-hot-toast';
 
 export default function ReportSummarizer() {
   const [reportText, setReportText] = useState('');
@@ -15,7 +19,32 @@ export default function ReportSummarizer() {
   const [loading, setLoading] = useState(false);
   const [uploadLoading, setUploadLoading] = useState(false);
   const [error, setError] = useState('');
+  const [conversationId, setConversationId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  
+  const { saveConversation } = useConversationSave();
+  const { isAuthenticated } = useAuthStore();
+  const { currentConversation, clearLoadedConversation } = useHistoryStore();
+
+  // Load conversation from history
+  useEffect(() => {
+    if (currentConversation && currentConversation.feature === 'reports') {
+      const loadedMessages: ChatMessage[] = currentConversation.messages.map((msg: any) => ({
+        type: msg.role === 'user' ? 'user' : 'bot',
+        content: msg.content,
+        timestamp: new Date(msg.timestamp),
+      }));
+      
+      setMessages(loadedMessages);
+      setConversationId(currentConversation._id);
+      
+      // Note: We can't reload the PDF, but we can show the conversation
+      setReportText('loaded'); // Placeholder to enable chat
+      
+      clearLoadedConversation();
+      toast.success('Report conversation loaded!');
+    }
+  }, [currentConversation, clearLoadedConversation]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -31,6 +60,7 @@ export default function ReportSummarizer() {
     setMessages([]);
     setInput('');
     setError('');
+    setConversationId(null);
   };
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
@@ -115,6 +145,20 @@ export default function ReportSummarizer() {
           timestamp: new Date(),
         }];
       });
+      
+      // Auto-save conversation if user is authenticated
+      if (isAuthenticated) {
+        const savedId = await saveConversation({
+          feature: 'reports',
+          userMessage: userMessage.content,
+          aiResponse: response,
+          conversationId: conversationId || undefined,
+        });
+        
+        if (savedId && !conversationId) {
+          setConversationId(savedId);
+        }
+      }
     } catch (error) {
       console.error(error);
       setError('Failed to process your query. Please try again.');

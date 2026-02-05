@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { useHistoryStore } from '../../store/historyStore';
 import { useAuthStore } from '../../store/authStore';
+import { useNavigationContext } from '../../context/NavigationContext';
 import HistoryItem from './HistoryItem';
 import { exportConversationToPDF, exportAllConversationsToPDF } from '../../utils/pdfExport';
 import LoginModal from '../auth/LoginModal';
@@ -36,9 +37,11 @@ export default function HistorySidebar() {
     deleteConversation,
     toggleBookmark,
     fetchConversationById,
+    setCurrentConversation,
   } = useHistoryStore();
 
   const { isAuthenticated, user, logout } = useAuthStore();
+  const { setActiveTab } = useNavigationContext();
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -51,8 +54,45 @@ export default function HistorySidebar() {
   }, [isAuthenticated, searchQuery, filterFeature, showBookmarked]);
 
   const handleSelectConversation = async (id: string) => {
-    await fetchConversationById(id);
-    // You can add logic here to load the conversation into the active feature
+    const conversation = await fetchConversationById(id);
+    if (conversation) {
+      // Navigate to the appropriate feature and load the conversation
+      loadConversationIntoFeature(conversation);
+    }
+  };
+
+  const loadConversationIntoFeature = (conversation: any) => {
+    // Get the feature from the conversation
+    const feature = conversation.feature;
+    
+    // Map feature names to navigation IDs (must match navigation.ts)
+    const featureTabs: Record<string, string> = {
+      'symptoms': 'symptoms',
+      'drugs': 'drugs',
+      'terms': 'terms',
+      'reports': 'reports',
+      'chat': 'chat',
+      'medical-image': 'medical-image',
+      'medicine': 'medicine',
+      'policy': 'policy',
+    };
+    
+    // Navigate to the feature
+    const tabId = featureTabs[feature];
+    if (tabId) {
+      // Store the conversation to be loaded
+      setCurrentConversation(conversation);
+      
+      // Navigate to the feature
+      setActiveTab(tabId);
+      
+      // Close sidebar on mobile
+      if (window.innerWidth < 1024) {
+        toggleSidebar();
+      }
+      
+      toast.success('Conversation loaded');
+    }
   };
 
   const handleExportAll = async () => {

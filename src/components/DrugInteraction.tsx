@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Pill, Plus, X, Loader, AlertCircle } from 'lucide-react';
 import { checkDrugInteraction, validateMedicationName } from '../lib/gemini';
 import ReactMarkdown from 'react-markdown';
+import { useConversationSave } from '../hooks/useConversationSave';
+import { useAuthStore } from '../store/authStore';
+import { useHistoryStore } from '../store/historyStore';
+import toast from 'react-hot-toast';
 
 export default function DrugInteraction() {
   const [drugs, setDrugs] = useState<string[]>([]);
@@ -10,6 +14,37 @@ export default function DrugInteraction() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [validating, setValidating] = useState(false);
+  const [conversationId, setConversationId] = useState<string | null>(null);
+  
+  const { saveConversation } = useConversationSave();
+  const { isAuthenticated } = useAuthStore();
+  const { currentConversation, clearLoadedConversation } = useHistoryStore();
+
+  // Load conversation from history
+  useEffect(() => {
+    if (currentConversation && currentConversation.feature === 'drugs') {
+      // Extract drugs from the first user message
+      const firstUserMsg = currentConversation.messages.find((msg: any) => msg.role === 'user');
+      if (firstUserMsg) {
+        // Parse drugs from message like "Check interactions for: Drug1, Drug2"
+        const match = firstUserMsg.content.match(/(?:for:|:)\s*(.+)/);
+        if (match) {
+          const drugList = match[1].split(',').map((d: string) => d.trim());
+          setDrugs(drugList);
+        }
+      }
+      
+      // Set the analysis from last assistant message
+      const lastAssistantMsg = currentConversation.messages.filter((msg: any) => msg.role === 'assistant').pop();
+      if (lastAssistantMsg) {
+        setAnalysis(lastAssistantMsg.content);
+      }
+      
+      setConversationId(currentConversation._id);
+      clearLoadedConversation();
+      toast.success('Drug interaction check loaded!');
+    }
+  }, [currentConversation, clearLoadedConversation]);
 
   const addDrug = async () => {
     const drugName = currentDrug.trim();
@@ -68,6 +103,24 @@ export default function DrugInteraction() {
     try {
       const result = await checkDrugInteraction(drugs);
       setAnalysis(result);
+      
+      // Auto-save conversation if user is authenticated
+      if (isAuthenticated) {
+        const userMessage = drugs.length === 1 
+          ? `Analyze medication: ${drugs[0]}`
+          : `Check interactions for: ${drugs.join(', ')}`;
+          
+        const savedId = await saveConversation({
+          feature: 'drugs',
+          userMessage,
+          aiResponse: result,
+          conversationId: conversationId || undefined,
+        });
+        
+        if (savedId && !conversationId) {
+          setConversationId(savedId);
+        }
+      }
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Error analyzing medications. Please try again.');
       setAnalysis('');

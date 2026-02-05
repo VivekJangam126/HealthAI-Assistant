@@ -2,6 +2,10 @@ import { useState, useRef, useEffect, useCallback, memo } from 'react';
 import { Send, Sparkles, Copy, Check, X, RefreshCw, Mic, MicOff, Edit2 } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { streamAIResponse, cancelCurrentRequest } from '../lib/gemini';
+import { useConversationSave } from '../hooks/useConversationSave';
+import { useAuthStore } from '../store/authStore';
+import { useHistoryStore } from '../store/historyStore';
+import toast from 'react-hot-toast';
 
 interface Message {
   id: string;
@@ -171,9 +175,35 @@ const HealthcareChat = () => {
   const [interimText, setInterimText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [conversationId, setConversationId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const recognitionRef = useRef<any>(null);
+  
+  const { saveConversation } = useConversationSave();
+  const { isAuthenticated } = useAuthStore();
+  const { currentConversation, clearLoadedConversation } = useHistoryStore();
+
+  // Load conversation from history when currentConversation changes
+  useEffect(() => {
+    if (currentConversation && currentConversation.feature === 'chat') {
+      // Convert history messages to component format
+      const loadedMessages: Message[] = currentConversation.messages.map((msg: any) => ({
+        id: Date.now().toString() + Math.random(),
+        role: msg.role,
+        content: msg.content,
+        timestamp: new Date(msg.timestamp),
+      }));
+      
+      setMessages(loadedMessages);
+      setConversationId(currentConversation._id);
+      
+      // Clear the loaded conversation from store
+      clearLoadedConversation();
+      
+      toast.success('Conversation loaded - continue chatting!');
+    }
+  }, [currentConversation, clearLoadedConversation]);
 
   useEffect(() => {
     const scrollTimeout = setTimeout(() => {
@@ -343,6 +373,20 @@ const HealthcareChat = () => {
             : msg
         )
       );
+      
+      // Auto-save conversation if user is authenticated
+      if (isAuthenticated) {
+        const savedId = await saveConversation({
+          feature: 'chat',
+          userMessage: userMessage.content,
+          aiResponse: fullResponse,
+          conversationId: conversationId || undefined,
+        });
+        
+        if (savedId && !conversationId) {
+          setConversationId(savedId);
+        }
+      }
     } catch (error: any) {
       console.error('AI Response Error:', error);
       
@@ -382,8 +426,9 @@ const HealthcareChat = () => {
     if (messages.length > 0) {
       const confirmed = window.confirm('Start a new session? This will clear all messages.');
       if (confirmed) {
-        setMessages([])
-        setInput('')
+        setMessages([]);
+        setInput('');
+        setConversationId(null);
       }
     }
   };

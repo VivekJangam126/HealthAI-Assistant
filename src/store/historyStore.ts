@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 interface HistoryState {
   conversations: HistoryListItem[];
   currentConversation: History | null;
+  loadedConversation: History | null; // For loading into features
   pagination: PaginationInfo | null;
   isLoading: boolean;
   error: string | null;
@@ -17,7 +18,7 @@ interface HistoryState {
     bookmarked?: boolean;
     search?: string;
   }) => Promise<void>;
-  fetchConversationById: (id: string) => Promise<void>;
+  fetchConversationById: (id: string) => Promise<History | null>;
   createConversation: (data: {
     feature: string;
     title?: string;
@@ -28,6 +29,8 @@ interface HistoryState {
   deleteConversation: (id: string) => Promise<void>;
   toggleBookmark: (id: string) => Promise<void>;
   setCurrentConversation: (conversation: History | null) => void;
+  setLoadedConversation: (conversation: History | null) => void;
+  clearLoadedConversation: () => void;
   toggleSidebar: () => void;
   clearError: () => void;
 }
@@ -35,6 +38,7 @@ interface HistoryState {
 export const useHistoryStore = create<HistoryState>((set, get) => ({
   conversations: [],
   currentConversation: null,
+  loadedConversation: null,
   pagination: null,
   isLoading: false,
   error: null,
@@ -64,10 +68,12 @@ export const useHistoryStore = create<HistoryState>((set, get) => ({
         currentConversation: response.history,
         isLoading: false,
       });
+      return response.history;
     } catch (error: any) {
       const errorMessage = error.response?.data?.message || 'Failed to fetch conversation';
       set({ error: errorMessage, isLoading: false });
       toast.error(errorMessage);
+      return null;
     }
   },
 
@@ -149,6 +155,14 @@ export const useHistoryStore = create<HistoryState>((set, get) => ({
 
   setCurrentConversation: (conversation) => {
     set({ currentConversation: conversation });
+  },
+
+  setLoadedConversation: (conversation) => {
+    set({ loadedConversation: conversation });
+  },
+
+  clearLoadedConversation: () => {
+    set({ loadedConversation: null });
   },
 
   toggleSidebar: () => {

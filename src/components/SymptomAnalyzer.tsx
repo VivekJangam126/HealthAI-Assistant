@@ -2,6 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Stethoscope, Loader2, Mic, MicOff, Send, Sparkles, RefreshCw, X, AlertTriangle, Info } from 'lucide-react';
 import { analyzeSymptoms } from '../lib/gemini';
 import ReactMarkdown from 'react-markdown';
+import { useConversationSave } from '../hooks/useConversationSave';
+import { useAuthStore } from '../store/authStore';
+import { useHistoryStore } from '../store/historyStore';
+import toast from 'react-hot-toast';
 
 interface AnalysisMessage {
   id: string;
@@ -93,10 +97,32 @@ export default function SymptomAnalyzer() {
   const [showAutocomplete, setShowAutocomplete] = useState(false);
   const [filteredSymptoms, setFilteredSymptoms] = useState<string[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [conversationId, setConversationId] = useState<string | null>(null);
   const recognitionRef = useRef<any>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const autocompleteRef = useRef<HTMLDivElement>(null);
+  
+  const { saveConversation } = useConversationSave();
+  const { isAuthenticated } = useAuthStore();
+  const { currentConversation, clearLoadedConversation } = useHistoryStore();
+
+  // Load conversation from history
+  useEffect(() => {
+    if (currentConversation && currentConversation.feature === 'symptoms') {
+      const loadedMessages: AnalysisMessage[] = currentConversation.messages.map((msg: any) => ({
+        id: Date.now().toString() + Math.random(),
+        role: msg.role,
+        content: msg.content,
+        timestamp: new Date(msg.timestamp),
+      }));
+      
+      setMessages(loadedMessages);
+      setConversationId(currentConversation._id);
+      clearLoadedConversation();
+      toast.success('Conversation loaded - continue your symptom analysis!');
+    }
+  }, [currentConversation, clearLoadedConversation]);
 
   // Auto-scroll to bottom when messages change
   useEffect(() => {
@@ -198,6 +224,20 @@ export default function SymptomAnalyzer() {
         timestamp: new Date(),
       };
       setMessages(prev => [...prev, aiMessage]);
+      
+      // Auto-save conversation if user is authenticated
+      if (isAuthenticated) {
+        const savedId = await saveConversation({
+          feature: 'symptoms',
+          userMessage: symptomsText,
+          aiResponse: result,
+          conversationId: conversationId || undefined,
+        });
+        
+        if (savedId && !conversationId) {
+          setConversationId(savedId);
+        }
+      }
     } catch (error) {
       console.error(error);
       const errorMessage: AnalysisMessage = {
@@ -271,6 +311,10 @@ export default function SymptomAnalyzer() {
       if (confirmed) {
         setMessages([]);
         setInput('');
+        setConversationId(null);
+        if (isAuthenticated) {
+          toast.success('New session started');
+        }
       }
     }
   };

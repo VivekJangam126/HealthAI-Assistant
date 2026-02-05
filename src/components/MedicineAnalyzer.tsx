@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Pill, Upload, Send, AlertTriangle, Loader, Clock, Heart, Shield, Utensils, RefreshCw } from 'lucide-react';
 import { analyzeMedicine, validateMedicineImage } from '../lib/gemini';
+import { useHistoryStore } from '../store/historyStore';
+import { useConversationSave } from '../hooks/useConversationSave';
+import { useAuthStore } from '../store/authStore';
+import toast from 'react-hot-toast';
 
 interface MedicineAnalysis {
   medicineName: string;
@@ -32,6 +36,35 @@ export default function MedicineAnalyzer() {
   const [analysis, setAnalysis] = useState<MedicineAnalysis | null>(null);
   const [error, setError] = useState('');
   const [validationWarning, setValidationWarning] = useState('');
+  const [conversationId, setConversationId] = useState<string | null>(null);
+  
+  const { currentConversation, clearLoadedConversation } = useHistoryStore();
+  const { saveConversation } = useConversationSave();
+  const { isAuthenticated } = useAuthStore();
+
+  // Load conversation from history when currentConversation changes
+  useEffect(() => {
+    if (currentConversation && currentConversation.feature === 'medicine') {
+      // Extract analysis from last assistant message
+      const lastAssistantMsg = currentConversation.messages
+        .filter((msg: any) => msg.role === 'assistant').pop();
+      
+      if (lastAssistantMsg) {
+        try {
+          // Try to parse the analysis from the message
+          const analysisData = JSON.parse(lastAssistantMsg.content);
+          setAnalysis(analysisData);
+        } catch {
+          // If not JSON, just show as text (fallback)
+          toast.error('Could not load full analysis details');
+        }
+      }
+      
+      setConversationId(currentConversation._id);
+      clearLoadedConversation();
+      toast.success('Medicine analysis loaded!');
+    }
+  }, [currentConversation, clearLoadedConversation]);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -115,6 +148,21 @@ export default function MedicineAnalyzer() {
       
       const result = await analyzeMedicine(base64Image, additionalInfo.trim());
       setAnalysis(result);
+      
+      // Auto-save conversation if user is authenticated
+      if (isAuthenticated) {
+        const userMessage = `Analyze medicine: ${result.medicineName}${additionalInfo ? ` (Context: ${additionalInfo})` : ''}`;
+        const savedId = await saveConversation({
+          feature: 'medicine',
+          userMessage,
+          aiResponse: JSON.stringify(result),
+          conversationId: conversationId || undefined,
+        });
+        
+        if (savedId && !conversationId) {
+          setConversationId(savedId);
+        }
+      }
     } catch (err) {
       console.error(err);
       setError('Failed to analyze medicine. Please try again.');

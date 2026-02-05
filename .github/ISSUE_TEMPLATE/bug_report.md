@@ -15,7 +15,7 @@ assignees: ''
 ## 👥 Recognition
 If you report this bug and it's confirmed, consider adding yourself to [CONTRIBUTORS.md](../../CONTRIBUTORS.md) under the "🐛 Bug Hunters" section! 🏅
 
-⭐ **If you haven't already, please [star the repo](https://github.com/NikhilRaikwar/HealthAI-Assistant)!** ⭐
+⭐ **If you haven't already, please [star the repo](https://github.com/VivekJangam126/HealthAI-Assistant)!** ⭐
 
 
 ## 🐛 Bug Description

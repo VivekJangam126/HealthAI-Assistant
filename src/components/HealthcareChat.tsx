@@ -1,7 +1,11 @@
 import { useState, useRef, useEffect, useCallback, memo } from 'react';
-import { Send, Sparkles, Copy, Check, X, RefreshCw, Mic, MicOff, Edit2 } from 'lucide-react';
+import { Send, Sparkles, Copy, Check, X, Mic, MicOff, Edit2 } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { streamAIResponse, cancelCurrentRequest } from '../lib/gemini';
+import { useConversationSave } from '../hooks/useConversationSave';
+import { useAuthStore } from '../store/authStore';
+import { useHistoryStore } from '../store/historyStore';
+import toast from 'react-hot-toast';
 
 interface Message {
   id: string;
@@ -171,9 +175,35 @@ const HealthcareChat = () => {
   const [interimText, setInterimText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [conversationId, setConversationId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const recognitionRef = useRef<any>(null);
+  
+  const { saveConversation } = useConversationSave();
+  const { isAuthenticated } = useAuthStore();
+  const { currentConversation, clearLoadedConversation, isSidebarOpen } = useHistoryStore();
+
+  // Load conversation from history when currentConversation changes
+  useEffect(() => {
+    if (currentConversation && currentConversation.feature === 'chat') {
+      // Convert history messages to component format
+      const loadedMessages: Message[] = currentConversation.messages.map((msg: any) => ({
+        id: Date.now().toString() + Math.random(),
+        role: msg.role,
+        content: msg.content,
+        timestamp: new Date(msg.timestamp),
+      }));
+      
+      setMessages(loadedMessages);
+      setConversationId(currentConversation._id);
+      
+      // Clear the loaded conversation from store
+      clearLoadedConversation();
+      
+      toast.success('Conversation loaded - continue chatting!');
+    }
+  }, [currentConversation, clearLoadedConversation]);
 
   useEffect(() => {
     const scrollTimeout = setTimeout(() => {
@@ -343,6 +373,20 @@ const HealthcareChat = () => {
             : msg
         )
       );
+      
+      // Auto-save conversation if user is authenticated
+      if (isAuthenticated) {
+        const savedId = await saveConversation({
+          feature: 'chat',
+          userMessage: userMessage.content,
+          aiResponse: fullResponse,
+          conversationId: conversationId || undefined,
+        });
+        
+        if (savedId && !conversationId) {
+          setConversationId(savedId);
+        }
+      }
     } catch (error: any) {
       console.error('AI Response Error:', error);
       
@@ -375,17 +419,6 @@ const HealthcareChat = () => {
           : msg
       )
     );
-  };
-
-  // Start new session
-  const handleNewSession = () => {
-    if (messages.length > 0) {
-      const confirmed = window.confirm('Start a new session? This will clear all messages.');
-      if (confirmed) {
-        setMessages([])
-        setInput('')
-      }
-    }
   };
 
   // Handle keyboard shortcuts
@@ -441,77 +474,56 @@ const HealthcareChat = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className={`fixed inset-0 flex flex-col bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-all duration-300 ${isSidebarOpen ? 'lg:left-80' : 'lg:left-0'}`} style={{ top: '64px', bottom: '64px' }}>
       
-      {/* Animated Header - Centered with New Session Button */}
-      <div className="relative bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-700/50 shadow-lg">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-purple-500/10 animate-gradient-x"></div>
-        <div className="relative px-3 sm:px-6 py-3 sm:py-4">
-          <div className="flex items-center justify-center">
-            {/* New Session Button - Left Side */}
-            {messages.length > 0 && !isLoading && (
-              <button
-                onClick={handleNewSession}
-                className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 flex items-center gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xs sm:text-sm font-medium shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200"
-                title="Start New Session"
-              >
-                <RefreshCw className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span className="hidden sm:inline">New Session</span>
-              </button>
-            )}
-            
-            <div className="flex flex-col items-center gap-2 sm:gap-3 text-center">
-              <div className="relative">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/30 animate-pulse-slow">
-                  <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                </div>
-                <div className="absolute -bottom-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 bg-green-500 rounded-full border-[1.5px] border-white dark:border-gray-900 animate-pulse"></div>
-              </div>
-              <div>
-                <h1 className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
-                  HealthAI Assistant
-                </h1>
-                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                  {isLoading ? (
-                    <span className="flex items-center justify-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-bounce"></span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: '0.1s' }}></span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-bounce" style={{ animationDelay: '0.2s' }}></span>
-                      <span className="ml-1">Thinking...</span>
-                    </span>
-                  ) : (
-                    'Always here to help'
-                  )}
-                </p>
-              </div>
+      {/* Compact Header */}
+      <div className="relative bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-700/50 shadow-sm">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-indigo-500/5 to-purple-500/5"></div>
+        <div className="relative px-3 sm:px-6 py-2">
+          <div className="flex items-center justify-center gap-3">
+            {/* Status indicator */}
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-xs text-gray-600 dark:text-gray-400">
+                {isLoading ? 'Thinking...' : 'Online'}
+              </span>
             </div>
             
+            <div className="h-4 w-px bg-gray-300 dark:bg-gray-600"></div>
+            
+            {/* Title */}
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">
+                Chat Assistant
+              </span>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Messages Container - Responsive */}
-      <div className = {`flex-1 ${messages.length>0 && "overflow-y-auto"} px-2 sm:px-4 md:px-6 py-3 sm:py-6 space-y-3 sm:space-y-6 scroll-smooth`}>
+      <div className = {`flex-1 ${messages.length>0 && "overflow-y-auto"} px-2 sm:px-4 md:px-6 py-3 sm:py-4 space-y-3 sm:space-y-4 scroll-smooth`}>
         {messages.length === 0 && (
           <div className="h-full flex items-center justify-center px-4">
-            <div className="text-center space-y-3 sm:space-y-4 max-w-md animate-fade-in">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-3xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-2xl shadow-blue-500/30 animate-float">
-                <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+            <div className="text-center space-y-3 max-w-md animate-fade-in">
+              <div className="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-xl shadow-blue-500/20">
+                <Sparkles className="w-7 h-7 text-white" />
               </div>
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white">
-                Welcome to HealthAI
+              <h2 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white">
+                How can I help you today?
               </h2>
-              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
                 Ask me anything about health, symptoms, or wellness
               </p>
               
-              {/* Quick Suggestions - Responsive */}
-              <div className="flex flex-wrap gap-2 justify-center mt-4 sm:mt-6">
+              {/* Quick Suggestions - Compact */}
+              <div className="flex flex-wrap gap-2 justify-center mt-4">
                 {['Healthy diet tips', 'Exercise advice', 'Stress relief', 'Better sleep'].map((suggestion) => (
                   <button
                     key={suggestion}
                     onClick={() => setInput(suggestion)}
-                    className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white dark:bg-gray-800 text-xs sm:text-sm text-gray-700 dark:text-gray-300 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200 border border-gray-200 dark:border-gray-700"
+                    className="px-3 py-1.5 rounded-full bg-white dark:bg-gray-800 text-xs text-gray-700 dark:text-gray-300 shadow-sm hover:shadow-md hover:scale-105 transition-all duration-200 border border-gray-200 dark:border-gray-700"
                   >
                     {suggestion}
                   </button>

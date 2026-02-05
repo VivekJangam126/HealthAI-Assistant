@@ -6,6 +6,10 @@ import ReactMarkdown from 'react-markdown';
 import { useDropzone } from 'react-dropzone';
 import { PageContainer } from './ui/PageContainer';
 import { ChatMessage } from '../types';
+import { useHistoryStore } from '../store/historyStore';
+import { useConversationSave } from '../hooks/useConversationSave';
+import { useAuthStore } from '../store/authStore';
+import toast from 'react-hot-toast';
 
 export default function PolicyQueryAssistant() {
   const [policyText, setPolicyText] = useState('');
@@ -15,7 +19,33 @@ export default function PolicyQueryAssistant() {
   const [loading, setLoading] = useState(false);
   const [uploadLoading, setUploadLoading] = useState(false);
   const [error, setError] = useState('');
+  const [conversationId, setConversationId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  
+  const { currentConversation, clearLoadedConversation } = useHistoryStore();
+  const { saveConversation } = useConversationSave();
+  const { isAuthenticated } = useAuthStore();
+
+  // Load conversation from history when currentConversation changes
+  useEffect(() => {
+    if (currentConversation && currentConversation.feature === 'policy') {
+      // Convert history messages to component format
+      const loadedMessages: ChatMessage[] = currentConversation.messages.map((msg: any) => ({
+        type: msg.role === 'user' ? 'user' : 'bot',
+        content: msg.content,
+        timestamp: new Date(msg.timestamp),
+      }));
+      
+      setMessages(loadedMessages);
+      setConversationId(currentConversation._id);
+      
+      // Note: We can't reload the PDF, but we can show the conversation
+      setPolicyText('loaded'); // Placeholder to enable chat
+      
+      clearLoadedConversation();
+      toast.success('Policy conversation loaded! Note: PDF not reloaded.');
+    }
+  }, [currentConversation, clearLoadedConversation]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -109,6 +139,20 @@ export default function PolicyQueryAssistant() {
           timestamp: new Date(),
         }];
       });
+      
+      // Auto-save conversation if user is authenticated
+      if (isAuthenticated) {
+        const savedId = await saveConversation({
+          feature: 'policy',
+          userMessage: userMessage.content,
+          aiResponse: response,
+          conversationId: conversationId || undefined,
+        });
+        
+        if (savedId && !conversationId) {
+          setConversationId(savedId);
+        }
+      }
     } catch (error) {
       console.error(error);
       setError('Failed to process your query. Please try again.');

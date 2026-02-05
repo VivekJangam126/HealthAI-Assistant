@@ -1,13 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BookOpen, Loader, AlertCircle } from 'lucide-react';
 import { explainMedicalTerm, validateMedicalTerm } from '../lib/gemini';
 import ReactMarkdown from 'react-markdown';
+import { useConversationSave } from '../hooks/useConversationSave';
+import { useAuthStore } from '../store/authStore';
+import { useHistoryStore } from '../store/historyStore';
+import toast from 'react-hot-toast';
 
 export default function MedicalTermExplainer() {
   const [term, setTerm] = useState('');
   const [explanation, setExplanation] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [conversationId, setConversationId] = useState<string | null>(null);
+  
+  const { saveConversation } = useConversationSave();
+  const { isAuthenticated } = useAuthStore();
+  const { currentConversation, clearLoadedConversation } = useHistoryStore();
+
+  // Load conversation from history
+  useEffect(() => {
+    if (currentConversation && currentConversation.feature === 'terms') {
+      // Extract term from the first user message
+      const firstUserMsg = currentConversation.messages.find((msg: any) => msg.role === 'user');
+      if (firstUserMsg) {
+        const match = firstUserMsg.content.match(/(?:term:|Explain medical term:)\s*(.+)/);
+        if (match) {
+          setTerm(match[1].trim());
+        }
+      }
+      
+      // Set the explanation from last assistant message
+      const lastAssistantMsg = currentConversation.messages.filter((msg: any) => msg.role === 'assistant').pop();
+      if (lastAssistantMsg) {
+        setExplanation(lastAssistantMsg.content);
+      }
+      
+      setConversationId(currentConversation._id);
+      clearLoadedConversation();
+      toast.success('Medical term explanation loaded!');
+    }
+  }, [currentConversation, clearLoadedConversation]);
 
   const handleExplain = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,6 +63,20 @@ export default function MedicalTermExplainer() {
       
       const result = await explainMedicalTerm(term);
       setExplanation(result);
+      
+      // Auto-save conversation if user is authenticated
+      if (isAuthenticated) {
+        const savedId = await saveConversation({
+          feature: 'terms',
+          userMessage: `Explain medical term: ${term}`,
+          aiResponse: result,
+          conversationId: conversationId || undefined,
+        });
+        
+        if (savedId && !conversationId) {
+          setConversationId(savedId);
+        }
+      }
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Error explaining term. Please try again.');
       setExplanation('');

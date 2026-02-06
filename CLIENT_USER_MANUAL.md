@@ -1,12 +1,12 @@
-# Healthcare Application – Client User Manual
+# AyuMitra – Client User Manual
 
 **Version 1.0 | February 2026**
 
 ---
 
-## Welcome to Your Healthcare Application!
+## Welcome to AyuMitra!
 
-This manual will guide you through everything you need to know to run and use your new healthcare application. Don't worry if you're not technical – we've written this guide in simple, everyday language.
+This manual will guide you through everything you need to know to run and use AyuMitra. Don't worry if you're not technical – we've written this guide in simple, everyday language.
 
 **What You'll Learn:**
 - How to set up the application on your computer
@@ -39,7 +39,7 @@ This manual will guide you through everything you need to know to run and use yo
 
 ### 1.1 What This Application Does
 
-Your Healthcare Application is an intelligent health assistant that helps people:
+AyuMitra is an intelligent health assistant that helps people:
 
 ✅ **Analyze Symptoms** - Describe how you're feeling and get possible explanations
 ✅ **Check Drug Interactions** - See if medications are safe to take together
@@ -709,7 +709,7 @@ VITE v5.x.x  ready in xxx ms
 ```
 
 ✅ **Browser shows:**
-- The HealthAI Assistant homepage
+- The AyuMitra homepage
 - A navigation menu at the top
 - Feature cards in the middle
 - Everything looks colorful and professional
@@ -1507,7 +1507,7 @@ Before you start using the application, make sure:
 
 ## CONCLUSION
 
-Congratulations! You now have everything you need to run and use your Healthcare Application.
+Congratulations! You now have everything you need to run and use AyuMitra.
 
 **Remember:**
 - This application is a tool for information, not medical advice
@@ -1516,7 +1516,7 @@ Congratulations! You now have everything you need to run and use your Healthcare
 - Make regular backups
 - Contact your developer if you need help
 
-**Enjoy using your Healthcare Application!**
+**Enjoy using AyuMitra!**
 
 ---
 
@@ -1526,4 +1526,4 @@ Congratulations! You now have everything you need to run and use your Healthcare
 
 ---
 
-*This manual was created to help non-technical users successfully run and use the Healthcare Application. If you have suggestions for improving this manual, please share them with your developer.*
+*This manual was created to help non-technical users successfully run and use AyuMitra. If you have suggestions for improving this manual, please share them with your developer.*

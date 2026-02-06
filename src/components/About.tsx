@@ -54,7 +54,7 @@ export default function About() {
   return (
     <PageContainer
       icon={<Globe className="w-6 h-6 text-blue-600" />}
-      title="About HealthAI Assistant"
+      title="About AyuMitra"
     >
       <div className="w-full space-y-16">
         {/* Mission Section */}
@@ -66,7 +66,7 @@ export default function About() {
             Our Mission
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-            HealthAI Assistant is dedicated to making healthcare information more accessible and understandable for everyone. 
+            AyuMitra is dedicated to making healthcare information more accessible and understandable for everyone. 
             We leverage advanced artificial intelligence to provide instant, accurate health insights that empower you to make 
             informed decisions about your well-being.
           </p>
@@ -145,7 +145,7 @@ export default function About() {
             Powered by Advanced Technology
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 text-center max-w-3xl mx-auto mb-12">
-            HealthAI Assistant utilizes state-of-the-art artificial intelligence and machine learning technologies 
+            AyuMitra utilizes state-of-the-art artificial intelligence and machine learning technologies 
             to provide accurate, reliable health information and analysis.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
@@ -193,11 +193,11 @@ export default function About() {
             Important Medical Disclaimer
           </h3>
           <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-            HealthAI Assistant provides information for educational purposes only and is not a substitute for 
+            AyuMitra provides information for educational purposes only and is not a substitute for 
             professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or 
             other qualified health provider with any questions you may have regarding a medical condition. 
             Never disregard professional medical advice or delay in seeking it because of information provided 
-            by HealthAI Assistant.
+            by AyuMitra.
           </p>
         </section>
       </div>

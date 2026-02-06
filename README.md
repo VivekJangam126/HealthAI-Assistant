@@ -1,4 +1,4 @@
-# HealthAI Assistant 🏥
+# AyuMitra 🏥
 
 [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/VivekJangam126/HealthAI-Assistant)
 [![Hacktoberfest 2025](https://img.shields.io/badge/Hacktoberfest-2025-blueviolet)](https://hacktoberfest.com)
@@ -124,7 +124,7 @@ We're excited to participate in Hacktoberfest 2025! This is the perfect opportun
 
 ## 🚀 Live Demo
 
-Visit the live application: **[HealthAI Assistant](https://health-ai-assistant.vercel.app/)**
+Visit the live application: **[AyuMitra](https://health-ai-assistant.vercel.app/)**
 
 ---
 
@@ -800,7 +800,7 @@ For questions or suggestions, please open an issue on GitHub.
 
 We're thrilled to be part of Hacktoberfest 2025! Here's what makes our project great for contributors:
 
-### 🏆 Why Contribute to HealthAI Assistant?
+### 🏆 Why Contribute to AyuMitra?
 
 - 💙 **Real Impact**: Your code helps people access healthcare information
 - 🌱 **Beginner Friendly**: Well-documented codebase with good first issues
@@ -910,6 +910,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 *Remember: This application provides AI-powered health information and should not replace professional medical advice. Always consult healthcare professionals for medical concerns.*
 
-**Made with ❤️ by the HealthAI Assistant Community**
+**Made with ❤️ by the AyuMitra Community**
 
 </div>

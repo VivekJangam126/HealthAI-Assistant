@@ -31,3 +31,4 @@ dist-ssr
 # Server build
 server/dist
 server/node_modules
+.vercel

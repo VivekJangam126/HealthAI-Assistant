@@ -1,12 +1,17 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-if (!apiKey) {
-  throw new Error("VITE_GEMINI_API_KEY is not set in .env file");
-}
+const getApiKey = () => {
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  if (!apiKey) {
+    throw new Error("VITE_GEMINI_API_KEY is not set in environment variables. Please add it in Vercel Dashboard.");
+  }
+  return apiKey;
+};
 
-const genAI = new GoogleGenerativeAI(apiKey);
-const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+const getModel = () => {
+  const genAI = new GoogleGenerativeAI(getApiKey());
+  return genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+};
 
 // ============================================
 // BASE SYSTEM PROMPT - SAFE GUIDANCE MODE
@@ -176,7 +181,7 @@ Please provide a comprehensive analysis with the following structure:
 *Remember: This is educational information based on symptom patterns. Only a qualified healthcare provider can provide a proper diagnosis after examining you.*`;
 
   try {
-    const result = await model.generateContent(
+    const result = await getModel().generateContent(
       getPromptInLanguage(prompt, symptoms)
     );
     return result.response.text();
@@ -292,7 +297,7 @@ ${drugs.map((drug, i) => `\n**${i + 1}. ${drug}**:\n- Primary use: [brief descri
   }
 
   try {
-    const result = await model.generateContent(
+    const result = await getModel().generateContent(
       getPromptInLanguage(prompt, drugs.join(", "))
     );
     return result.response.text();
@@ -326,7 +331,7 @@ Respond with ONLY "VALID" if this is a legitimate medical term, or "INVALID" if 
 INPUT TO ANALYZE: ${term}`;
 
   try {
-    const result = await model.generateContent(prompt);
+    const result = await getModel().generateContent(prompt);
     const response = result.response.text().trim().toUpperCase();
     return response.includes('VALID') && !response.includes('INVALID');
   } catch (error) {
@@ -380,7 +385,7 @@ Please provide a comprehensive yet accessible explanation:
 *Understanding medical terminology helps you be an active participant in your healthcare. Don't hesitate to ask your healthcare provider to explain terms you don't understand.*`;
 
   try {
-    const result = await model.generateContent(
+    const result = await getModel().generateContent(
       getPromptInLanguage(prompt, term)
     );
     return result.response.text();
@@ -444,7 +449,7 @@ This summary is to help you understand your report. Always discuss results with 
 *This AI-generated summary should not replace consultation with your healthcare provider.*`;
 
   try {
-    const result = await model.generateContent(
+    const result = await getModel().generateContent(
       getPromptInLanguage(prompt, report)
     );
     return result.response.text();
@@ -486,7 +491,7 @@ If the question involves symptoms, potential conditions, or medical decisions, a
 For general health/wellness questions, provide evidence-based information while encouraging healthy lifestyle choices.`;
 
   try {
-    const result = await model.generateContent(
+    const result = await getModel().generateContent(
       getPromptInLanguage(prompt, message)
     );
     return result.response.text();
@@ -533,7 +538,7 @@ Use semantic understanding to find relevant information even if the query is vag
 Format your response in a clear, structured manner with proper headings and bullet points where appropriate.`;
 
   try {
-    const result = await model.generateContent(
+    const result = await getModel().generateContent(
       getPromptInLanguage(prompt, query)
     );
     return result.response.text();
@@ -571,7 +576,7 @@ Respond with ONLY "INVALID" if it is:
 TERM TO VALIDATE: ${drugName}`;
 
   try {
-    const result = await model.generateContent(prompt);
+    const result = await getModel().generateContent(prompt);
     const response = result.response.text().trim().toUpperCase();
     return response.includes("VALID") && !response.includes("INVALID");
   } catch (error) {
@@ -624,7 +629,7 @@ TEXT TO ANALYZE:
 ${text.substring(0, 2000)}`;
 
   try {
-    const result = await model.generateContent(prompt);
+    const result = await getModel().generateContent(prompt);
     const response = result.response.text().trim().toUpperCase();
     return response.includes("VALID") && !response.includes("INVALID");
   } catch (error) {
@@ -671,7 +676,7 @@ TEXT TO ANALYZE:
 ${text.substring(0, 3000)}`;
 
   try {
-    const result = await model.generateContent(prompt);
+    const result = await getModel().generateContent(prompt);
     const response = result.response.text().trim().toUpperCase();
     return response.includes("VALID") && !response.includes("INVALID");
   } catch (error) {
@@ -751,7 +756,7 @@ Important guidelines:
 Format your response in a clear, structured manner with proper headings and bullet points where appropriate.`;
 
   try {
-    const result = await model.generateContent(
+    const result = await getModel().generateContent(
       getPromptInLanguage(prompt, query)
     );
     return result.response.text();
@@ -811,7 +816,7 @@ export async function* streamAIResponse(
     const context = buildContext(conversationHistory);
     const prompt = `${SYSTEM_PROMPT}\n\nConversation History:\n${context}\n\nUser: ${userMessage}\n\nAssistant:`;
 
-    const result = await model.generateContentStream(prompt);
+    const result = await getModel().generateContentStream(prompt);
 
     for await (const chunk of result.stream) {
       // Check if cancellation was requested
@@ -894,7 +899,7 @@ Return ONLY the JSON object, no additional text.`;
       },
     };
 
-    const result = await model.generateContent([prompt, imagePart]);
+    const result = await getModel().generateContent([prompt, imagePart]);
     const response = result.response.text();
 
     let cleanedResponse = response.trim();
@@ -997,7 +1002,7 @@ Return ONLY the JSON object, no additional text.`;
       },
     };
 
-    const result = await model.generateContent([prompt, imagePart]);
+    const result = await getModel().generateContent([prompt, imagePart]);
     const response = result.response.text();
 
     let cleanedResponse = response.trim();
@@ -1072,7 +1077,7 @@ Return ONLY the JSON object, no additional text.`;
       },
     };
 
-    const result = await model.generateContent([prompt, imagePart]);
+    const result = await getModel().generateContent([prompt, imagePart]);
     const response = result.response.text();
 
     let cleanedResponse = response.trim();
@@ -1166,7 +1171,7 @@ Return ONLY the JSON object, no additional text.`;
       },
     };
 
-    const result = await model.generateContent([prompt, imagePart]);
+    const result = await getModel().generateContent([prompt, imagePart]);
     const response = result.response.text();
 
     let cleanedResponse = response.trim();

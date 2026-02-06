@@ -1,12 +1,26 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Get API URL from environment variable
+const API_URL = import.meta.env.VITE_API_URL;
+
+// Validate API URL is set
+if (!API_URL) {
+  console.error('VITE_API_URL is not set in environment variables!');
+  console.error('Please set VITE_API_URL in Vercel Dashboard');
+  throw new Error('VITE_API_URL environment variable is not configured. Please add it in Vercel Dashboard.');
+}
+
+// Log the API URL for debugging (only in development)
+if (import.meta.env.DEV) {
+  console.log('API URL:', API_URL);
+}
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true,
 });
 
 // Request interceptor to add token

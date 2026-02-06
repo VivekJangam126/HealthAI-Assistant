@@ -55,7 +55,7 @@ export default function AppContent() {
             <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500">
               <HealthcareLogo className="w-5 h-5 text-white" />
             </div>
-            <span className="text-gray-900 dark:text-gray-100 font-semibold text-sm sm:text-base">HealthAI Assistant</span>
+            <span className="text-gray-900 dark:text-gray-100 font-semibold text-sm sm:text-base">AyuMitra</span>
             <span className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm">© {new Date().getFullYear()}</span>
           </div>
         </div>

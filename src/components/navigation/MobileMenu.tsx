@@ -29,7 +29,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <div className="flex items-center justify-between px-4 h-16 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center space-x-2">
               <HealthcareLogo className="w-6 h-6 text-blue-600" />
-              <span className="font-semibold text-gray-900 dark:text-gray-200">HealthAI Assistant</span>
+              <span className="font-semibold text-gray-900 dark:text-gray-200">AyuMitra</span>
             </div>
             <button
               onClick={onClose}

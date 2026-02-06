@@ -1,4 +1,4 @@
-# HealthAI Assistant - Technical Documentation
+# AyuMitra - Technical Documentation
 
 ## Table of Contents
 1. [Project Overview](#project-overview)
@@ -18,7 +18,7 @@
 
 ## Project Overview
 
-**HealthAI Assistant** is an AI-powered healthcare platform that provides accessible medical information, symptom analysis, and health recommendations to users worldwide. The application leverages Google's Gemini AI to deliver intelligent, context-aware health guidance while maintaining safety and encouraging professional medical consultation when necessary.
+**AyuMitra** is an AI-powered healthcare platform that provides accessible medical information, symptom analysis, and health recommendations to users worldwide. The application leverages Google's Gemini AI to deliver intelligent, context-aware health guidance while maintaining safety and encouraging professional medical consultation when necessary.
 
 ### Key Objectives
 - Democratize access to health information
@@ -62,7 +62,7 @@
 
 ## Solution
 
-HealthAI Assistant addresses these challenges through:
+AyuMitra addresses these challenges through:
 
 ### 1. AI-Powered Health Analysis
 - **Symptom Analyzer**: Analyzes user-described symptoms and provides possible conditions, severity assessment, and recommendations
@@ -862,4 +862,4 @@ This application provides AI-powered health information and should not replace p
 
 **Last Updated**: February 2026
 **Version**: 1.0.0
-**Maintained By**: HealthAI Assistant Team
+**Maintained By**: AyuMitra Team

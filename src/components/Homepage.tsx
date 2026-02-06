@@ -263,7 +263,7 @@ export default function Homepage() {
                 Ready to take control of your health?
               </h2>
               <p className="text-xl text-blue-100 leading-relaxed">
-                Join thousands of users who trust HealthAI Assistant for their health information needs. Start your journey to better health today.
+                Join thousands of users who trust AyuMitra for their health information needs. Start your journey to better health today.
               </p>
             </div>
             <div className="mt-10 lg:mt-0 flex flex-col sm:flex-row gap-4 lg:justify-end">
@@ -289,7 +289,7 @@ export default function Homepage() {
       <section className="bg-gray-50 dark:bg-gray-800 py-8">
         <div className="w-full px-8 sm:px-12 lg:px-20 xl:px-32">
           <p className="text-center text-sm text-gray-600 dark:text-gray-400">
-            ⚕️ <strong>Medical Disclaimer:</strong> HealthAI Assistant provides information for educational purposes only. Always consult with qualified healthcare professionals for medical advice, diagnosis, or treatment.
+            ⚕️ <strong>Medical Disclaimer:</strong> AyuMitra provides information for educational purposes only. Always consult with qualified healthcare professionals for medical advice, diagnosis, or treatment.
           </p>
         </div>
       </section>

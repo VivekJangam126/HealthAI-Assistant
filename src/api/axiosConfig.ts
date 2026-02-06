@@ -1,22 +1,26 @@
 import axios from 'axios';
 
 // Get API URL from environment variable
+// In production, this is set at build time by Vercel
 const API_URL = import.meta.env.VITE_API_URL;
 
 // Validate API URL is set
 if (!API_URL) {
   console.error('VITE_API_URL is not set in environment variables!');
-  console.error('Please set VITE_API_URL in Vercel Dashboard');
-  throw new Error('VITE_API_URL environment variable is not configured. Please add it in Vercel Dashboard.');
+  console.error('Available env vars:', import.meta.env);
+  console.error('Please set VITE_API_URL in Vercel Dashboard and redeploy');
+  // Fallback for now to prevent app from crashing
+  // TODO: Remove this fallback once environment variable is properly set
 }
 
-// Log the API URL for debugging (only in development)
-if (import.meta.env.DEV) {
-  console.log('API URL:', API_URL);
-}
+// Use the API URL or fallback
+const baseURL = API_URL || 'https://ayumitra-backend.vercel.app/api';
+
+// Log the API URL for debugging
+console.log('Using API URL:', baseURL);
 
 const axiosInstance = axios.create({
-  baseURL: API_URL,
+  baseURL: baseURL,
   headers: {
     'Content-Type': 'application/json',
   },

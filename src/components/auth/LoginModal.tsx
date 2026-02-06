@@ -74,6 +74,7 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignup }: LoginM
               <input
                 {...register('email')}
                 type="email"
+                autoComplete="email"
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
                 placeholder="your@email.com"
               />
@@ -93,6 +94,7 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignup }: LoginM
               <input
                 {...register('password')}
                 type={showPassword ? 'text' : 'password'}
+                autoComplete="current-password"
                 className="w-full pl-10 pr-12 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
                 placeholder="••••••••"
               />

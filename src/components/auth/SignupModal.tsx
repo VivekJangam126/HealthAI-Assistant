@@ -84,6 +84,7 @@ export default function SignupModal({ isOpen, onClose, onSwitchToLogin }: Signup
               <input
                 {...register('displayName')}
                 type="text"
+                autoComplete="name"
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
                 placeholder="John Doe"
               />
@@ -103,6 +104,7 @@ export default function SignupModal({ isOpen, onClose, onSwitchToLogin }: Signup
               <input
                 {...register('email')}
                 type="email"
+                autoComplete="email"
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
                 placeholder="your@email.com"
               />
@@ -122,6 +124,7 @@ export default function SignupModal({ isOpen, onClose, onSwitchToLogin }: Signup
               <input
                 {...register('password')}
                 type={showPassword ? 'text' : 'password'}
+                autoComplete="new-password"
                 className="w-full pl-10 pr-12 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
                 placeholder="••••••••"
               />
@@ -148,6 +151,7 @@ export default function SignupModal({ isOpen, onClose, onSwitchToLogin }: Signup
               <input
                 {...register('confirmPassword')}
                 type={showConfirmPassword ? 'text' : 'password'}
+                autoComplete="new-password"
                 className="w-full pl-10 pr-12 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
                 placeholder="••••••••"
               />

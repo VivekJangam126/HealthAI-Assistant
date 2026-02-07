@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">AyuMitra</string>
+    <string name="title_activity_main">AyuMitra</string>
+    <string name="package_name">com.ayumitra.healthai</string>
+    <string name="custom_url_scheme">com.ayumitra.healthai</string>
+</resources>

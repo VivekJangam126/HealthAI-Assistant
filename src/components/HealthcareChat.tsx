@@ -204,6 +204,10 @@ const HealthcareChat = () => {
       clearLoadedConversation();
       
       toast.success('Conversation loaded - continue chatting!');
+    } else if (currentConversation === null && messages.length > 0) {
+      // If currentConversation is explicitly set to null, clear the chat
+      setMessages([]);
+      setConversationId(null);
     }
   }, [currentConversation, clearLoadedConversation]);
 

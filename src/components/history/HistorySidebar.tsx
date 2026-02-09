@@ -147,16 +147,28 @@ export default function HistorySidebar() {
         `}
       >
         {/* Header - Mobile optimized */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 min-h-[64px] lg:min-h-0">
-          <div className="flex items-center gap-2">
-            <HistoryIcon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-            <h2 className="text-lg lg:text-base font-semibold text-gray-900 dark:text-white">
-              History
-            </h2>
+        <div className="flex items-center justify-between p-3 sm:p-4 border-b border-gray-200 dark:border-gray-700 min-h-[56px] sm:min-h-[64px] lg:min-h-0">
+          <div className="flex items-center gap-2 min-w-0 flex-1">
+            <div className="flex-shrink-0">
+              <div className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500">
+                <HistoryIcon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              </div>
+            </div>
+            <div className="min-w-0 flex-1">
+              <h1 className="text-base sm:text-lg lg:text-base font-bold text-gray-900 dark:text-white leading-tight truncate">
+                AyuMitra
+              </h1>
+              <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 leading-tight truncate hidden sm:block lg:hidden">
+                Your Personal Health Analysis Tool
+              </p>
+              <p className="text-[9px] sm:text-[10px] text-gray-500 dark:text-gray-400 leading-tight truncate sm:hidden">
+                Health Tool
+              </p>
+            </div>
           </div>
           <button
             onClick={toggleSidebar}
-            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors touch-manipulation"
+            className="flex-shrink-0 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors touch-manipulation"
             title="Close sidebar"
             aria-label="Close sidebar"
           >
@@ -170,6 +182,7 @@ export default function HistorySidebar() {
             {/* New Chat Button */}
             <button
               onClick={() => {
+                setCurrentConversation(null); // Clear any loaded conversation
                 setActiveTab('chat');
                 if (window.innerWidth < 1024) toggleSidebar();
               }}

@@ -1,10 +1,10 @@
 import { useAuthStore } from '../store/authStore';
-import { useNavigate } from 'react-router-dom';
+import { useNavigationContext } from '../context/NavigationContext';
 import { toast } from 'react-hot-toast';
 
 export function useGeminiKey() {
   const { user, isAuthenticated } = useAuthStore();
-  const navigate = useNavigate();
+  const { setActiveTab } = useNavigationContext();
 
   // Compute hasApiKey based on current user state
   const hasApiKey = !!(user?.geminiApiKey && user.geminiApiKey.trim() !== '');
@@ -30,7 +30,7 @@ export function useGeminiKey() {
         duration: 5000,
         icon: '🔑',
       });
-      setTimeout(() => navigate('/settings'), 1500);
+      setTimeout(() => setActiveTab('settings'), 1500);
       return null;
     }
 
@@ -44,7 +44,7 @@ export function useGeminiKey() {
         duration: 5000,
         icon: '🔑',
       });
-      setTimeout(() => navigate('/settings'), 1500);
+      setTimeout(() => setActiveTab('settings'), 1500);
       return true;
     }
 
@@ -53,7 +53,16 @@ export function useGeminiKey() {
         duration: 5000,
         icon: '⚠️',
       });
-      setTimeout(() => navigate('/settings'), 1500);
+      setTimeout(() => setActiveTab('settings'), 1500);
+      return true;
+    }
+
+    if (error.message === 'GEMINI_QUOTA_EXCEEDED') {
+      toast.error('Your API key quota has been exceeded. Please update your API key in Settings.', {
+        duration: 6000,
+        icon: '⚠️',
+      });
+      setTimeout(() => setActiveTab('settings'), 1500);
       return true;
     }
 

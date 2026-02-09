@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Backend Connection Test</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .success { color: green; }
+        .error { color: red; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Backend Connection Test</h1>
+    
+    <button onclick="testHealth()">Test Health Endpoint</button>
+    <button onclick="testLogin()">Test Login</button>
+    <button onclick="clearCache()">Clear LocalStorage</button>
+    
+    <div id="result"></div>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        
+        async function testHealth() {
+            const result = document.getElementById('result');
+            result.innerHTML = '<p>Testing health endpoint...</p>';
+            
+            try {
+                const response = await fetch(`${API_URL}/health`);
+                const data = await response.json();
+                result.innerHTML = `
+                    <p class="success">✅ Backend is working!</p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                result.innerHTML = `
+                    <p class="error">❌ Connection failed!</p>
+                    <pre>${error.message}</pre>
+                    <p>Make sure backend is running on port 5000</p>
+                `;
+            }
+        }
+        
+        async function testLogin() {
+            const result = document.getElementById('result');
+            result.innerHTML = '<p>Testing login endpoint...</p>';
+            
+            try {
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: 'admin@company.com',
+                        password: 'admin123'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    result.innerHTML = `
+                        <p class="success">✅ Login successful!</p>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                        <p>geminiApiKey in response: ${data.user?.geminiApiKey ? 'YES (' + data.user.geminiApiKey.length + ' chars)' : 'NO'}</p>
+                    `;
+                } else {
+                    result.innerHTML = `
+                        <p class="error">❌ Login failed!</p>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                result.innerHTML = `
+                    <p class="error">❌ Connection failed!</p>
+                    <pre>${error.message}</pre>
+                `;
+            }
+        }
+        
+        function clearCache() {
+            localStorage.clear();
+            sessionStorage.clear();
+            document.getElementById('result').innerHTML = '<p class="success">✅ Cache cleared!</p>';
+        }
+        
+        // Auto-test on load
+        window.onload = () => testHealth();
+    </script>
+</body>
+</html>

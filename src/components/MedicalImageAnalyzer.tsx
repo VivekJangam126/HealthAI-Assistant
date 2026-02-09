@@ -3,6 +3,7 @@ import { Camera, Upload, Send, AlertTriangle, Loader, Activity, TrendingUp, Chec
 import { analyzeMedicalImage, validateMedicalImage } from '../lib/gemini';
 import { useHistoryStore } from '../store/historyStore';
 import { useConversationSave } from '../hooks/useConversationSave';
+import { useGeminiKey } from '../hooks/useGeminiKey';
 import { useAuthStore } from '../store/authStore';
 import toast from 'react-hot-toast';
 
@@ -46,6 +47,7 @@ export default function MedicalImageAnalyzer() {
     
     const { currentConversation, clearLoadedConversation } = useHistoryStore();
     const { saveConversation } = useConversationSave();
+    const { getApiKey, handleGeminiError } = useGeminiKey();
     const { isAuthenticated } = useAuthStore();
 
     // Load conversation from history when currentConversation changes
@@ -96,8 +98,14 @@ export default function MedicalImageAnalyzer() {
     const validateUploadedImage = async (file: File) => {
         setValidating(true);
         try {
+            const apiKey = getApiKey();
+            if (!apiKey) {
+                setValidating(false);
+                return;
+            }
+            
             const base64Image = await convertImageToBase64(file);
-            const validation = await validateMedicalImage(base64Image);
+            const validation = await validateMedicalImage(base64Image, apiKey);
             
             if (!validation.isValid) {
                 setValidationWarning(validation.message);
@@ -141,17 +149,23 @@ export default function MedicalImageAnalyzer() {
         setError('');
 
         try {
+            const apiKey = getApiKey();
+            if (!apiKey) {
+                setLoading(false);
+                return;
+            }
+            
             const base64Image = await convertImageToBase64(image);
             
             // Final validation before analysis
-            const validation = await validateMedicalImage(base64Image);
+            const validation = await validateMedicalImage(base64Image, apiKey);
             if (!validation.isValid) {
                 setError(validation.message + '\n\nPlease upload a valid medical image such as X-rays, CT scans, MRI, ultrasound, or ECG images.');
                 setLoading(false);
                 return;
             }
             
-            const result = await analyzeMedicalImage(base64Image, additionalInfo.trim());
+            const result = await analyzeMedicalImage(base64Image, additionalInfo.trim(), apiKey);
             setAnalysis(result);
             
             // Auto-save conversation if user is authenticated
@@ -168,9 +182,11 @@ export default function MedicalImageAnalyzer() {
                     setConversationId(savedId);
                 }
             }
-        } catch (err) {
+        } catch (err: any) {
             console.error(err);
-            setError('Failed to analyze medical image. Please try again.');
+            if (!handleGeminiError(err)) {
+                setError('Failed to analyze medical image. Please try again.');
+            }
         } finally {
             setLoading(false);
         }

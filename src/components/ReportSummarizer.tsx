@@ -75,10 +75,16 @@ export default function ReportSummarizer() {
     setMessages([]);
     
     try {
+      const apiKey = getApiKey();
+      if (!apiKey) {
+        setUploadLoading(false);
+        return;
+      }
+      
       const text = await extractTextFromPdf(file);
       
       // Validate if the extracted text is actually a medical report
-      const isValidMedicalReport = await validateMedicalReport(text);
+      const isValidMedicalReport = await validateMedicalReport(text, apiKey);
       
       if (!isValidMedicalReport) {
         setError('⚠️ This doesn\'t appear to be a medical report. Please upload a valid medical document.');
@@ -93,9 +99,11 @@ export default function ReportSummarizer() {
         content: `✅ **Medical report "${file.name}" has been successfully uploaded and processed!**\n\nYou can now ask me anything about your medical report. For example:\n- "What are my blood test results?"\n- "Explain the diagnosis in simple terms"\n- "Are there any abnormal findings?"\n- "What do the test values mean?"\n- "What should I discuss with my doctor?"`,
         timestamp: new Date(),
       }]);
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      setError('Error processing the medical report. Please try again.');
+      if (!handleGeminiError(error)) {
+        setError('Error processing the medical report. Please try again.');
+      }
       setReportText('');
       setFileName('');
     } finally {

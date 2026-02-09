@@ -1,5 +1,16 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+// Helper function to check if error is quota exceeded
+const isQuotaExceededError = (error: any): boolean => {
+  return (
+    error.status === 429 ||
+    error.message?.includes('quota') ||
+    error.message?.includes('429') ||
+    error.message?.toLowerCase().includes('rate limit') ||
+    error.message?.toLowerCase().includes('too many requests')
+  );
+};
+
 const getModel = (apiKey: string) => {
   if (!apiKey || apiKey.trim() === '') {
     throw new Error("GEMINI_KEY_MISSING");
@@ -191,6 +202,9 @@ Please provide a comprehensive analysis with the following structure:
     if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
       throw error;
     }
+    if (isQuotaExceededError(error)) {
+      throw new Error("GEMINI_QUOTA_EXCEEDED");
+    }
     throw new Error("Failed to analyze symptoms. Please try again.");
   }
 };
@@ -310,6 +324,9 @@ ${drugs.map((drug, i) => `\n**${i + 1}. ${drug}**:\n- Primary use: [brief descri
     if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
       throw error;
     }
+    if (isQuotaExceededError(error)) {
+      throw new Error("GEMINI_QUOTA_EXCEEDED");
+    }
     throw new Error("Failed to analyze drug interactions. Please try again.");
   }
 };
@@ -404,6 +421,9 @@ Please provide a comprehensive yet accessible explanation:
     if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
       throw error;
     }
+    if (isQuotaExceededError(error)) {
+      throw new Error("GEMINI_QUOTA_EXCEEDED");
+    }
     throw new Error("Failed to explain the medical term. Please try again.");
   }
 };
@@ -471,6 +491,9 @@ This summary is to help you understand your report. Always discuss results with 
     if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
       throw error;
     }
+    if (isQuotaExceededError(error)) {
+      throw new Error("GEMINI_QUOTA_EXCEEDED");
+    }
     throw new Error(
       "Failed to summarize the medical report. Please try again."
     );
@@ -515,6 +538,9 @@ For general health/wellness questions, provide evidence-based information while 
     console.error("Error getting AI response:", error);
     if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
       throw error;
+    }
+    if (isQuotaExceededError(error)) {
+      throw new Error("GEMINI_QUOTA_EXCEEDED");
     }
     throw new Error("Failed to process your question. Please try again.");
   }
@@ -567,6 +593,9 @@ Format your response in a clear, structured manner with proper headings and bull
     console.error("Error querying policy document:", error);
     if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
       throw error;
+    }
+    if (isQuotaExceededError(error)) {
+      throw new Error("GEMINI_QUOTA_EXCEEDED");
     }
     throw new Error("Failed to analyze the policy query. Please try again.");
   }
@@ -799,6 +828,9 @@ Format your response in a clear, structured manner with proper headings and bull
     if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
       throw error;
     }
+    if (isQuotaExceededError(error)) {
+      throw new Error("GEMINI_QUOTA_EXCEEDED");
+    }
     throw new Error(
       "Failed to analyze your medical report query. Please try again."
     );
@@ -873,6 +905,9 @@ export async function* streamAIResponse(
     }
     if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
       throw error;
+    }
+    if (isQuotaExceededError(error)) {
+      throw new Error("GEMINI_QUOTA_EXCEEDED");
     }
     throw new Error("Failed to stream response from AI");
   }
@@ -1078,6 +1113,9 @@ Return ONLY the JSON object, no additional text.`;
     if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
       throw error;
     }
+    if (isQuotaExceededError(error)) {
+      throw new Error("GEMINI_QUOTA_EXCEEDED");
+    }
     throw new Error("Failed to analyze medical image. Please try again.");
   }
 };
@@ -1258,6 +1296,9 @@ Return ONLY the JSON object, no additional text.`;
     console.error("Error analyzing medicine:", error);
     if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
       throw error;
+    }
+    if (isQuotaExceededError(error)) {
+      throw new Error("GEMINI_QUOTA_EXCEEDED");
     }
     throw new Error("Failed to analyze medicine. Please try again.");
   }

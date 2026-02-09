@@ -3,6 +3,7 @@ import { BookOpen, Loader, AlertCircle } from 'lucide-react';
 import { explainMedicalTerm, validateMedicalTerm } from '../lib/gemini';
 import ReactMarkdown from 'react-markdown';
 import { useConversationSave } from '../hooks/useConversationSave';
+import { useGeminiKey } from '../hooks/useGeminiKey';
 import { useAuthStore } from '../store/authStore';
 import { useHistoryStore } from '../store/historyStore';
 import toast from 'react-hot-toast';
@@ -15,6 +16,7 @@ export default function MedicalTermExplainer() {
   const [conversationId, setConversationId] = useState<string | null>(null);
   
   const { saveConversation } = useConversationSave();
+  const { getApiKey, handleGeminiError } = useGeminiKey();
   const { isAuthenticated } = useAuthStore();
   const { currentConversation, clearLoadedConversation } = useHistoryStore();
 
@@ -52,8 +54,14 @@ export default function MedicalTermExplainer() {
     setLoading(true);
     setError('');
     try {
+      const apiKey = getApiKey();
+      if (!apiKey) {
+        setLoading(false);
+        return;
+      }
+      
       // Validate if the input is a legitimate medical term
-      const isValidMedicalTerm = await validateMedicalTerm(term);
+      const isValidMedicalTerm = await validateMedicalTerm(term, apiKey);
       
       if (!isValidMedicalTerm) {
         setError('⚠️ The input you provided is not recognized as a valid medical term. Please enter a valid term or code.');
@@ -61,7 +69,7 @@ export default function MedicalTermExplainer() {
         return;
       }
       
-      const result = await explainMedicalTerm(term);
+      const result = await explainMedicalTerm(term, apiKey);
       setExplanation(result);
       
       // Auto-save conversation if user is authenticated
@@ -77,8 +85,10 @@ export default function MedicalTermExplainer() {
           setConversationId(savedId);
         }
       }
-    } catch (error) {
-      setError(error instanceof Error ? error.message : 'Error explaining term. Please try again.');
+    } catch (error: any) {
+      if (!handleGeminiError(error)) {
+        setError(error instanceof Error ? error.message : 'Error explaining term. Please try again.');
+      }
       setExplanation('');
     } finally {
       setLoading(false);

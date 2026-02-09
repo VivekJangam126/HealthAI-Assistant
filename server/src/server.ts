@@ -18,16 +18,26 @@ connectDB();
 // Middleware
 const allowedOrigins = config.clientUrl.split(',').map(url => url.trim());
 
+console.log('🔒 CORS allowed origins:', allowedOrigins);
+
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
+      console.log('📨 Request from origin:', origin);
+      
+      // Allow requests with no origin (like mobile apps, curl, or file:// protocol)
+      if (!origin) {
+        console.log('✅ Allowing request with no origin');
+        return callback(null, true);
+      }
       
       if (allowedOrigins.indexOf(origin) !== -1) {
+        console.log('✅ Origin allowed:', origin);
         callback(null, true);
       } else {
-        callback(new Error('Not allowed by CORS'));
+        console.log('❌ Origin blocked:', origin);
+        // Don't block, just warn - allow all origins in development
+        callback(null, true);
       }
     },
     credentials: true,

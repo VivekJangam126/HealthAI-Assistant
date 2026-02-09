@@ -3,6 +3,7 @@ import { Pill, Upload, Send, AlertTriangle, Loader, Clock, Heart, Shield, Utensi
 import { analyzeMedicine, validateMedicineImage } from '../lib/gemini';
 import { useHistoryStore } from '../store/historyStore';
 import { useConversationSave } from '../hooks/useConversationSave';
+import { useGeminiKey } from '../hooks/useGeminiKey';
 import { useAuthStore } from '../store/authStore';
 import toast from 'react-hot-toast';
 
@@ -40,6 +41,7 @@ export default function MedicineAnalyzer() {
   
   const { currentConversation, clearLoadedConversation } = useHistoryStore();
   const { saveConversation } = useConversationSave();
+  const { getApiKey, handleGeminiError } = useGeminiKey();
   const { isAuthenticated } = useAuthStore();
 
   // Load conversation from history when currentConversation changes
@@ -91,8 +93,14 @@ export default function MedicineAnalyzer() {
   const validateUploadedImage = async (file: File) => {
     setValidating(true);
     try {
+      const apiKey = getApiKey();
+      if (!apiKey) {
+        setValidating(false);
+        return;
+      }
+      
       const base64Image = await convertImageToBase64(file);
-      const validation = await validateMedicineImage(base64Image);
+      const validation = await validateMedicineImage(base64Image, apiKey);
       
       if (!validation.isValid) {
         setValidationWarning(validation.message);
@@ -136,17 +144,23 @@ export default function MedicineAnalyzer() {
     setError('');
 
     try {
+      const apiKey = getApiKey();
+      if (!apiKey) {
+        setLoading(false);
+        return;
+      }
+      
       const base64Image = await convertImageToBase64(image);
       
       // Final validation before analysis
-      const validation = await validateMedicineImage(base64Image);
+      const validation = await validateMedicineImage(base64Image, apiKey);
       if (!validation.isValid) {
         setError(validation.message + '\n\nPlease upload a clear image of medicine packaging, tablets, capsules, or medicine bottles.');
         setLoading(false);
         return;
       }
       
-      const result = await analyzeMedicine(base64Image, additionalInfo.trim());
+      const result = await analyzeMedicine(base64Image, additionalInfo.trim(), apiKey);
       setAnalysis(result);
       
       // Auto-save conversation if user is authenticated
@@ -163,9 +177,11 @@ export default function MedicineAnalyzer() {
           setConversationId(savedId);
         }
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      setError('Failed to analyze medicine. Please try again.');
+      if (!handleGeminiError(err)) {
+        setError('Failed to analyze medicine. Please try again.');
+      }
     } finally {
       setLoading(false);
     }

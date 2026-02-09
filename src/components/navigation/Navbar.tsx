@@ -46,7 +46,7 @@ export function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-40 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-sm">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-sm">
         <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Mobile sidebar toggle - only show on pages with sidebar */}
           {!shouldShowAuthInNavbar && (
@@ -82,41 +82,37 @@ export function Navbar() {
                           <ul className="grid w-[240px] gap-1 p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg">
                             {item.dropdown.map((subItem) => (
                               <li key={subItem.id}>
-                                <NavigationMenuLink asChild>
-                                  <button
-                                    onClick={() => setActiveTab(subItem.id)}
-                                    className={cn(
-                                      "flex w-full items-center rounded-md p-3 text-sm transition-colors hover:bg-gray-100 dark:hover:bg-gray-700",
-                                      activeTab === subItem.id
-                                        ? "bg-blue-50 text-blue-700 dark:bg-gray-700 dark:text-blue-400"
-                                        : "text-gray-700 dark:text-gray-300"
-                                    )}
-                                  >
-                                    <subItem.icon className="mr-2 h-5 w-5" />
-                                    <span className="font-medium">{subItem.name}</span>
-                                  </button>
-                                </NavigationMenuLink>
+                                <button
+                                  onClick={() => setActiveTab(subItem.id)}
+                                  className={cn(
+                                    "flex w-full items-center rounded-md p-3 text-sm transition-colors hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer",
+                                    activeTab === subItem.id
+                                      ? "bg-blue-50 text-blue-700 dark:bg-gray-700 dark:text-blue-400"
+                                      : "text-gray-700 dark:text-gray-300"
+                                  )}
+                                >
+                                  <subItem.icon className="mr-2 h-5 w-5" />
+                                  <span className="font-medium">{subItem.name}</span>
+                                </button>
                               </li>
                             ))}
                           </ul>
                         </NavigationMenuContent>
                       </>
                     ) : (
-                      <NavigationMenuLink asChild>
-                        <button
-                          onClick={() => setActiveTab(item.id)}
-                          className={cn(
-                            navigationMenuTriggerStyle(),
-                            "bg-transparent",
-                            activeTab === item.id
-                              ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-gray-800"
-                              : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                          )}
-                        >
-                          <item.icon className="mr-1.5 h-5 w-5" />
-                          {item.name}
-                        </button>
-                      </NavigationMenuLink>
+                      <button
+                        onClick={() => setActiveTab(item.id)}
+                        className={cn(
+                          navigationMenuTriggerStyle(),
+                          "bg-transparent cursor-pointer",
+                          activeTab === item.id
+                            ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-gray-800"
+                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                        )}
+                      >
+                        <item.icon className="mr-1.5 h-5 w-5" />
+                        {item.name}
+                      </button>
                     )}
                   </NavigationMenuItem>
                 </NavigationMenuList>

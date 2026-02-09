@@ -67,11 +67,17 @@ export default function PolicyQueryAssistant() {
     setMessages([]);
     
     try {
+      const apiKey = getApiKey();
+      if (!apiKey) {
+        setUploadLoading(false);
+        return;
+      }
+      
       // Extract text from PDF
       const text = await extractTextFromPdf(file);
       
       // Validate if the document is a health policy
-      const isValidPolicy = await validatePolicyDocument(text);
+      const isValidPolicy = await validatePolicyDocument(text, apiKey);
       
       if (!isValidPolicy) {
         setError('⚠️ Invalid document. Please upload a valid health policy PDF.');
@@ -87,9 +93,11 @@ export default function PolicyQueryAssistant() {
         content: `✅ **Policy document "${file.name}" has been successfully uploaded and processed!**\n\nYou can now ask me questions about your policy. For example:\n- "46-year-old male, knee surgery in Pune, 3-month-old insurance policy"\n- "What is covered under maternity benefits?"\n- "What are the waiting periods for pre-existing conditions?"`,
         timestamp: new Date(),
       }]);
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      setError('Error processing the policy document. Please try again.');
+      if (!handleGeminiError(error)) {
+        setError('Error processing the policy document. Please try again.');
+      }
       setPolicyText('');
       setFileName('');
     } finally {

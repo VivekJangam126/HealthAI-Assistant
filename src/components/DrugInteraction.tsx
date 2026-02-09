@@ -3,6 +3,7 @@ import { Pill, Plus, X, Loader, AlertCircle } from 'lucide-react';
 import { checkDrugInteraction, validateMedicationName } from '../lib/gemini';
 import ReactMarkdown from 'react-markdown';
 import { useConversationSave } from '../hooks/useConversationSave';
+import { useGeminiKey } from '../hooks/useGeminiKey';
 import { useAuthStore } from '../store/authStore';
 import { useHistoryStore } from '../store/historyStore';
 import toast from 'react-hot-toast';
@@ -17,6 +18,7 @@ export default function DrugInteraction() {
   const [conversationId, setConversationId] = useState<string | null>(null);
   
   const { saveConversation } = useConversationSave();
+  const { getApiKey, handleGeminiError } = useGeminiKey();
   const { isAuthenticated } = useAuthStore();
   const { currentConversation, clearLoadedConversation } = useHistoryStore();
 
@@ -62,7 +64,13 @@ export default function DrugInteraction() {
     setError('');
     
     try {
-      const isValid = await validateMedicationName(drugName);
+      const apiKey = getApiKey();
+      if (!apiKey) {
+        setValidating(false);
+        return;
+      }
+      
+      const isValid = await validateMedicationName(drugName, apiKey);
       
       if (!isValid) {
         setError('⚠️ Invalid input. Please enter a valid medication name.');
@@ -101,7 +109,13 @@ export default function DrugInteraction() {
     setLoading(true);
     setError('');
     try {
-      const result = await checkDrugInteraction(drugs);
+      const apiKey = getApiKey();
+      if (!apiKey) {
+        setLoading(false);
+        return;
+      }
+      
+      const result = await checkDrugInteraction(drugs, apiKey);
       setAnalysis(result);
       
       // Auto-save conversation if user is authenticated
@@ -121,8 +135,10 @@ export default function DrugInteraction() {
           setConversationId(savedId);
         }
       }
-    } catch (error) {
-      setError(error instanceof Error ? error.message : 'Error analyzing medications. Please try again.');
+    } catch (error: any) {
+      if (!handleGeminiError(error)) {
+        setError(error instanceof Error ? error.message : 'Error analyzing medications. Please try again.');
+      }
       setAnalysis('');
     }
     setLoading(false);

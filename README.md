@@ -1,915 +1,359 @@
-# AyuMitra 🏥
+# AyuMitra - AI-Powered Healthcare Assistant 🏥
 
-[![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/VivekJangam126/HealthAI-Assistant)
-[![Hacktoberfest 2025](https://img.shields.io/badge/Hacktoberfest-2025-blueviolet)](https://hacktoberfest.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/VivekJangam126/HealthAI-Assistant/pulls)
-[![Stars](https://img.shields.io/github/stars/VivekJangam126/HealthAI-Assistant?style=social)](https://github.com/VivekJangam126/HealthAI-Assistant/stargazers)
-[![Forks](https://img.shields.io/github/forks/VivekJangam126/HealthAI-Assistant?style=social)](https://github.com/VivekJangam126/HealthAI-Assistant/network/members)
+[![React](https://img.shields.io/badge/React-18.3-blue.svg)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue.svg)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-20+-green.svg)](https://nodejs.org/)
 
-An AI-powered healthcare assistant that provides medical information, symptom analysis, and health recommendations using Google's Gemini AI. Supporting multiple languages for global accessibility! 🌍
-
----
-
-## 🎃 Hacktoberfest 2025 - Join Us!
-
-<div align="center">
-
-### 🚨 **IMPORTANT: Star the Repo First!** 🚨
-
-**Your Hacktoberfest contribution will be marked INVALID if you don't star the repository!**
-
-<a href="https://github.com/VivekJangam126/HealthAI-Assistant">
-  <img src="https://img.shields.io/github/stars/VivekJangam126/HealthAI-Assistant?style=for-the-badge&logo=github&color=yellow" alt="Star this repo"/>
-</a>
-
-**👆 Click above to star the repo - It takes 2 seconds!**
-
-</div>
-
-We're excited to participate in Hacktoberfest 2025! This is the perfect opportunity for open source developers to contribute to a meaningful healthcare project. Whether you're fixing bugs, adding features, improving documentation, or enhancing the UI, your contributions are welcome!
-
-### 📋 **Before You Contribute:**
-
-1. ⭐ **STAR THE REPOSITORY** - This is **MANDATORY** for valid contributions
-2. 📖 Read our [CONTRIBUTING.md](./CONTRIBUTING.md) thoroughly
-3. 🔍 Find an issue or create a new one
-4. ⏳ Wait for maintainer assignment before starting work
-5. 🎯 Submit focused, quality PRs
-
-### 🎉 **All Quality Contributions Welcome!**
-
-**We accept meaningful contributions:**
-- 💻 **Code Contributions**: Bug fixes, new features, refactoring
-- 🎨 **UI/UX Redesigns**: Design improvements, responsive fixes, accessibility enhancements
-- 📚 **Documentation**: README updates, code comments, guides, tutorials
-- 🧪 **Testing**: Writing tests, improving test coverage
-- 🐛 **Bug Reports**: Finding and reporting issues with detailed information
-- 💡 **Feature Proposals**: Well-thought-out feature requests with mockups/diagrams
-- 🌍 **Translations**: Adding language support
-- ♿ **Accessibility**: Making the app more accessible
-
-### ⚠️ **Important: Quality Over Quantity!**
-
-**We Do NOT Accept:**
-- ❌ **PRs without starring the repo first**
-- ❌ **Working without issue assignment**
-- ❌ **Spammy PRs**: Minor changes just to get a PR count (e.g., adding spaces, removing empty lines)
-- ❌ **Low-Effort Contributions**: Changes that add no real value
-- ❌ **Copy-Paste Code**: Directly copying code from other projects without understanding
-- ❌ **Massive Unfocused PRs**: Trying to add 5+ features in one PR
-- ❌ **Incomplete Work**: PRs that are half-done or don't work properly
-- ❌ **README Only Changes**: Just adding your name without meaningful contribution
-
-**⚠️ Your PR will be marked as "invalid" or "spam" if it doesn't provide meaningful value to the project.**
-
-### ✅ **What Makes a Good Contribution?**
-
-- **Well-documented**: Clear description of what and why
-- **Tested**: You've tested your changes locally
-- **Focused**: Addresses one specific issue or feature
-- **Quality code**: Follows project conventions and best practices
-- **Meaningful**: Adds real value to the project and its users
-
-### 🚀 **Quick Start for Hacktoberfest Contributors**
-
-1. **⭐ Star the repo** - [Click here](https://github.com/VivekJangam126/HealthAI-Assistant) (MANDATORY!)
-2. **Find an issue** - Check our [Good First Issues](https://github.com/VivekJangam126/HealthAI-Assistant/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) or [Hacktoberfest](https://github.com/VivekJangam126/HealthAI-Assistant/issues?q=is%3Aopen+is%3Aissue+label%3AHacktoberfest) labeled issues
-3. **Comment on the issue** - Express your interest: "I'd like to work on this"
-4. **Wait for assignment** - Maintainers will assign the issue to you
-5. **Fork the repo** - Click the 'Fork' button at the top right
-6. **Create your branch** - Use descriptive names: `git checkout -b feature/your-feature-name`
-7. **Make your changes** - Follow our [contribution guidelines](./CONTRIBUTING.md)
-8. **Add yourself to CONTRIBUTORS.md** - Celebrate your contribution!
-9. **Submit a PR** - Create a pull request and our maintainers will review it
-
----
-
-## ✨ Key Features
-
-- 🌐 **Multilingual Support**: Get healthcare assistance in multiple languages
-- 🔍 **Symptom Analysis**: AI-powered analysis with severity assessment and recommendations
-- 💊 **Drug Interaction Checker**: Check potential interactions between medications
-- 📚 **Medical Term Explainer**: Understand complex medical terminology in simple language
-- 📄 **Medical Report Assistant**: Upload and get AI-powered summaries and Q&A for medical reports
-- 💬 **Healthcare Chat**: Interactive chat with AI for health-related queries
-- 🚨 **Emergency Contacts**: Quick access to important emergency numbers
-
----
-
-## 🌐 Supported Languages
-
-- 🇬🇧 English
-- 🇮🇳 Hindi
-- 🇪🇸 Spanish
-- 🇫🇷 French
-- 🇩🇪 German
-- 🇨🇳 Chinese
-- 🇯🇵 Japanese
-- 🇰🇷 Korean
-- 🇸🇦 Arabic
-- And more...
-
----
-
-## 🛠 Tech Stack
-
-- ⚛️ **React.js** - UI framework
-- ⚡ **Vite** - Build tool
-- 🤖 **Gemini AI API** - AI-powered responses
-- 🎨 **Tailwind CSS** - Styling
-- 📘 **TypeScript** - Type safety
-
----
-
-## 🚀 Live Demo
-
-Visit the live application: **[AyuMitra](https://health-ai-assistant.vercel.app/)**
+**AyuMitra** is a comprehensive AI-powered healthcare assistant that provides medical information, symptom analysis, drug interaction checking, and personalized health recommendations using Google's Gemini AI. Available as both a web application and mobile app (Android).
 
 ---
 
 ## 📋 Table of Contents
 
-- [Getting Started](#getting-started)
-- [Development Setup](#development-setup)
-- [Contributing](#contributing)
-- [Project Structure](#project-structure)
-- [Available Scripts](#available-scripts)
-- [Feature Roadmap](#feature-roadmap)
-- [Usage Guide](#usage-guide)
-- [Code of Conduct](#code-of-conduct-)
-- [Contributors](#contributors-)
-- [License](#license)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Architecture](#-architecture)
+- [Getting Started](#-getting-started)
+- [Documentation](#-documentation)
+- [Project Structure](#-project-structure)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Support](#-support)
 
 ---
 
-## Getting Started
+## ✨ Features
+
+### Core Features
+- 🔍 **Symptom Analyzer** - AI-powered symptom analysis with severity assessment
+- 💊 **Drug Interaction Checker** - Check interactions between multiple medications
+- 📚 **Medical Term Explainer** - Understand complex medical terminology
+- 🖼️ **Medical Image Analyzer** - Analyze X-rays, CT scans, MRI images
+- 💊 **Medicine Analyzer** - Scan medicine packaging for information
+- � **Report Summarizer** - Upload and get AI summaries of medical reports
+- � **Policy Query Assistant** - Query health insurance policies
+- 💬 **Healthcare Chat** - Interactive AI chat for health queries
+- 🚨 **Emergency Contacts** - Quick access to emergency services
+
+### User Features
+- 👤 **User Authentication** - Secure login and registration
+- 🔑 **Personal API Key Management** - Users manage their own Gemini API keys
+- � **Conversation History** - Save and revisit past conversations
+- ⭐ **Bookmarks** - Bookmark important conversations
+- � **Export to PDF** - Export conversations and reports
+- 🌓 **Dark Mode** - Eye-friendly dark theme
+- � **Responsive Design** - Works on desktop, tablet, and mobile
+- 🌐 **Multilingual Support** - Auto-detects and responds in user's language
+
+### Technical Features
+- ⚡ **Real-time Streaming** - AI responses stream in real-time
+- 🔒 **Secure** - HTTPS, JWT authentication, encrypted data
+- 💾 **Cloud Storage** - MongoDB Atlas for data persistence
+- 🚀 **Fast Performance** - Optimized React with code splitting
+- 📱 **Mobile App** - Native Android app via Capacitor
+- 🔄 **Auto-save** - Conversations automatically saved
+- 🎨 **Modern UI** - Beautiful, intuitive interface with Tailwind CSS
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **Framework**: React 18.3 with TypeScript
+- **Build Tool**: Vite 5.4
+- **Styling**: Tailwind CSS 3.4
+- **UI Components**: Radix UI, Lucide Icons
+- **State Management**: Zustand
+- **Routing**: React Router DOM 7.9
+- **Forms**: React Hook Form with Zod validation
+- **HTTP Client**: Axios
+- **PDF Generation**: jsPDF, html2canvas, @react-pdf/renderer
+- **Mobile**: Capacitor 8.0 (Android)
+
+### Backend
+- **Runtime**: Node.js 20+
+- **Framework**: Express.js
+- **Language**: TypeScript
+- **Database**: MongoDB Atlas
+- **Authentication**: JWT (JSON Web Tokens)
+- **Password Hashing**: bcryptjs
+- **Validation**: express-validator
+- **CORS**: cors middleware
+- **Environment**: dotenv
+
+### AI & APIs
+- **AI Model**: Google Gemini 2.5 Flash
+- **SDK**: @google/generative-ai
+- **Features**: Text generation, image analysis, streaming responses
+
+### Deployment
+- **Frontend**: Vercel (Web), APK (Mobile)
+- **Backend**: Vercel Serverless Functions
+- **Database**: MongoDB Atlas (Cloud)
+- **CDN**: Vercel Edge Network
+
+---
+
+## �️ Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     Client Layer                             │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
+│  │  Web Browser │  │ Mobile App   │  │   Tablet     │      │
+│  │  (React)     │  │ (Capacitor)  │  │   (PWA)      │      │
+│  └──────────────┘  └──────────────┘  └──────────────┘      │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            │ HTTPS
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│                   API Gateway (Vercel)                       │
+│                  https://ayumitra2026.vercel.app/api         │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                ┌───────────┴───────────┐
+                │                       │
+                ▼                       ▼
+┌──────────────────────────┐  ┌──────────────────────────┐
+│   Backend Services       │  │   External Services      │
+│   (Express + TypeScript) │  │                          │
+│                          │  │  ┌────────────────────┐  │
+│  • Auth Controller       │  │  │  Google Gemini AI  │  │
+│  • History Controller    │  │  │  (AI Processing)   │  │
+│  • Middleware            │  │  └────────────────────┘  │
+│  • Validation            │  │                          │
+└──────────────────────────┘  └──────────────────────────┘
+                │
+                ▼
+┌─────────────────────────────────────────────────────────────┐
+│                   Database Layer                             │
+│              MongoDB Atlas (Cloud Database)                  │
+│                                                              │
+│  Collections:                                                │
+│  • users - User accounts and API keys                        │
+│  • histories - Conversation history                          │
+│  • activities - User activity logs                           │
+│  • bookmarkedterms - Saved medical terms                     │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Data Flow
+1. **User Request** → Client (React/Mobile)
+2. **API Call** → Backend (Express on Vercel)
+3. **Authentication** → JWT Verification
+4. **AI Processing** → Gemini API (if needed)
+5. **Data Storage** → MongoDB Atlas
+6. **Response** → Client (Streaming or JSON)
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
+- Node.js 20+ and npm
+- MongoDB Atlas account (or local MongoDB)
+- Google Gemini API key ([Get one here](https://aistudio.google.com/app/apikey))
+- Git
 
-Before you begin, ensure you have the following installed on your system:
+### Installation
 
-- **Node.js** (version 16 or higher) - [Download here](https://nodejs.org/)
-- **npm** (comes with Node.js) or **yarn**
-- **MongoDB** (for local development) - [Download here](https://www.mongodb.com/try/download/community)
-- **Git** - [Download here](https://git-scm.com/downloads)
-- **Gemini AI API Key** - [Get it here](https://makersuite.google.com/app/apikey)
-
----
-
-## 📦 Complete Installation Guide
-
-### Step 1: Install MongoDB
-
-#### For Windows:
-1. Download MongoDB Community Server from [MongoDB Download Center](https://www.mongodb.com/try/download/community)
-2. Run the installer and follow the installation wizard
-3. Choose "Complete" installation
-4. Install MongoDB as a Service (recommended)
-5. MongoDB will start automatically on `mongodb://localhost:27017`
-
-#### For macOS:
+1. **Clone the repository**
 ```bash
-# Using Homebrew
-brew tap mongodb/brew
-brew install mongodb-community
-brew services start mongodb-community
-```
-
-#### For Linux (Ubuntu/Debian):
-```bash
-# Import MongoDB public GPG key
-wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
-
-# Create list file
-echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
-
-# Update package database
-sudo apt-get update
-
-# Install MongoDB
-sudo apt-get install -y mongodb-org
-
-# Start MongoDB
-sudo systemctl start mongod
-sudo systemctl enable mongod
-```
-
-#### Verify MongoDB Installation:
-```bash
-# Check if MongoDB is running
-mongosh
-# or
-mongo
-
-# You should see MongoDB shell prompt
-# Type 'exit' to quit
-```
-
----
-
-### Step 2: Clone the Repository
-
-```bash
-# Clone the repository
 git clone https://github.com/VivekJangam126/HealthAI-Assistant.git
-
-# Navigate to project directory
 cd HealthAI-Assistant
 ```
 
----
-
-### Step 3: Get Your Gemini API Key
-
-1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
-2. Sign in with your Google account
-3. Click on "Get API Key" or "Create API Key"
-4. Copy the generated API key (it looks like: `AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX`)
-5. Keep it safe - you'll need it in the next step
-
----
-
-### Step 4: Configure Frontend Environment Variables
-
-1. **Navigate to the root directory** (HealthAI-Assistant folder)
-
-2. **Create a `.env` file** in the root directory:
+2. **Install frontend dependencies**
 ```bash
-# For Windows (Command Prompt)
-type nul > .env
-
-# For Windows (PowerShell)
-New-Item .env
-
-# For macOS/Linux
-touch .env
+npm install
 ```
 
-3. **Open the `.env` file** in your text editor and add:
-```env
-# Gemini AI API Key (REQUIRED)
-VITE_GEMINI_API_KEY=your_actual_gemini_api_key_here
-
-# Backend API URL (for local development)
-VITE_API_URL=http://localhost:5000/api
-```
-
-4. **Replace `your_actual_gemini_api_key_here`** with your actual Gemini API key from Step 3
-
-**Example:**
-```env
-VITE_GEMINI_API_KEY=AIzaSyBcP0qQLG2jyT-bHsMPrNet67zdFGIZDow
-VITE_API_URL=http://localhost:5000/api
-```
-
----
-
-### Step 5: Configure Backend Environment Variables
-
-1. **Navigate to the server directory**:
+3. **Install backend dependencies**
 ```bash
 cd server
-```
-
-2. **Create a `.env` file** in the server directory:
-```bash
-# For Windows (Command Prompt)
-type nul > .env
-
-# For Windows (PowerShell)
-New-Item .env
-
-# For macOS/Linux
-touch .env
-```
-
-3. **Open the `server/.env` file** and add:
-```env
-# Server Configuration
-PORT=5000
-NODE_ENV=development
-
-# MongoDB Configuration (Local)
-MONGODB_URI=mongodb://localhost:27017/healthai
-
-# JWT Configuration
-JWT_SECRET=healthai_jwt_secret_key_2024_production_secure_xyz789abc123
-JWT_EXPIRE=7d
-
-# Frontend URL (for CORS)
-CLIENT_URL=http://localhost:3000,http://localhost:5173,http://127.0.0.1:3000
-```
-
-**Note:** You can change the `JWT_SECRET` to any secure random string for better security.
-
-4. **Go back to the root directory**:
-```bash
+npm install
 cd ..
 ```
 
----
+4. **Configure environment variables**
 
-### Step 6: Install Dependencies
-
-#### Install Frontend Dependencies:
-```bash
-# Make sure you're in the root directory (HealthAI-Assistant)
-npm install
-```
-
-This will install all required packages including:
-- React, Vite, TypeScript
-- Tailwind CSS
-- Gemini AI SDK
-- Axios for API calls
-- And more...
-
-#### Install Backend Dependencies:
-```bash
-# Navigate to server directory
-cd server
-
-# Install server dependencies
-npm install
-
-# Go back to root
-cd ..
-```
-
-This will install:
-- Express.js
-- MongoDB/Mongoose
-- JWT for authentication
-- bcryptjs for password hashing
-- And more...
-
----
-
-### Step 7: Start the Application
-
-You need to run both frontend and backend servers simultaneously.
-
-#### Option 1: Using Two Terminal Windows (Recommended)
-
-**Terminal 1 - Start Backend Server:**
-```bash
-# Navigate to server directory
-cd server
-
-# Start the backend server
-npm run dev
-```
-
-You should see:
-```
-Server running on port 5000
-MongoDB connected successfully
-```
-
-**Terminal 2 - Start Frontend Server:**
-```bash
-# Make sure you're in the root directory
-# Open a new terminal window/tab
-
-# Start the frontend development server
-npm run dev
-```
-
-You should see:
-```
-VITE v5.x.x  ready in xxx ms
-
-➜  Local:   http://localhost:3000/
-➜  Network: use --host to expose
-```
-
-#### Option 2: Using One Terminal (Windows)
-
-```bash
-# Start backend in background and frontend
-cd server && start npm run dev && cd .. && npm run dev
-```
-
-#### Option 3: Using One Terminal (macOS/Linux)
-
-```bash
-# Start backend in background and frontend
-cd server && npm run dev & cd .. && npm run dev
-```
-
----
-
-### Step 8: Access the Application
-
-1. **Open your browser** and navigate to:
-   - Frontend: `http://localhost:3000` or `http://localhost:5173`
-   - Backend API: `http://localhost:5000/api`
-
-2. **Test the application**:
-   - Try the Symptom Analyzer
-   - Use the Healthcare Chat
-   - Check Drug Interactions
-   - Upload a medical report
-
----
-
-## 🔧 Troubleshooting
-
-### MongoDB Connection Issues
-
-**Error: `MongooseServerSelectionError: connect ECONNREFUSED`**
-
-**Solution:**
-```bash
-# Check if MongoDB is running
-# Windows:
-net start MongoDB
-
-# macOS:
-brew services start mongodb-community
-
-# Linux:
-sudo systemctl start mongod
-sudo systemctl status mongod
-```
-
-### Port Already in Use
-
-**Error: `Port 3000 is already in use`**
-
-**Solution:**
-```bash
-# Kill the process using the port
-# Windows:
-netstat -ano | findstr :3000
-taskkill /PID <PID> /F
-
-# macOS/Linux:
-lsof -ti:3000 | xargs kill -9
-```
-
-### API Key Issues
-
-**Error: `API key not valid`**
-
-**Solution:**
-1. Verify your Gemini API key is correct
-2. Check if there are any spaces before/after the key in `.env`
-3. Restart the development server after changing `.env`
-4. Make sure the key starts with `AIza`
-
-### Module Not Found Errors
-
-**Solution:**
-```bash
-# Delete node_modules and reinstall
-rm -rf node_modules package-lock.json
-npm install
-
-# For server
-cd server
-rm -rf node_modules package-lock.json
-npm install
-```
-
----
-
-## 📝 Quick Reference
-
-### Environment Variables Summary
-
-**Frontend (`.env` in root):**
+Frontend `.env`:
 ```env
-VITE_GEMINI_API_KEY=your_gemini_api_key
-VITE_API_URL=http://localhost:5000/api
+VITE_API_URL=https://ayumitra2026.vercel.app/api
 ```
 
-**Backend (`server/.env`):**
+Backend `server/.env`:
 ```env
+NODE_ENV=production
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
 PORT=5000
-NODE_ENV=development
-MONGODB_URI=mongodb://localhost:27017/healthai
-JWT_SECRET=your_secure_secret_key
-JWT_EXPIRE=7d
-CLIENT_URL=http://localhost:3000,http://localhost:5173
 ```
 
-### Common Commands
+5. **Run the application**
 
+Development mode:
 ```bash
-# Start frontend
+# Terminal 1 - Frontend
 npm run dev
 
-# Start backend
-cd server && npm run dev
+# Terminal 2 - Backend
+cd server
+npm run dev
+```
 
-# Build for production
+Production build:
+```bash
+# Build frontend
 npm run build
 
-# Run linter
-npm run lint
-
-# Install new package
-npm install package-name
+# Start backend
+cd server
+npm start
 ```
 
----
-
-## ✅ Verification Checklist
-
-Before you start developing, make sure:
-
-- [ ] MongoDB is installed and running
-- [ ] Node.js and npm are installed
-- [ ] Repository is cloned
-- [ ] Gemini API key is obtained
-- [ ] Frontend `.env` file is created with API key
-- [ ] Backend `server/.env` file is created
-- [ ] Frontend dependencies are installed (`npm install`)
-- [ ] Backend dependencies are installed (`cd server && npm install`)
-- [ ] Backend server is running (port 5000)
-- [ ] Frontend server is running (port 3000 or 5173)
-- [ ] Application opens in browser
-- [ ] No console errors
+6. **Access the application**
+- Web: http://localhost:3000
+- Backend API: http://localhost:5000/api
 
 ---
 
-## 🎉 You're All Set!
+## 📚 Documentation
 
-The application should now be running successfully. You can start exploring the features or begin contributing to the project!
+Comprehensive documentation is available in the `docs/` folder:
 
----
+- **[USER_MANUAL_WEB.md](./USER_MANUAL_WEB.md)** - Complete guide for web users
+- **[USER_MANUAL_MOBILE.md](./USER_MANUAL_MOBILE.md)** - Mobile app user guide
+- **[MOBILE_DEPLOYMENT_GUIDE.md](./MOBILE_DEPLOYMENT_GUIDE.md)** - Deploy to Android
+- **[TECHNICAL_DOCUMENTATION.md](./TECHNICAL_DOCUMENTATION.md)** - Technical details for developers
 
-## Development Setup
-
-### For New Contributors
-
-1. **Set up your development environment**:
-   - Make sure you have Node.js installed (v16+ recommended)
-   - Use a code editor like VS Code with these recommended extensions:
-     - ES7+ React/Redux/React-Native snippets
-     - Prettier - Code formatter
-     - ESLint
-     - Tailwind CSS IntelliSense
-
-2. **Understand the project structure**: See [Project Structure](#project-structure) section below
-
-3. **Follow our coding standards**:
-   - Use functional components with hooks
-   - Follow the existing code style and formatting
-   - Write meaningful commit messages
-   - Add comments for complex logic
+### Quick Links
+- [How to use the web app](./USER_MANUAL_WEB.md)
+- [How to use the mobile app](./USER_MANUAL_MOBILE.md)
+- [Deploy to mobile device](./MOBILE_DEPLOYMENT_GUIDE.md)
+- [API documentation](./TECHNICAL_DOCUMENTATION.md#api-endpoints)
+- [Database schema](./TECHNICAL_DOCUMENTATION.md#database-schema)
+- [Contributing guidelines](./CONTRIBUTING.md)
 
 ---
 
-## Contributing
-
-We welcome all types of contributions! Here are some ways you can help:
-
-### 🐛 Bug Fixes
-- Fix typos in documentation
-- Resolve UI/UX issues
-- Solve functional bugs
-- Fix responsive design issues
-
-### 🎨 UI/UX Improvements
-- Redesign existing components
-- Improve responsive design
-- Add animations and micro-interactions
-- Enhance accessibility (WCAG compliance)
-- Improve dark/light mode consistency
-
-### ✨ New Features
-- Add new language support
-- Implement new healthcare features
-- Create new utility components
-- Voice input for symptom analysis
-- Session history tracking
-- Export/download functionality
-
-### 📚 Documentation
-- Improve README documentation
-- Add code comments and JSDoc
-- Create contribution guides
-- Write tutorials and how-to guides
-- Add API documentation
-
-### 🔧 Technical Enhancements
-- Performance optimizations
-- Code refactoring
-- Add unit tests
-- Implement TypeScript
-- Improve error handling
-
-### 📖 **Read the Full Guidelines:**
-
-Before contributing, please read our detailed [CONTRIBUTING.md](./CONTRIBUTING.md) file!
-
-### Contribution Process
-
-1. ⭐ **Star the repository** (MANDATORY!)
-2. 🔍 **Find an issue** or **create a new one** if you have an idea
-3. 💬 **Comment** on the issue expressing interest
-4. ⏳ **Wait for assignment** from a maintainer
-5. 🍴 **Fork the repository** and create your feature branch
-6. 💻 **Make your changes** following our code standards
-7. 🧪 **Test your changes** thoroughly
-8. 📝 **Add yourself to CONTRIBUTORS.md**
-9. 🚀 **Submit a pull request** with a clear description
-
-### Pull Request Guidelines
-
-- ✅ Provide a clear title and description
-- ✅ Reference any related issues (e.g., "Closes #123")
-- ✅ Include screenshots for UI changes
-- ✅ Ensure all tests pass
-- ✅ Follow the PR template
-- ✅ Keep PRs focused (one feature/fix per PR)
-
----
-
-## Project Structure
+## 📁 Project Structure
 
 ```
 HealthAI-Assistant/
-├── README.md
-├── components.json
-├── CONTRIBUTING.md
-├── CONTRIBUTORS.md
-├── eslint.config.js
-├── index.html
-├── LICENSE
-├── package.json
-├── postcss.config.js
-├── tailwind.config.js
-├── tsconfig.app.json
-├── tsconfig.json
-├── tsconfig.node.json
-├── vite.config.ts
-├── .hintrc
-├── public/                     # Static files
-│   ├── robots.txt
-│   ├── site.webmanifest
-│   └── sitemap.xml
-├── src/
-│   ├── App.tsx                 # Main application component
-│   ├── index.css               # Global styles
-│   ├── main.tsx                # Application entry point
-│   ├── vite-env.d.ts          # Vite environment types
-│   ├── components/             # React components
-│   │   ├── About.tsx
-│   │   ├── AppContent.tsx
-│   │   ├── DrugInteraction.tsx
-│   │   ├── Emergency.tsx
-│   │   ├── HealthcareChat.tsx
-│   │   ├── HealthcareLogo.tsx
-│   │   ├── Homepage.tsx
-│   │   ├── MedicalTermExplainer.tsx
-│   │   ├── PolicyQueryAssistant.tsx
-│   │   ├── ReportSummarizer.tsx
-│   │   ├── SymptomAnalyzer.tsx
-│   │   ├── navigation/         # Navigation components
-│   │   │   ├── MobileMenu.tsx
-│   │   │   ├── Navbar.tsx
-│   │   │   ├── NavItem.tsx
-│   │   │   ├── NavLogo.tsx
-│   │   │   └── ThemeToggle.tsx
-│   │   └── ui/                 # Reusable UI components
-│   │       ├── bento-grid.tsx
-│   │       ├── button.tsx
-│   │       ├── ChatInput.tsx
-│   │       ├── MessageList.tsx
-│   │       ├── navigation-menu.tsx
-│   │       └── PageContainer.tsx
-│   ├── config/                 # Configuration files
-│   │   └── navigation.ts
-│   ├── context/                # React context providers
-│   │   ├── NavigationContext.tsx
-│   │   └── ThemeContext.tsx
-│   ├── lib/                    # External library configurations
-│   │   ├── gemini.ts          # Gemini AI integration
-│   │   └── utils.ts           # Utility helper functions
-│   ├── types/                  # TypeScript type definitions
-│   │   └── index.ts
-│   └── utils/                  # Utility functions
-│       └── pdfUtils.ts        # PDF processing utilities
-└── .github/                    # GitHub configuration
-    ├── PULL_REQUEST_TEMPLATE.md
-    └── ISSUE_TEMPLATE/
-        ├── bug_report.md
-        ├── feature_request.md
-        └── ui_redesign.md
+├── src/                          # Frontend source code
+│   ├── api/                      # API client functions
+│   ├── components/               # React components
+│   │   ├── auth/                 # Authentication components
+│   │   ├── history/              # History sidebar components
+│   │   ├── navigation/           # Navigation components
+│   │   └── ui/                   # Reusable UI components
+│   ├── config/                   # Configuration files
+│   ├── context/                  # React context providers
+│   ├── hooks/                    # Custom React hooks
+│   ├── lib/                      # Utility libraries
+│   ├── store/                    # Zustand state stores
+│   ├── types/                    # TypeScript type definitions
+│   ├── utils/                    # Utility functions
+│   ├── App.tsx                   # Main app component
+│   └── main.tsx                  # App entry point
+│
+├── server/                       # Backend source code
+│   └── src/
+│       ├── config/               # Server configuration
+│       ├── controllers/          # Route controllers
+│       ├── middleware/           # Express middleware
+│       ├── models/               # MongoDB models
+│       ├── routes/               # API routes
+│       ├── types/                # TypeScript types
+│       └── server.ts             # Server entry point
+│
+├── android/                      # Android mobile app
+│   └── app/                      # Android app source
+│
+├── public/                       # Static assets
+├── docs/                         # Documentation
+├── .env                          # Frontend environment variables
+├── .env.example                  # Environment template
+├── capacitor.config.ts           # Capacitor configuration
+├── package.json                  # Frontend dependencies
+├── tsconfig.json                 # TypeScript configuration
+├── tailwind.config.js            # Tailwind CSS configuration
+├── vite.config.ts                # Vite configuration
+└── README.md                     # This file
 ```
 
 ---
 
-## Available Scripts
+## 🤝 Contributing
 
-```bash
-# Start development server
-npm run dev
+We welcome contributions! Please see our [Contributing Guidelines](./CONTRIBUTING.md) for details.
 
-# Build for production
-npm run build
+### How to Contribute
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-# Preview production build
-npm run preview
-
-# Run linter
-npm run lint
-
-# Format code
-npm run format
-```
-
----
-
-## Feature Roadmap
-
-### 🎯 High Priority
-- [ ] 🧪 Add comprehensive unit testing
-- [ ] 📱 Enhance mobile responsiveness
-- [ ] ✅ Add medical report validation
-- [ ] ♿ Improve accessibility (WCAG 2.1 AA compliance)
-- [ ] 📊 PWA capabilities for offline support
-
-### 🔮 Future Features
-- [ ] 🎙️ Voice input support for symptom analysis
-- [ ] 💊 Medication reminder system
-- [ ] 📈 Health tracking dashboard
-- [ ] 🔌 Integration with health APIs
-- [ ] 📥 Export health reports (PDF/JSON)
-- [ ] 👥 Multi-user support with profiles
-- [ ] 🔔 Real-time notifications
-- [ ] 📍 Location-based emergency services
+### Development Guidelines
+- Follow the existing code style
+- Write meaningful commit messages
+- Add tests for new features
+- Update documentation as needed
+- Ensure all tests pass before submitting PR
 
 ---
 
-## Usage Guide
+## 📄 License
 
-### 🔍 Symptom Analysis
-1. Navigate to the Symptom Analysis section
-2. Enter your symptoms in natural language
-3. Get AI-powered analysis with potential causes
-4. Receive personalized recommendations
-
-### 💊 Drug Interactions
-1. Access the Drug Interaction Checker
-2. Input multiple medications
-3. Check for potential interactions
-4. View safety recommendations
-
-### 📚 Medical Terminology
-1. Use the Medical Term Explainer
-2. Look up complex medical terms
-3. Get clear, simple explanations
-4. Understand your medical reports better
-
-### 📄 Medical Report Assistant
-1. Upload medical reports (PDF format)
-2. Ask questions about your report in natural language
-3. Get AI-powered answers and explanations
-4. Understand test results and diagnoses clearly
-
-### 💬 Healthcare Chat
-1. Start a conversation with the AI assistant
-2. Ask health-related questions
-3. Get instant, informative responses
-4. Continue conversation with context
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
 ---
 
-## 📧 Contact
+## 💬 Support
 
-For questions or suggestions, please open an issue on GitHub.
-
-**Project Link**: [https://github.com/VivekJangam126/HealthAI-Assistant](https://github.com/VivekJangam126/HealthAI-Assistant)
-
----
-
-## 🙏 Acknowledgments
-
-- Google for providing the Gemini AI API
-- The open source community for invaluable tools and libraries
-- All our amazing contributors who help make this project better
+- **Issues**: [GitHub Issues](https://github.com/VivekJangam126/HealthAI-Assistant/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/VivekJangam126/HealthAI-Assistant/discussions)
+- **Email**: support@ayumitra.com
 
 ---
 
-## 🎉 Hacktoberfest 2025 Special
+## 🌟 Acknowledgments
 
-We're thrilled to be part of Hacktoberfest 2025! Here's what makes our project great for contributors:
-
-### 🏆 Why Contribute to AyuMitra?
-
-- 💙 **Real Impact**: Your code helps people access healthcare information
-- 🌱 **Beginner Friendly**: Well-documented codebase with good first issues
-- 🚀 **Modern Stack**: Work with React, Vite, and modern web technologies
-- 🤝 **Supportive Community**: Friendly maintainers and contributors
-- 📚 **Learning Opportunity**: Gain experience with AI integration and healthcare tech
-
-### 🎁 Contributor Benefits
-
-- ✅ Get your Hacktoberfest PRs merged
-- 🎖️ Receive contributor shoutouts
-- 💼 Build your open source portfolio
-- 📚 Learn from code reviews
-- 🤝 Join a growing community
-- 🌟 Get featured in our contributors section
-
-### 💡 Contribution Ideas for Hacktoberfest
-
-**🌱 For Beginners:**
-- 📝 Fix typos in documentation
-- 🎨 Improve UI styling and colors
-- ⏳ Add loading states to components
-- 💬 Create better error messages
-- 📖 Add helpful code comments
-- 🔧 Fix mobile responsive issues
-
-**🚀 For Intermediate:**
-- 🆕 Add new UI components
-- 🎙️ Implement voice input feature
-- 📊 Create data visualization components
-- 🧪 Write unit tests for existing features
-- ⚡ Optimize component performance
-- ♿ Add accessibility features (ARIA labels, keyboard navigation)
-
-**🔥 For Advanced:**
-- 📘 Add TypeScript type definitions
-- 🏗️ Implement advanced features (session history, export data)
-- 🔄 Set up CI/CD pipeline
-- 🧪 Add integration tests
-- ♻️ Refactor complex logic for better maintainability
-- 📱 Create Progressive Web App (PWA) support
+- Google Gemini AI for powering the AI features
+- MongoDB Atlas for database hosting
+- Vercel for deployment platform
+- All our contributors and supporters
 
 ---
 
-## Contributors 🌟
+## 📊 Project Status
 
-We love our contributors! All contributors are shown below with their GitHub profile images. Your face could be here too—just contribute! 😄
-
-<div align="center">
-
-### 🎉 Thank You to All Our Amazing Contributors! 🎉
-
-<a href="https://github.com/VivekJangam126/HealthAI-Assistant/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=VivekJangam126/HealthAI-Assistant&max=100&columns=10" alt="Contributors"/>
-</a>
-
-**Want to see your face here? [Start contributing now!](./CONTRIBUTING.md)** 🚀
-
-</div>
+- ✅ **Web App**: Production ready
+- ✅ **Mobile App**: Android available
+- ✅ **Backend API**: Deployed on Vercel
+- ✅ **Database**: MongoDB Atlas
+- 🚧 **iOS App**: Coming soon
+- 🚧 **Additional Languages**: In progress
 
 ---
 
-## 📊 Project Stats
+## 🔗 Links
 
-<div align="center">
-
-![GitHub stars](https://img.shields.io/github/stars/VivekJangam126/HealthAI-Assistant?style=social)
-![GitHub forks](https://img.shields.io/github/forks/VivekJangam126/HealthAI-Assistant?style=social)
-![GitHub issues](https://img.shields.io/github/issues/VivekJangam126/HealthAI-Assistant)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/VivekJangam126/HealthAI-Assistant)
-![GitHub contributors](https://img.shields.io/github/contributors/VivekJangam126/HealthAI-Assistant)
-![GitHub last commit](https://img.shields.io/github/last-commit/VivekJangam126/HealthAI-Assistant)
-
-</div>
-
----
-
-## Code of Conduct 📜 
-
-Please be respectful and considerate in all interactions. We are committed to providing a welcoming and inclusive experience for everyone. See our [Code of Conduct](./CONTRIBUTING.md#-code-of-conduct) for details.
-
----
-
-## License ⚖️ 
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+- **Live Demo**: [https://ayumitra.vercel.app](https://ayumitra.vercel.app)
+- **API**: [https://ayumitra2026.vercel.app/api](https://ayumitra2026.vercel.app/api)
+- **GitHub**: [https://github.com/VivekJangam126/HealthAI-Assistant](https://github.com/VivekJangam126/HealthAI-Assistant)
 
 ---
 
 <div align="center">
 
-### ⭐ **If you like this project, please [star the repo](https://github.com/VivekJangam126/HealthAI-Assistant)!** ⭐
+**Made with ❤️ by the AyuMitra Team**
 
-**Let's build something amazing together! 🚀**
-
----
-
-### 🎃 Happy Hacktoberfest 2025! 🎃
-
-**Quality contributions are always welcome!**
-
-<a href="https://github.com/VivekJangam126/HealthAI-Assistant">
-  <img src="https://img.shields.io/badge/⭐-Star%20This%20Repo-yellow?style=for-the-badge&logo=github" alt="Star this repo"/>
-</a>
-
----
-
-*Remember: This application provides AI-powered health information and should not replace professional medical advice. Always consult healthcare professionals for medical concerns.*
-
-**Made with ❤️ by the AyuMitra Community**
+[⭐ Star this repo](https://github.com/VivekJangam126/HealthAI-Assistant) | [🐛 Report Bug](https://github.com/VivekJangam126/HealthAI-Assistant/issues) | [✨ Request Feature](https://github.com/VivekJangam126/HealthAI-Assistant/issues)
 
 </div>

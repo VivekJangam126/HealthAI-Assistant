@@ -21,6 +21,7 @@ export interface User {
     theme: 'light' | 'dark';
     notifications: boolean;
   };
+  geminiApiKey?: string;
   isEmailVerified: boolean;
   createdAt: string;
   lastLogin: string;

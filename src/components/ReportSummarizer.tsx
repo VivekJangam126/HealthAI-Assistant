@@ -7,6 +7,7 @@ import { useDropzone } from 'react-dropzone';
 import { PageContainer } from './ui/PageContainer';
 import { ChatMessage } from '../types';
 import { useConversationSave } from '../hooks/useConversationSave';
+import { useGeminiKey } from '../hooks/useGeminiKey';
 import { useAuthStore } from '../store/authStore';
 import { useHistoryStore } from '../store/historyStore';
 import toast from 'react-hot-toast';
@@ -25,6 +26,7 @@ export default function ReportSummarizer() {
   const { saveConversation } = useConversationSave();
   const { isAuthenticated } = useAuthStore();
   const { currentConversation, clearLoadedConversation } = useHistoryStore();
+  const { getApiKey, handleGeminiError } = useGeminiKey();
 
   // Load conversation from history
   useEffect(() => {
@@ -134,7 +136,14 @@ export default function ReportSummarizer() {
     setMessages(prev => [...prev, typingMessage]);
 
     try {
-      const response = await queryMedicalReport(userMessage.content, reportText);
+      const apiKey = getApiKey();
+      if (!apiKey) {
+        setLoading(false);
+        setMessages(prev => prev.filter(msg => !msg.isTyping));
+        return;
+      }
+      
+      const response = await queryMedicalReport(userMessage.content, reportText, apiKey);
       
       // Remove typing indicator and add actual response
       setMessages(prev => {
@@ -159,17 +168,22 @@ export default function ReportSummarizer() {
           setConversationId(savedId);
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      setError('Failed to process your query. Please try again.');
-      setMessages(prev => {
-        const filtered = prev.filter(msg => !msg.isTyping);
-        return [...filtered, {
-          type: 'bot',
-          content: 'I apologize, but I encountered an error processing your query. Please try again.',
-          timestamp: new Date(),
-        }];
-      });
+      
+      if (!handleGeminiError(error)) {
+        setError('Failed to process your query. Please try again.');
+        setMessages(prev => {
+          const filtered = prev.filter(msg => !msg.isTyping);
+          return [...filtered, {
+            type: 'bot',
+            content: 'I apologize, but I encountered an error processing your query. Please try again.',
+            timestamp: new Date(),
+          }];
+        });
+      } else {
+        setMessages(prev => prev.filter(msg => !msg.isTyping));
+      }
     }
 
     setLoading(false);
@@ -238,30 +252,30 @@ export default function ReportSummarizer() {
 
       <form 
         onSubmit={handleSubmit} 
-        className="flex gap-3 p-4 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700"
+        className="flex flex-col sm:flex-row gap-2 sm:gap-3 p-3 sm:p-4 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700"
       >
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask about your medical report (e.g., 'What are my blood test results?')"
-          className="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 placeholder-gray-400 dark:placeholder-gray-500"
+          className="flex-1 px-3 sm:px-4 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 placeholder-gray-400 dark:placeholder-gray-500 touch-manipulation"
           disabled={loading || !reportText}
         />
         <button
           type="submit"
           disabled={loading || !input.trim() || !reportText}
-          className="px-6 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-all duration-200"
+          className="w-full sm:w-auto min-h-[44px] px-4 sm:px-6 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-all duration-200 touch-manipulation"
         >
           {loading ? (
             <>
               <Loader className="w-5 h-5 animate-spin" />
-              <span className="hidden sm:inline">Processing...</span>
+              <span>Processing...</span>
             </>
           ) : (
             <>
               <Send className="w-5 h-5" />
-              <span className="hidden sm:inline">Ask</span>
+              <span>Ask</span>
             </>
           )}
         </button>

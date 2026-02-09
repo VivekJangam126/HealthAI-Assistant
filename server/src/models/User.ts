@@ -48,6 +48,11 @@ const UserSchema = new Schema<IUser>(
       type: Boolean,
       default: false,
     },
+    geminiApiKey: {
+      type: String,
+      required: false,
+      default: '',
+    },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
     lastLogin: {

@@ -18,7 +18,7 @@ export const createHistory = async (req: AuthRequest, res: Response): Promise<vo
 
     // Create new history
     const history = await History.create({
-      userId,
+      userId: userId.toString(),
       feature,
       title: title || messages[0]?.content.substring(0, 50) || 'Untitled',
       messages,
@@ -28,10 +28,10 @@ export const createHistory = async (req: AuthRequest, res: Response): Promise<vo
 
     // Log activity
     await Activity.create({
-      userId,
+      userId: userId.toString(),
       action: 'create_history',
       feature: 'history',
-      metadata: { historyId: history._id, feature },
+      metadata: { historyId: history._id.toString(), feature },
     });
 
     res.status(201).json({
@@ -66,7 +66,7 @@ export const getHistory = async (req: AuthRequest, res: Response): Promise<void>
     }
 
     // Build query
-    const query: any = { userId };
+    const query: any = { userId: userId.toString() };
     if (feature) query.feature = feature;
     if (bookmarked) query.bookmarked = true;
     if (search) {
@@ -113,7 +113,12 @@ export const getHistoryById = async (req: AuthRequest, res: Response): Promise<v
     const userId = req.user?._id;
     const { id } = req.params;
 
-    const history = await History.findOne({ _id: id, userId });
+    if (!userId) {
+      res.status(401).json({ success: false, message: 'User not authenticated' });
+      return;
+    }
+
+    const history = await History.findOne({ _id: id, userId: userId.toString() });
 
     if (!history) {
       res.status(404).json({
@@ -145,7 +150,12 @@ export const updateHistory = async (req: AuthRequest, res: Response): Promise<vo
     const { id } = req.params;
     const { messages, title, tags } = req.body;
 
-    const history = await History.findOne({ _id: id, userId });
+    if (!userId) {
+      res.status(401).json({ success: false, message: 'User not authenticated' });
+      return;
+    }
+
+    const history = await History.findOne({ _id: id, userId: userId.toString() });
 
     if (!history) {
       res.status(404).json({
@@ -184,7 +194,12 @@ export const deleteHistory = async (req: AuthRequest, res: Response): Promise<vo
     const userId = req.user?._id;
     const { id } = req.params;
 
-    const history = await History.findOneAndDelete({ _id: id, userId });
+    if (!userId) {
+      res.status(401).json({ success: false, message: 'User not authenticated' });
+      return;
+    }
+
+    const history = await History.findOneAndDelete({ _id: id, userId: userId.toString() });
 
     if (!history) {
       res.status(404).json({
@@ -196,7 +211,7 @@ export const deleteHistory = async (req: AuthRequest, res: Response): Promise<vo
 
     // Log activity
     await Activity.create({
-      userId,
+      userId: userId.toString(),
       action: 'delete_history',
       feature: 'history',
       metadata: { historyId: id },
@@ -223,7 +238,12 @@ export const toggleBookmark = async (req: AuthRequest, res: Response): Promise<v
     const userId = req.user?._id;
     const { id } = req.params;
 
-    const history = await History.findOne({ _id: id, userId });
+    if (!userId) {
+      res.status(401).json({ success: false, message: 'User not authenticated' });
+      return;
+    }
+
+    const history = await History.findOne({ _id: id, userId: userId.toString() });
 
     if (!history) {
       res.status(404).json({
@@ -258,7 +278,12 @@ export const getHistoryByFeature = async (req: AuthRequest, res: Response): Prom
     const userId = req.user?._id;
     const { type } = req.params;
 
-    const history = await History.find({ userId, feature: type })
+    if (!userId) {
+      res.status(401).json({ success: false, message: 'User not authenticated' });
+      return;
+    }
+
+    const history = await History.find({ userId: userId.toString(), feature: type })
       .sort({ createdAt: -1 })
       .select('-messages');
 

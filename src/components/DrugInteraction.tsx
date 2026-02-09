@@ -129,28 +129,38 @@ export default function DrugInteraction() {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
-      <div className="flex items-center justify-center gap-2 mb-6">
-        <Pill className="w-6 h-6 text-blue-600" />
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 text-center">Drug Interaction Checker</h2>
+    <div className="w-full max-w-2xl mx-auto p-4 sm:p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+      <div className="flex items-center justify-center gap-2 mb-4 sm:mb-6">
+        <Pill className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-200 text-center">Drug Interaction Checker</h2>
       </div>
 
-      <div className="flex gap-2 mb-4">
+      <div className="flex flex-col sm:flex-row gap-2 mb-4">
         <input
           type="text"
           value={currentDrug}
           onChange={(e) => setCurrentDrug(e.target.value)}
           onKeyPress={handleKeyPress}
           disabled={validating}
-          className="flex-1 p-3 border border-gray-300 dark:border-gray-600 dark:bg-slate-500 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50"
-          placeholder="Enter medication name and press Enter"
+          className="flex-1 p-3 sm:p-3 text-base touch-manipulation border border-gray-300 dark:border-gray-600 dark:bg-slate-500 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50"
+          placeholder="Enter medication name"
         />
         <button
           onClick={addDrug}
           disabled={validating}
-          className="p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+          className="w-full sm:w-auto min-h-[44px] px-6 sm:px-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 touch-manipulation flex items-center justify-center gap-2"
         >
-          {validating ? <Loader className="w-5 h-5 animate-spin" /> : <Plus className="w-5 h-5" />}
+          {validating ? (
+            <>
+              <Loader className="w-5 h-5 animate-spin" />
+              <span className="sm:hidden">Validating...</span>
+            </>
+          ) : (
+            <>
+              <Plus className="w-5 h-5" />
+              <span className="sm:hidden">Add Medication</span>
+            </>
+          )}
         </button>
       </div>
 
@@ -181,7 +191,7 @@ export default function DrugInteraction() {
       <button
         onClick={handleCheck}
         disabled={loading || drugs.length < 1}
-        className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-colors duration-200"
+        className="w-full min-h-[44px] py-3 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-colors duration-200 touch-manipulation text-base font-medium"
       >
         {loading ? (
           <>

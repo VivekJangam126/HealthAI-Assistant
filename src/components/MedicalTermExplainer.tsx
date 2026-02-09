@@ -86,10 +86,10 @@ export default function MedicalTermExplainer() {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
-      <div className="flex items-center justify-center gap-2 mb-6">
-        <BookOpen className="w-6 h-6 text-blue-600" />
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 text-center">Medical Term Explainer</h2>
+    <div className="w-full max-w-2xl mx-auto p-4 sm:p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+      <div className="flex items-center justify-center gap-2 mb-4 sm:mb-6">
+        <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-200 text-center">Medical Term Explainer</h2>
       </div>
 
       <form onSubmit={handleExplain} className="space-y-4">
@@ -101,7 +101,7 @@ export default function MedicalTermExplainer() {
               setTerm(e.target.value);
               setError('');
             }}
-            className="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-12 dark:bg-slate-500 dark:text-white"
+            className="w-full p-3 sm:p-4 text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-12 dark:bg-slate-500 dark:text-white touch-manipulation"
             placeholder="Enter a medical term..."
           />
           {term && (
@@ -111,7 +111,7 @@ export default function MedicalTermExplainer() {
                 setTerm('');
                 setError('');
               }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600"
+              className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 min-w-[44px] min-h-[44px] flex items-center justify-center text-2xl touch-manipulation"
             >
               ×
             </button>
@@ -128,7 +128,7 @@ export default function MedicalTermExplainer() {
         <button
           type="submit"
           disabled={loading || !term.trim()}
-          className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-colors duration-200"
+          className="w-full min-h-[44px] py-3 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-colors duration-200 touch-manipulation text-base font-medium"
         >
           {loading ? (
             <>

@@ -40,7 +40,7 @@ export const register = async (req: AuthRequest, res: Response): Promise<void> =
 
     // Log activity
     await Activity.create({
-      userId: user._id,
+      userId: user._id.toString(),
       action: 'register',
       feature: 'auth',
       metadata: { email },
@@ -59,6 +59,10 @@ export const register = async (req: AuthRequest, res: Response): Promise<void> =
         displayName: user.displayName,
         avatar: user.avatar,
         preferences: user.preferences,
+        geminiApiKey: user.geminiApiKey || '',
+        isEmailVerified: user.isEmailVerified,
+        createdAt: user.createdAt,
+        lastLogin: user.lastLogin,
       },
     });
   } catch (error: any) {
@@ -113,7 +117,7 @@ export const login = async (req: AuthRequest, res: Response): Promise<void> => {
 
     // Log activity
     await Activity.create({
-      userId: user._id,
+      userId: user._id.toString(),
       action: 'login',
       feature: 'auth',
       metadata: { email },
@@ -132,6 +136,9 @@ export const login = async (req: AuthRequest, res: Response): Promise<void> => {
         displayName: user.displayName,
         avatar: user.avatar,
         preferences: user.preferences,
+        geminiApiKey: user.geminiApiKey || '',
+        isEmailVerified: user.isEmailVerified,
+        createdAt: user.createdAt,
         lastLogin: user.lastLogin,
       },
     });
@@ -159,6 +166,7 @@ export const getMe = async (req: AuthRequest, res: Response): Promise<void> => {
         displayName: user?.displayName,
         avatar: user?.avatar,
         preferences: user?.preferences,
+        geminiApiKey: user?.geminiApiKey,
         isEmailVerified: user?.isEmailVerified,
         createdAt: user?.createdAt,
         lastLogin: user?.lastLogin,
@@ -187,7 +195,14 @@ export const updateProfile = async (req: AuthRequest, res: Response): Promise<vo
       return;
     }
 
-    const { displayName, avatar, preferences } = req.body;
+    const { displayName, avatar, preferences, geminiApiKey } = req.body;
+
+    console.log('[updateProfile] Request received:', {
+      userId: req.user?._id,
+      hasDisplayName: !!displayName,
+      hasGeminiApiKey: geminiApiKey !== undefined,
+      geminiApiKeyLength: geminiApiKey?.length || 0,
+    });
 
     const user = await User.findById(req.user?._id);
     if (!user) {
@@ -204,29 +219,46 @@ export const updateProfile = async (req: AuthRequest, res: Response): Promise<vo
     if (preferences) {
       user.preferences = { ...user.preferences, ...preferences };
     }
+    if (geminiApiKey !== undefined) {
+      // Trim and validate the API key
+      const cleanKey = geminiApiKey?.trim();
+      user.geminiApiKey = cleanKey || '';
+      console.log('[updateProfile] Setting geminiApiKey:', {
+        original: geminiApiKey?.length || 0,
+        cleaned: cleanKey?.length || 0,
+      });
+    }
 
     await user.save();
 
+    console.log('[updateProfile] User saved, geminiApiKey length:', user.geminiApiKey?.length || 0);
+
     // Log activity
     await Activity.create({
-      userId: user._id,
+      userId: user._id.toString(),
       action: 'update_profile',
       feature: 'auth',
-      metadata: { displayName, preferences },
+      metadata: { displayName, preferences, geminiApiKeyUpdated: geminiApiKey !== undefined },
     });
+
+    const responseUser = {
+      id: user._id,
+      email: user.email,
+      displayName: user.displayName,
+      avatar: user.avatar,
+      preferences: user.preferences,
+      geminiApiKey: user.geminiApiKey,
+    };
+
+    console.log('[updateProfile] Sending response with geminiApiKey length:', responseUser.geminiApiKey?.length || 0);
 
     res.status(200).json({
       success: true,
       message: 'Profile updated successfully',
-      user: {
-        id: user._id,
-        email: user.email,
-        displayName: user.displayName,
-        avatar: user.avatar,
-        preferences: user.preferences,
-      },
+      user: responseUser,
     });
   } catch (error: any) {
+    console.error('[updateProfile] Error:', error);
     res.status(500).json({
       success: false,
       message: 'Error updating profile',
@@ -243,7 +275,7 @@ export const logout = async (req: AuthRequest, res: Response): Promise<void> => 
     // Log activity
     if (req.user) {
       await Activity.create({
-        userId: req.user._id,
+        userId: req.user._id.toString(),
         action: 'logout',
         feature: 'auth',
         metadata: {},

@@ -2,7 +2,6 @@ import { Request } from 'express';
 import { Document } from 'mongoose';
 
 export interface IUser extends Document {
-  _id: string;
   email: string;
   password: string;
   displayName: string;
@@ -13,6 +12,7 @@ export interface IUser extends Document {
     notifications: boolean;
   };
   isEmailVerified: boolean;
+  geminiApiKey?: string;
   resetPasswordToken?: string;
   resetPasswordExpire?: Date;
   createdAt: Date;

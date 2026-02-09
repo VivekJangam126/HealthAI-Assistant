@@ -11,7 +11,7 @@ function AppWithSidebar() {
   const { activeTab } = useNavigationContext();
   
   // Pages that don't need sidebar
-  const pagesWithoutSidebar = ['home', 'about', 'emergency'];
+  const pagesWithoutSidebar = ['home', 'about', 'emergency', 'settings'];
   const shouldShowSidebar = !pagesWithoutSidebar.includes(activeTab);
   
   return (

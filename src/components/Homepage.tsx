@@ -118,28 +118,28 @@ export default function Homepage() {
   return (
     <div className="w-full animate-fadeIn">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-900 py-20 sm:py-28">
-        <div className="w-full px-8 sm:px-12 lg:px-20 xl:px-32">
+      <section className="relative overflow-hidden bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-900 py-12 sm:py-20 md:py-28">
+        <div className="w-full px-4 sm:px-8 md:px-12 lg:px-20 xl:px-32">
           <div className="lg:grid lg:grid-cols-12 lg:gap-8">
-            <div className="sm:text-center md:mx-auto lg:col-span-12 lg:text-center">
-              <h1 className="text-5xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl md:text-7xl">
+            <div className="text-center md:mx-auto lg:col-span-12">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-gray-900 dark:text-white">
                 Your Personal
                 <span className="block text-blue-600 dark:text-blue-400 mt-2">Health AI Assistant</span>
               </h1>
-              <p className="mt-6 text-lg text-gray-600 dark:text-gray-300 sm:mt-8 sm:text-xl lg:text-2xl max-w-4xl mx-auto leading-relaxed">
+              <p className="mt-4 sm:mt-6 md:mt-8 text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed px-2">
                 Powered by advanced AI technology to help you understand your health better. Get instant analysis of symptoms, drug interactions, medical images, and much more.
               </p>
-              <div className="mt-10 sm:mt-14 flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="mt-6 sm:mt-10 md:mt-14 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
                 <button
                   onClick={handleGetStarted}
-                  className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-8 py-4 text-lg font-semibold text-white shadow-xl transition-all hover:bg-blue-700 hover:shadow-2xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  className="inline-flex items-center justify-center min-h-[48px] rounded-xl bg-blue-600 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold text-white shadow-xl transition-all hover:bg-blue-700 hover:shadow-2xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 touch-manipulation"
                 >
                   Get Started Free
-                  <ArrowRight className="ml-2 h-6 w-6" />
+                  <ArrowRight className="ml-2 h-5 w-5 sm:h-6 sm:w-6" />
                 </button>
                 <button
                   onClick={() => setActiveTab('about')}
-                  className="inline-flex items-center justify-center rounded-xl bg-white dark:bg-gray-800 px-8 py-4 text-lg font-semibold text-gray-900 dark:text-white shadow-lg transition-all hover:shadow-xl hover:scale-105 border-2 border-gray-200 dark:border-gray-700"
+                  className="inline-flex items-center justify-center min-h-[48px] rounded-xl bg-white dark:bg-gray-800 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold text-gray-900 dark:text-white shadow-lg transition-all hover:shadow-xl hover:scale-105 border-2 border-gray-200 dark:border-gray-700 touch-manipulation"
                 >
                   Learn More
                 </button>
@@ -150,8 +150,8 @@ export default function Homepage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="bg-white dark:bg-gray-900 py-16 sm:py-20">
-        <div className="w-full px-8 sm:px-12 lg:px-20 xl:px-32">
+      <section className="bg-white dark:bg-gray-900 py-12 sm:py-16 md:py-20">
+        <div className="w-full px-4 sm:px-8 md:px-12 lg:px-20 xl:px-32">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {benefits.map((benefit, index) => (
               <div
@@ -174,8 +174,8 @@ export default function Homepage() {
       </section>
 
       {/* Features Section */}
-      <section className="bg-gradient-to-b from-white to-blue-50 dark:from-gray-900 dark:to-gray-800 py-20 sm:py-28">
-        <div className="w-full px-8 sm:px-12 lg:px-20 xl:px-32">
+      <section className="bg-gradient-to-b from-white to-blue-50 dark:from-gray-900 dark:to-gray-800 py-12 sm:py-20 md:py-28">
+        <div className="w-full px-4 sm:px-8 md:px-12 lg:px-20 xl:px-32">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl mb-4">
               Comprehensive Health Tools
@@ -202,8 +202,8 @@ export default function Homepage() {
       </section>
 
       {/* How It Works Section */}
-      <section className="bg-white dark:bg-gray-900 py-20 sm:py-28">
-        <div className="w-full px-8 sm:px-12 lg:px-20 xl:px-32">
+      <section className="bg-white dark:bg-gray-900 py-12 sm:py-20 md:py-28">
+        <div className="w-full px-4 sm:px-8 md:px-12 lg:px-20 xl:px-32">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl mb-4">
               How It Works

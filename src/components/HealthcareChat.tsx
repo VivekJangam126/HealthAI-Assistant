@@ -3,6 +3,7 @@ import { Send, Sparkles, Copy, Check, X, Mic, MicOff, Edit2 } from 'lucide-react
 import { formatDistanceToNow } from 'date-fns';
 import { streamAIResponse, cancelCurrentRequest } from '../lib/gemini';
 import { useConversationSave } from '../hooks/useConversationSave';
+import { useGeminiKey } from '../hooks/useGeminiKey';
 import { useAuthStore } from '../store/authStore';
 import { useHistoryStore } from '../store/historyStore';
 import toast from 'react-hot-toast';
@@ -183,6 +184,7 @@ const HealthcareChat = () => {
   const { saveConversation } = useConversationSave();
   const { isAuthenticated } = useAuthStore();
   const { currentConversation, clearLoadedConversation, isSidebarOpen } = useHistoryStore();
+  const { getApiKey, handleGeminiError } = useGeminiKey();
 
   // Load conversation from history when currentConversation changes
   useEffect(() => {
@@ -275,9 +277,16 @@ const HealthcareChat = () => {
       // Get conversation history up to the edited message
       const conversationHistory = messages.filter(msg => msg.id !== messageId);
       
+      const apiKey = getApiKey();
+      if (!apiKey) {
+        setIsLoading(false);
+        setMessages(prev => prev.filter(msg => msg.id !== aiMessageId));
+        return;
+      }
+      
       let fullResponse = '';
       
-      for await (const chunk of streamAIResponse(newContent, conversationHistory)) {
+      for await (const chunk of streamAIResponse(newContent, conversationHistory, apiKey)) {
         fullResponse += chunk;
         
         setMessages(prev =>
@@ -352,7 +361,14 @@ const HealthcareChat = () => {
       // Stream the response
       let fullResponse = '';
       
-      for await (const chunk of streamAIResponse(userMessage.content, messages)) {
+      const apiKey = getApiKey();
+      if (!apiKey) {
+        setIsLoading(false);
+        setMessages(prev => prev.filter(msg => msg.id !== aiMessageId));
+        return;
+      }
+      
+      for await (const chunk of streamAIResponse(userMessage.content, messages, apiKey)) {
         fullResponse += chunk;
         
         // Update message with accumulated content
@@ -393,14 +409,16 @@ const HealthcareChat = () => {
       // Remove placeholder and show error
       setMessages(prev => prev.filter(msg => msg.id !== aiMessageId));
       
-      // Add error message
-      const errorMessage: Message = {
-        id: Date.now().toString(),
-        role: 'assistant',
-        content: '⚠️ Sorry, I encountered an error. Please try again.',
-        timestamp: new Date(),
-      };
-      setMessages(prev => [...prev, errorMessage]);
+      if (!handleGeminiError(error)) {
+        // Add error message
+        const errorMessage: Message = {
+          id: Date.now().toString(),
+          role: 'assistant',
+          content: '⚠️ Sorry, I encountered an error. Please try again.',
+          timestamp: new Date(),
+        };
+        setMessages(prev => [...prev, errorMessage]);
+      }
     } finally {
       setIsLoading(false)
     }

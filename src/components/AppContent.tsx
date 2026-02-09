@@ -10,6 +10,7 @@ import HealthcareChat from './HealthcareChat';
 import Emergency from './Emergency';
 import MedicalImageAnalyzer from './MedicalImageAnalyzer';
 import MedicineAnalyzer from './MedicineAnalyzer';
+import Settings from './Settings';
 import { Navbar } from './navigation/Navbar';
 import HealthcareLogo from './HealthcareLogo';
 import { useHistoryStore } from '../store/historyStore';
@@ -20,7 +21,7 @@ export default function AppContent() {
   const { activeTab } = useNavigationContext();
   
   // Pages that don't need sidebar
-  const pagesWithoutSidebar = ['home', 'about', 'emergency'];
+  const pagesWithoutSidebar = ['home', 'about', 'emergency', 'settings'];
   const shouldShowSidebar = !pagesWithoutSidebar.includes(activeTab);
   
   return (
@@ -28,7 +29,7 @@ export default function AppContent() {
       <Navbar />
 
       <main className={`flex-grow pt-16 pb-16 transition-all duration-300 ${shouldShowSidebar && isSidebarOpen ? 'lg:ml-80' : 'lg:ml-0'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6">
           <div className="flex justify-center">
             <div className="w-full animate-fadeIn">
               <Routes>
@@ -43,6 +44,7 @@ export default function AppContent() {
                 <Route path="/policy-query" element={<PolicyQueryAssistant />} />
                 <Route path="/emergency" element={<Emergency />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/settings" element={<Settings />} />
               </Routes>
             </div>
           </div>

@@ -52,7 +52,7 @@ export function Navbar() {
           {!shouldShowAuthInNavbar && (
             <button
               onClick={toggleSidebar}
-              className="lg:hidden p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className="lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors touch-manipulation"
             >
               <PanelLeft className="w-5 h-5" />
             </button>
@@ -134,7 +134,7 @@ export function Navbar() {
                   <div className="relative">
                     <button
                       onClick={() => setShowProfileMenu(!showProfileMenu)}
-                      className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                      className="flex items-center gap-2 min-h-[44px] px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors touch-manipulation"
                     >
                       <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-medium">
                         {user?.displayName?.charAt(0).toUpperCase() || 'U'}
@@ -146,18 +146,19 @@ export function Navbar() {
 
                     {showProfileMenu && (
                       <div className="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg overflow-hidden z-50">
-                        <button
-                          onClick={() => {
-                            setShowProfileMenu(false);
-                          }}
-                          className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                        >
-                          <Settings className="w-4 h-4" />
-                          Settings
-                        </button>
+                    <button
+                      onClick={() => {
+                        setShowProfileMenu(false);
+                        setActiveTab('settings');
+                      }}
+                      className="w-full flex items-center gap-2 min-h-[44px] px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors touch-manipulation"
+                    >
+                      <Settings className="w-4 h-4" />
+                      Settings
+                    </button>
                         <button
                           onClick={handleLogout}
-                          className="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                          className="w-full flex items-center gap-2 min-h-[44px] px-4 py-3 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors touch-manipulation"
                         >
                           <LogOut className="w-4 h-4" />
                           Logout
@@ -169,14 +170,14 @@ export function Navbar() {
                   <>
                     <button
                       onClick={() => setIsLoginOpen(true)}
-                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                      className="flex items-center gap-2 min-h-[44px] px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors touch-manipulation"
                     >
                       <LogIn className="w-4 h-4" />
                       Login
                     </button>
                     <button
                       onClick={() => setIsSignupOpen(true)}
-                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
+                      className="flex items-center gap-2 min-h-[44px] px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors touch-manipulation"
                     >
                       <UserPlus className="w-4 h-4" />
                       Sign Up
@@ -188,7 +189,7 @@ export function Navbar() {
 
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+              className="lg:hidden inline-flex items-center justify-center min-w-[44px] min-h-[44px] rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 touch-manipulation"
             >
               <span className="sr-only">Open main menu</span>
               <Menu className="block h-6 w-6" aria-hidden="true" />

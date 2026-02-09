@@ -1,16 +1,17 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const getApiKey = () => {
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-  if (!apiKey) {
-    throw new Error("VITE_GEMINI_API_KEY is not set in environment variables. Please add it in Vercel Dashboard.");
+const getModel = (apiKey: string) => {
+  if (!apiKey || apiKey.trim() === '') {
+    throw new Error("GEMINI_KEY_MISSING");
   }
-  return apiKey;
-};
-
-const getModel = () => {
-  const genAI = new GoogleGenerativeAI(getApiKey());
-  return genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  
+  try {
+    const genAI = new GoogleGenerativeAI(apiKey);
+    return genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  } catch (error: any) {
+    console.error("Error initializing Gemini model:", error);
+    throw new Error("GEMINI_KEY_INVALID");
+  }
 };
 
 // ============================================
@@ -138,7 +139,7 @@ const getPromptInLanguage = (prompt: string, inputText: string): string => {
   }
 };
 
-export const analyzeSymptoms = async (symptoms: string) => {
+export const analyzeSymptoms = async (symptoms: string, apiKey: string) => {
   if (!symptoms.trim()) {
     throw new Error("Please describe your symptoms.");
   }
@@ -181,17 +182,20 @@ Please provide a comprehensive analysis with the following structure:
 *Remember: This is educational information based on symptom patterns. Only a qualified healthcare provider can provide a proper diagnosis after examining you.*`;
 
   try {
-    const result = await getModel().generateContent(
+    const result = await getModel(apiKey).generateContent(
       getPromptInLanguage(prompt, symptoms)
     );
     return result.response.text();
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error analyzing symptoms:", error);
+    if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
+      throw error;
+    }
     throw new Error("Failed to analyze symptoms. Please try again.");
   }
 };
 
-export const checkDrugInteraction = async (drugs: string[]) => {
+export const checkDrugInteraction = async (drugs: string[], apiKey: string) => {
   if (drugs.length < 1) {
     throw new Error("Please enter at least one medication to analyze.");
   }
@@ -297,17 +301,20 @@ ${drugs.map((drug, i) => `\n**${i + 1}. ${drug}**:\n- Primary use: [brief descri
   }
 
   try {
-    const result = await getModel().generateContent(
+    const result = await getModel(apiKey).generateContent(
       getPromptInLanguage(prompt, drugs.join(", "))
     );
     return result.response.text();
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error checking drug interactions:", error);
+    if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
+      throw error;
+    }
     throw new Error("Failed to analyze drug interactions. Please try again.");
   }
 };
 
-export const validateMedicalTerm = async (term: string): Promise<boolean> => {
+export const validateMedicalTerm = async (term: string, apiKey: string): Promise<boolean> => {
   if (!term.trim()) {
     return false;
   }
@@ -331,16 +338,19 @@ Respond with ONLY "VALID" if this is a legitimate medical term, or "INVALID" if 
 INPUT TO ANALYZE: ${term}`;
 
   try {
-    const result = await getModel().generateContent(prompt);
+    const result = await getModel(apiKey).generateContent(prompt);
     const response = result.response.text().trim().toUpperCase();
     return response.includes('VALID') && !response.includes('INVALID');
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error validating medical term:", error);
+    if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
+      throw error;
+    }
     return false;
   }
 };
 
-export const explainMedicalTerm = async (term: string) => {
+export const explainMedicalTerm = async (term: string, apiKey: string) => {
   if (!term.trim()) {
     throw new Error("Please enter a medical term to explain.");
   }
@@ -385,17 +395,20 @@ Please provide a comprehensive yet accessible explanation:
 *Understanding medical terminology helps you be an active participant in your healthcare. Don't hesitate to ask your healthcare provider to explain terms you don't understand.*`;
 
   try {
-    const result = await getModel().generateContent(
+    const result = await getModel(apiKey).generateContent(
       getPromptInLanguage(prompt, term)
     );
     return result.response.text();
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error explaining medical term:", error);
+    if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
+      throw error;
+    }
     throw new Error("Failed to explain the medical term. Please try again.");
   }
 };
 
-export const summarizeMedicalReport = async (report: string) => {
+export const summarizeMedicalReport = async (report: string, apiKey: string) => {
   if (!report.trim()) {
     throw new Error("No report content provided to analyze.");
   }
@@ -449,19 +462,22 @@ This summary is to help you understand your report. Always discuss results with 
 *This AI-generated summary should not replace consultation with your healthcare provider.*`;
 
   try {
-    const result = await getModel().generateContent(
+    const result = await getModel(apiKey).generateContent(
       getPromptInLanguage(prompt, report)
     );
     return result.response.text();
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error summarizing medical report:", error);
+    if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
+      throw error;
+    }
     throw new Error(
       "Failed to summarize the medical report. Please try again."
     );
   }
 };
 
-export const getAIResponse = async (message: string) => {
+export const getAIResponse = async (message: string, apiKey: string) => {
   if (!message.trim()) {
     throw new Error("Please enter your health-related question.");
   }
@@ -491,18 +507,23 @@ If the question involves symptoms, potential conditions, or medical decisions, a
 For general health/wellness questions, provide evidence-based information while encouraging healthy lifestyle choices.`;
 
   try {
-    const result = await getModel().generateContent(
+    const result = await getModel(apiKey).generateContent(
       getPromptInLanguage(prompt, message)
     );
     return result.response.text();
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error getting AI response:", error);
+    if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
+      throw error;
+    }
     throw new Error("Failed to process your question. Please try again.");
   }
 };
+
 export const queryPolicyDocument = async (
   query: string,
-  policyText: string
+  policyText: string,
+  apiKey: string
 ) => {
   if (!query.trim()) {
     throw new Error("Please enter your policy question.");
@@ -538,18 +559,22 @@ Use semantic understanding to find relevant information even if the query is vag
 Format your response in a clear, structured manner with proper headings and bullet points where appropriate.`;
 
   try {
-    const result = await getModel().generateContent(
+    const result = await getModel(apiKey).generateContent(
       getPromptInLanguage(prompt, query)
     );
     return result.response.text();
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error querying policy document:", error);
+    if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
+      throw error;
+    }
     throw new Error("Failed to analyze the policy query. Please try again.");
   }
 };
 
 export const validateMedicationName = async (
-  drugName: string
+  drugName: string,
+  apiKey: string
 ): Promise<boolean> => {
   if (!drugName.trim()) {
     return false;
@@ -576,11 +601,14 @@ Respond with ONLY "INVALID" if it is:
 TERM TO VALIDATE: ${drugName}`;
 
   try {
-    const result = await getModel().generateContent(prompt);
+    const result = await getModel(apiKey).generateContent(prompt);
     const response = result.response.text().trim().toUpperCase();
     return response.includes("VALID") && !response.includes("INVALID");
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error validating medication name:", error);
+    if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
+      throw error;
+    }
     // If API fails, use a simple client-side check as fallback
     const nonMedicalTerms = [
       "maths",
@@ -599,7 +627,7 @@ TERM TO VALIDATE: ${drugName}`;
   }
 };
 
-export const validateMedicalReport = async (text: string): Promise<boolean> => {
+export const validateMedicalReport = async (text: string, apiKey: string): Promise<boolean> => {
   if (!text.trim()) {
     return false;
   }
@@ -629,16 +657,19 @@ TEXT TO ANALYZE:
 ${text.substring(0, 2000)}`;
 
   try {
-    const result = await getModel().generateContent(prompt);
+    const result = await getModel(apiKey).generateContent(prompt);
     const response = result.response.text().trim().toUpperCase();
     return response.includes("VALID") && !response.includes("INVALID");
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error validating medical report:", error);
+    if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
+      throw error;
+    }
     return false;
   }
 };
 
-export const validatePolicyDocument = async (text: string): Promise<boolean> => {
+export const validatePolicyDocument = async (text: string, apiKey: string): Promise<boolean> => {
   if (!text.trim()) {
     return false;
   }
@@ -676,11 +707,14 @@ TEXT TO ANALYZE:
 ${text.substring(0, 3000)}`;
 
   try {
-    const result = await getModel().generateContent(prompt);
+    const result = await getModel(apiKey).generateContent(prompt);
     const response = result.response.text().trim().toUpperCase();
     return response.includes("VALID") && !response.includes("INVALID");
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error validating policy document:", error);
+    if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
+      throw error;
+    }
     // Fallback to keyword-based validation if API fails
     return performBasicPolicyValidation(text);
   }
@@ -722,7 +756,7 @@ const performBasicPolicyValidation = (text: string): boolean => {
   return policyMatches >= 2 && healthMatches >= 1;
 };
 
-export const queryMedicalReport = async (query: string, reportText: string) => {
+export const queryMedicalReport = async (query: string, reportText: string, apiKey: string) => {
   if (!query.trim()) {
     throw new Error("Please enter your question about the medical report.");
   }
@@ -756,12 +790,15 @@ Important guidelines:
 Format your response in a clear, structured manner with proper headings and bullet points where appropriate.`;
 
   try {
-    const result = await getModel().generateContent(
+    const result = await getModel(apiKey).generateContent(
       getPromptInLanguage(prompt, query)
     );
     return result.response.text();
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error querying medical report:", error);
+    if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
+      throw error;
+    }
     throw new Error(
       "Failed to analyze your medical report query. Please try again."
     );
@@ -807,7 +844,8 @@ Remember: You're having a conversation with a real person seeking health guidanc
 // STREAMING RESPONSE - Shows response as it's generated (feels faster!)
 export async function* streamAIResponse(
   userMessage: string,
-  conversationHistory: Message[] = []
+  conversationHistory: Message[] = [],
+  apiKey: string
 ): AsyncGenerator<string, void, unknown> {
   try {
     // Reset cancellation flag
@@ -816,7 +854,7 @@ export async function* streamAIResponse(
     const context = buildContext(conversationHistory);
     const prompt = `${SYSTEM_PROMPT}\n\nConversation History:\n${context}\n\nUser: ${userMessage}\n\nAssistant:`;
 
-    const result = await getModel().generateContentStream(prompt);
+    const result = await getModel(apiKey).generateContentStream(prompt);
 
     for await (const chunk of result.stream) {
       // Check if cancellation was requested
@@ -832,6 +870,9 @@ export async function* streamAIResponse(
     console.error("Gemini API Streaming Error:", error);
     if (error.message === "Request cancelled by user") {
       throw error; // Re-throw cancellation error
+    }
+    if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
+      throw error;
     }
     throw new Error("Failed to stream response from AI");
   }
@@ -850,7 +891,8 @@ export function cancelCurrentRequest() {
 }
 
 export const validateMedicalImage = async (
-  imageBase64: string
+  imageBase64: string,
+  apiKey: string
 ): Promise<{ isValid: boolean; message: string; imageType?: string }> => {
   if (!imageBase64) {
     return { isValid: false, message: "No image provided" };
@@ -899,7 +941,7 @@ Return ONLY the JSON object, no additional text.`;
       },
     };
 
-    const result = await getModel().generateContent([prompt, imagePart]);
+    const result = await getModel(apiKey).generateContent([prompt, imagePart]);
     const response = result.response.text();
 
     let cleanedResponse = response.trim();
@@ -927,8 +969,11 @@ Return ONLY the JSON object, no additional text.`;
         message: `This doesn't appear to be a medical image. Detected: ${validation.detectedType}. ${validation.reason}`,
       };
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error validating medical image:", error);
+    if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
+      throw error;
+    }
     // In case of API error, allow the image but log the issue
     return {
       isValid: true,
@@ -939,10 +984,15 @@ Return ONLY the JSON object, no additional text.`;
 
 export const analyzeMedicalImage = async (
   imageBase64: string,
-  additionalInfo?: string
+  additionalInfo?: string,
+  apiKey?: string
 ) => {
   if (!imageBase64) {
     throw new Error("Please upload a medical image.");
+  }
+
+  if (!apiKey) {
+    throw new Error("GEMINI_KEY_MISSING");
   }
 
   const contextPrompt = additionalInfo
@@ -1002,7 +1052,7 @@ Return ONLY the JSON object, no additional text.`;
       },
     };
 
-    const result = await getModel().generateContent([prompt, imagePart]);
+    const result = await getModel(apiKey).generateContent([prompt, imagePart]);
     const response = result.response.text();
 
     let cleanedResponse = response.trim();
@@ -1023,14 +1073,18 @@ Return ONLY the JSON object, no additional text.`;
     }
 
     return analysis;
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error analyzing medical image:", error);
+    if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
+      throw error;
+    }
     throw new Error("Failed to analyze medical image. Please try again.");
   }
 };
 
 export const validateMedicineImage = async (
-  imageBase64: string
+  imageBase64: string,
+  apiKey: string
 ): Promise<{ isValid: boolean; message: string; medicineType?: string }> => {
   if (!imageBase64) {
     return { isValid: false, message: "No image provided" };
@@ -1077,7 +1131,7 @@ Return ONLY the JSON object, no additional text.`;
       },
     };
 
-    const result = await getModel().generateContent([prompt, imagePart]);
+    const result = await getModel(apiKey).generateContent([prompt, imagePart]);
     const response = result.response.text();
 
     let cleanedResponse = response.trim();
@@ -1105,8 +1159,11 @@ Return ONLY the JSON object, no additional text.`;
         message: `This doesn't appear to be a medicine image. Detected: ${validation.detectedType}. ${validation.reason}`,
       };
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error validating medicine image:", error);
+    if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
+      throw error;
+    }
     // In case of API error, allow the image but log the issue
     return {
       isValid: true,
@@ -1117,10 +1174,15 @@ Return ONLY the JSON object, no additional text.`;
 
 export const analyzeMedicine = async (
   imageBase64: string,
-  additionalInfo?: string
+  additionalInfo?: string,
+  apiKey?: string
 ) => {
   if (!imageBase64) {
     throw new Error("Please upload a medicine image.");
+  }
+
+  if (!apiKey) {
+    throw new Error("GEMINI_KEY_MISSING");
   }
 
   const contextPrompt = additionalInfo
@@ -1171,7 +1233,7 @@ Return ONLY the JSON object, no additional text.`;
       },
     };
 
-    const result = await getModel().generateContent([prompt, imagePart]);
+    const result = await getModel(apiKey).generateContent([prompt, imagePart]);
     const response = result.response.text();
 
     let cleanedResponse = response.trim();
@@ -1192,8 +1254,11 @@ Return ONLY the JSON object, no additional text.`;
     }
 
     return analysis;
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error analyzing medicine:", error);
+    if (error.message === "GEMINI_KEY_MISSING" || error.message === "GEMINI_KEY_INVALID") {
+      throw error;
+    }
     throw new Error("Failed to analyze medicine. Please try again.");
   }
 };

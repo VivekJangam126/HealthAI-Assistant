@@ -181,10 +181,10 @@ export default function MedicineAnalyzer() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
-      <div className="flex items-center justify-center gap-2 mb-6">
-        <Pill className="w-6 h-6 text-blue-600" />
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 text-center">
+    <div className="w-full max-w-4xl mx-auto p-4 sm:p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+      <div className="flex items-center justify-center gap-2 mb-4 sm:mb-6">
+        <Pill className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-200 text-center">
           Medicine Analyzer
         </h2>
       </div>
@@ -281,7 +281,7 @@ export default function MedicineAnalyzer() {
         <button
           type="submit"
           disabled={loading || !image || validating || !!validationWarning}
-          className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-colors duration-200"
+          className="w-full min-h-[44px] py-3 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-colors duration-200 touch-manipulation text-base font-medium"
         >
           {validating ? (
             <>
@@ -305,22 +305,22 @@ export default function MedicineAnalyzer() {
       {analysis && (
         <div className="mt-6 space-y-6">
           <div className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl border border-blue-200 dark:border-blue-800">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 mb-4">
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200">
                 {analysis.medicineName}
               </h3>
-              <div className="flex gap-2">
-                <span className={`px-3 py-1 rounded-full text-sm font-medium ${getSeverityColor(analysis.severity)}`}>
+              <div className="flex flex-wrap gap-2">
+                <span className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${getSeverityColor(analysis.severity)}`}>
                   {analysis.severity} Risk
                 </span>
-                <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                <span className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${
                   analysis.doctorConsultationRequired
                     ? 'bg-orange-500 text-white'
                     : 'bg-green-500 text-white'
                 }`}>
                   {analysis.doctorConsultationRequired ? 'Doctor Required' : 'Self-Medication OK'}
                 </span>
-                <span className="px-3 py-1 rounded-full text-sm font-medium bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                <span className="px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
                   {analysis.confidence}% Confidence
                 </span>
               </div>
@@ -362,7 +362,7 @@ export default function MedicineAnalyzer() {
               <Clock className="w-5 h-5 text-blue-600" />
               <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">When & How to Take</h3>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
               <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800">
                 <div className="flex items-center gap-2 mb-3">
                   <Clock className="w-5 h-5 text-blue-600" />

@@ -3,6 +3,7 @@ import { Stethoscope, Loader2, Mic, MicOff, Send, Sparkles, RefreshCw, X, AlertT
 import { analyzeSymptoms } from '../lib/gemini';
 import ReactMarkdown from 'react-markdown';
 import { useConversationSave } from '../hooks/useConversationSave';
+import { useGeminiKey } from '../hooks/useGeminiKey';
 import { useAuthStore } from '../store/authStore';
 import { useHistoryStore } from '../store/historyStore';
 import toast from 'react-hot-toast';
@@ -106,6 +107,7 @@ export default function SymptomAnalyzer() {
   const { saveConversation } = useConversationSave();
   const { isAuthenticated } = useAuthStore();
   const { currentConversation, clearLoadedConversation } = useHistoryStore();
+  const { getApiKey, handleGeminiError } = useGeminiKey();
 
   // Load conversation from history
   useEffect(() => {
@@ -216,7 +218,13 @@ export default function SymptomAnalyzer() {
     setLoading(true);
 
     try {
-      const result = await analyzeSymptoms(symptomsText);
+      const apiKey = getApiKey();
+      if (!apiKey) {
+        setLoading(false);
+        return;
+      }
+      
+      const result = await analyzeSymptoms(symptomsText, apiKey);
       const aiMessage: AnalysisMessage = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
@@ -238,15 +246,18 @@ export default function SymptomAnalyzer() {
           setConversationId(savedId);
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      const errorMessage: AnalysisMessage = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: '⚠️ Error analyzing symptoms. Please try again.',
-        timestamp: new Date(),
-      };
-      setMessages(prev => [...prev, errorMessage]);
+      
+      if (!handleGeminiError(error)) {
+        const errorMessage: AnalysisMessage = {
+          id: (Date.now() + 1).toString(),
+          role: 'assistant',
+          content: '⚠️ Error analyzing symptoms. Please try again.',
+          timestamp: new Date(),
+        };
+        setMessages(prev => [...prev, errorMessage]);
+      }
     }
     setLoading(false);
   };
